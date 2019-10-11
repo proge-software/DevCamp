@@ -35,23 +35,22 @@ This hands-on-lab has the following exercises:
 
 In a future lab we will use [Visual Studio Team Services](https://www.visualstudio.com/team-services/), or "VSTS" for short. In this exercise we will enable a free trial subscription.
 
-1. In your browser, go to [www.visualstudio.com/team-services](http://www.visualstudio.com/team-services) and click on `Free Account` in the upper right corner.  
+1. In your browser, go to [https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard](https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard) and complete the sign in process if needed using your Proge-Software account:
 
-    ![image](./media/2018-07-05_15_36_42.png)
-
-    Complete the sign in process if needed using your Proge-Software account:
-
-    ![image](./media/2018-07-05_15_37_19.png)
+    ![image](./media/201910-00_login.png)
 
     You should be taken to a screen that looks like this:
 
-    ![image](./media/2018-07-05_15_38_22.png)
+    ![image](./media/201910-01_profile.png)
 
-    Click on `Create new account` to set your VSTS account. Please note that sometimes you may be taken to the following screen directly:
+    Click on `Create new organization` to set your new organization.
 
-    ![image](./media/2018-07-05_15_39_08.png)
+    ![image](./media/201910-02_new_org.png)
 
-    Enter your email name followed by `-proge` and click `Continue`.
+    Enter your email name followed by `-proge` and click `Next`.
+    You will be finally lead to the following page, that means the new organization was correctly set up and it is possibile to create the first project
+
+    ![image](./media/201910-03_new_proj.png)
 
 ---
 
