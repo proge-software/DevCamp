@@ -31,11 +31,11 @@ This hands-on-lab has the following exercises:
 
 ---
 
-## Exercise 1: Start your VSTS trial subscription<a name="ex1"></a>
+## Exercise 1: Start your ADO Account<a name="ex1"></a>
 
-In a future lab we will use [Visual Studio Team Services](https://www.visualstudio.com/team-services/), or "VSTS" for short. In this exercise we will enable a free trial subscription.
+In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for short.
 
-1. In your browser, go to [https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard](https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard) and complete the sign in process if needed using your Proge-Software account:
+1. In your browser, go to [https://aex.dev.azure.com/me?mkt=en-US&campaign=o\~msft\~vsts\~usercard](https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard) and complete the sign in process if needed using your Proge-Software account:
 
     ![image](./media/201910-00_login.png)
 
@@ -150,7 +150,7 @@ In a future lab we will use [Visual Studio Team Services](https://www.visualstud
 
 1. Change directory to the root using `cd c:\`.
 
-1. Type `git clone https://github.com/AzureCAT-GSI/DevCamp.git`:
+1. Type `git clone https://github.com/proge-software/DevCamp.git`:
 
     ![image](./media/2016-10-18_17-03-51.gif)
 
