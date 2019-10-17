@@ -208,15 +208,15 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
 2. Open a browser and navigate to [https://portal.azure.com](https://portal.azure.com). Open the resource group `Corso-MS-Cloud` and filter resources by your account name:
 
-    ![image](./media/2018-07-07_08_58_27.png)
+    ![image](./media/201910-e04-01-filtered_rg.png)
 
 3. Locate the app service named `incidentapi...` in the resource group blade:
 
-    ![image](./media/2018-07-07_08_59_43.png)
+    ![image](./media/201910-e04-02_incident_api.PNG)
 
 4. Click on the app service, which will bring up the app service blade. Click on `Browse` at the top:
 
-    ![image](./media/2017-06-15_13_08_00.png)
+    ![image](./media/201910-e04-03_incident_api_browse.PNG)
 
     A new browser tab will open.
 
