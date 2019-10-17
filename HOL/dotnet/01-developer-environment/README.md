@@ -172,31 +172,33 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
     ![image](./media/2016-10-18_17-59-21.gif)
 
-1. Create a VSTS repository. Enter a repository name and click continue:
+1. Connect to ADO:
 
-    ![image](./media/2016-10-18_18-07-34.gif)
+    ![image](./media/201910-04_Setup_ADO.png)
+    ![image](./media/201910-05_Setup_ADO.png)
 
-1. Create your first team project, and name it `DevCamp`:
+2. Open the ADO web portal to create a new project:
 
-    ![image](./media/2016-10-18_18-10-39.gif)
+    ![image](./media/201910-06_WebPortal_new_project.png)
 
-1. If the VSTS dialog does not appear during your setup process use the `Team Explorer` to open it manually by selecting `Get started for free` in the `Visual Studio Team Services` section.
+3. Complete the form inserting a `Project name` and selecting `Git` as `Version control` system and `Agile` as Work item process
 
-    ![image](./media/2017-10-30_12_01_00.png)
+   ![image](./media/201910-07_WebPortal_new_project.PNG)
 
-1. Enter a repository name, select `Git` and click `Continue`:
+4. Open the created project and in the left column select select `Repos` and then `Files`.
+   Finally click on the button `Clone in Visual Studio`. 
+   In case the button does not display Visual Studio as first choice, then use its right arrow to select it.
+
+    ![image](./media/201910-08_ADO_clone_project.PNG)
+    
+
+5. Enter a repository name, select `Git` and click `Continue`:
 
     ![image](./media/2017-10-30_12_05_00.png)
 
-1. After the repository has been created click `Clone in Visual Studio`:
+6. After the repository has been created click `Clone in Visual Studio`:
 
     ![image](./media/2017-10-30_12_08_00.png)
-
-1. In Visual Studio click `Clone` to confirm the settings.
-
-1. Click close. You are done with the Visual Studio setup.
-
-1. Close the remote desktop connection.
 
 ---
 
@@ -204,15 +206,15 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
 1. The API application has been prepared for you to be available as a communication partner during different exercises and just needs to be deployed once. It will be first used in the second hands on lab.
 
-1. Open a browser and navigate to [https://portal.azure.com](https://portal.azure.com). Open the resource group `Corso-MS-Cloud` and filter resources by your account name:
+2. Open a browser and navigate to [https://portal.azure.com](https://portal.azure.com). Open the resource group `Corso-MS-Cloud` and filter resources by your account name:
 
     ![image](./media/2018-07-07_08_58_27.png)
 
-1. Locate the app service named `incidentapi...` in the resource group blade:
+3. Locate the app service named `incidentapi...` in the resource group blade:
 
     ![image](./media/2018-07-07_08_59_43.png)
 
-1. Click on the app service, which will bring up the app service blade. Click on `Browse` at the top:
+4. Click on the app service, which will bring up the app service blade. Click on `Browse` at the top:
 
     ![image](./media/2017-06-15_13_08_00.png)
 
@@ -226,27 +228,27 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
     ![image](./media/2016-11-14_12-03-50.gif)
 
-1. In the Azure portal, select the API Application (noted with the ![image](./media/image-024.gif) icon).
+5. In the Azure portal, select the API Application (noted with the ![image](./media/image-024.gif) icon).
 
     ![image](./media/image-019.gif)
 
-1. On the details blade select `Deployment options`.
+6. On the details blade select `Deployment options`.
 
     ![image](./media/image-020.gif)
 
-1. If the app deployment is connected, click `Disconnect` on the menu bar.
+7. If the app deployment is connected, click `Disconnect` on the menu bar.
 
     ![image](./media/2017-06-15_15_47_00.png)
 
-1. Then select `Choose source` in the blade and select `External Repository`.
+8. Then select `Choose source` in the blade and select `External Repository`.
 
     ![image](./media/image-022.gif)
 
-1. Paste the following in the Repository URL field `https://github.com/AzureCAT-GSI/DevCamp.git`.
+9. Paste the following in the Repository URL field `https://github.com/AzureCAT-GSI/DevCamp.git`.
 
     ![image](./media/image-023.gif)
 
-1. Select `OK`.
+10. Select `OK`.
 
 ---
 
