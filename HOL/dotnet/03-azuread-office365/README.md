@@ -71,62 +71,61 @@ AzureAD can handle authentication for web applications. First we will create a n
 
     ![image](./media/2017-21-06_07_51_00.png)
 
-    Note the `Project URL` and port on the `Web` tab, you will need this later:
+    
+    On the `Web` tab set the port of the URL to the value `44300`, if it is different.
+    Also take note of the `Project URL` and port, you will need this later.
 
-    ![image](./media/2017-21-06_07_57_00.png)
+    ![image](./media/2019-10_01_00_WebAppProperties.png)
 
-1. Navigate in a browser to [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com), login with your Azure credentials (Work or school Account), and click the button to `Add an app`.
+1. Navigate in a browser to [https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade), login with your Proge-Software credentials (mail address and password), and click the button to `New Registration`.
 
-    ![image](./media/2017-21-06_08_00_00.png)
+    ![image](./media/2019-10_01_01_new_registration.png)
 
-1. Provide an application name using your account name at the end. Uncheck the `Guided Setup Let us help you get started` checkbox and click `Create`:
+1. Provide an application name using your account name at the end. Fill the `Redirect URI` with the address copied before and click `Register`:
 
-    ![image](./media/2018-07-12_11_40_12.png)
+    ![image](./media/2019-10_01_02_new_registration.png)
 
-1. On the Registration page, take note of the `Application ID`. This will be used as an environment variable named `AAD_APP_ID` and is used to configure the authentication library.  
+1. On the Registration page, take note of the `Application ID`.
+    This will be used as an environment variable named `AAD_APP_ID` and is used to configure the authentication library.  
 
-    We also need to generate a client secret. Select the `Generate New Password` button.
+    ![image](./media/2019-10_01_03_new_registration_created.png)
 
-    ![image](./media/2017-21-06_08_12_00.png)
+1. On `Authentication` tab, enable `Implicit Grants` for `Access tokens` and for `ID tokens`
 
-1. A key is generated for you. ***Save this key***, as you will not be able to retrieve it in the future. This key will become the `AAD_APP_SECRET` environment variable. **Note:** If the generated key contains the characters **\\** or **&** please generate a new key!
+    ![image](./media/2019-2019-10_01_03b_ImplicitGrant.png)
 
-    ![image](./media/image-007.gif)
 
-1. Click on the `Add Platform` button:
+2. We also need to generate a client secret. Open the `Certificates & secrets` blade and in the section `Client Secrets` select the `New client secret` button.
 
-    ![image](./media/2017-21-06_08_23_00.png)
+    ![image](./media/2019-10_01_04_new_client_secrets.png)
 
-1. Select `Web`:
+3. Press `Add` to create a new Secret
 
-    ![image](./media/2017-21-06_08_25_00.png)
+    ![image](./media/2019-10_01_05_new_client_secrets_add.png)
 
-1. After AzureAD handles the authentication, it needs a location to redirect the user. For testing locally, we'll use the local IISExpress web site `http://localhost:[YOUR LOCAL DYNAMIC PORT]/` as the `Redirect URL` and set the URL as an app setting variable named `AAD_APP_REDIRECTURI`. This URL may need to be updated to the IISExpress dynamic port that is generated while debugging. You don't have to provide a `Logout URL`.  
+4. A new Secret should now be present in the `Client secrets` table
 
-    ![image](./media/2017-21-06_08_33_00.png)
+    ![image](./media/2019-10_01_06_new_client_secrets_added.png)
 
-1. We will need to grant our application permission to access resources on our behalf. In the Microsoft Graph Permissions section for `Delegated Permissions`, select `Add`:
+5. We will need to grant our application permission to access resources on our behalf. 
+    In the `API Permissions` blade, select `Microsoft Graph (1)`:
 
-    ![image](./media/2017-21-06_08_43_00.png)  
+    ![image](./media/2019-10_01_07_add_permission.png)  
 
-1. Add the following permissions (you will have to scroll down to find them):
+6. Add the following permissions (you will have to scroll down to find them):
     * Mail.ReadWrite
     * Mail.Send
+
+    ![image](./media/2019-10_01_08_add_permission_mail.png)
+
     * User.Read
     * User.ReadBasic.All
 
-    ![image](./media/2017-21-06_08_46_00.png)
-    ![image](./media/2017-21-06_08_48_00.png)
+    ![image](./media/2019-10_01_09_add_permission_users.png)
 
-    Confirm your selection and close the modal dialog by clicking `OK`.
+    Confirm your selection and close the modal dialog by clicking `Update permissions`.
 
-1. Click the `Save` button on the bottom of the screen.
-
-    ![image](./media/2017-21-06_08_49_00.png)  
-
-    Sometimes the `Save` button will not work in Internet Explorer and the saving animation will not disapear. In this case please retry using the Chrome browser.
-
-1. In Visual Studio, open `Web.config` and update the settings with the values from the app registration screen:
+7. In Visual Studio, open `Web.config` and update the settings with the values from the app registration screen:
     For the `AAD_APP_REDIRECTURI` value, enter the local IIS web site URL including the port and an ending `/`. Example: `http://localhost:8443/`,
     ```xml
    <!--HOL 3-->
@@ -135,7 +134,7 @@ AzureAD can handle authentication for web applications. First we will create a n
     <add key="AAD_APP_REDIRECTURI" value="LOCAL HTTPS IIS WEBSITE" />
     ```
 
-1. In Visual Studio, add the following packages from NuGet:
+8. In Visual Studio, add the following packages from NuGet:
 
     > `Microsoft.IdentityModel.Clients.ActiveDirectory`  **Choose version 3.13.8**
     >
@@ -151,9 +150,9 @@ AzureAD can handle authentication for web applications. First we will create a n
 
     ![image](./media/2017-21-06_08_56_00.png)
 
-1. First let's update the `Settings` class with the additional constants.
+9.  First let's update the `Settings` class with the additional constants.
 
-1. Open the `Utils` -> `Settings.cs` file and paste these values below the existing entries from HOL2.
+10. Open the `Utils` -> `Settings.cs` file and paste these values below the existing entries from HOL2.
 
     ```csharp
         // --- OMITTED ---
@@ -178,9 +177,9 @@ AzureAD can handle authentication for web applications. First we will create a n
         //####    HOL 3    ######
     ```
 
-1. Navigate to the `Utils` folder and create **two** new helper class files. Create a file called `AuthHelper.cs` and another called `SessionTokenCache.cs`.
+11. Navigate to the `Utils` folder and create **two** new helper class files. Create a file called `AuthHelper.cs` and another called `SessionTokenCache.cs`.
 
-1. Open `Utils` -> `AuthHelper.cs` and paste the following code. This code will obtain a token from Azure AD for users:
+12. Open `Utils` -> `AuthHelper.cs` and paste the following code. This code will obtain a token from Azure AD for users:
 
     ```csharp
     using System.Threading.Tasks;
@@ -239,7 +238,7 @@ AzureAD can handle authentication for web applications. First we will create a n
     }
     ```
 
-1. Open `Utils` -> `SessionTokenCache.cs` and paste the following code. This code will handle the custom caching of tokens:
+13. Open `Utils` -> `SessionTokenCache.cs` and paste the following code. This code will handle the custom caching of tokens:
 
     ```csharp
     //Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
@@ -323,7 +322,7 @@ AzureAD can handle authentication for web applications. First we will create a n
     }
     ```
 
-1. Open the `App_Start` -> `Startup.cs` file in the editor and paste the following code. This will handle the initial authentication flow and cache the tokens:
+14. Open the `App_Start` -> `Startup.cs` file in the editor and paste the following code. This will handle the initial authentication flow and cache the tokens:
 
     ```csharp
     using DevCamp.WebApp.App_Start;
@@ -416,13 +415,13 @@ AzureAD can handle authentication for web applications. First we will create a n
     }
     ```
 
-1. Create a new partial page that will handle our login navigation. In the `Views` -> `Shared` folder, create a new partial page named `_LoginPartial` of type `MVC 5 Partial Page (Razor)`:
+15. Create a new partial page that will handle our login navigation. In the `Views` -> `Shared` folder, create a new partial page named `_LoginPartial` of type `MVC 5 Partial Page (Razor)`:
 
     ![image](./media/2017-21-06_10_06_00.png)
 
     ![image](./media/2017-21-06_10_07_00.png)
 
-1. Paste the following code to the `Views` -> `Shared` -> `_LoginPartial.cs` file to add links that will handle signing in/out and profile pages:
+16. Paste the following code to the `Views` -> `Shared` -> `_LoginPartial.cs` file to add links that will handle signing in/out and profile pages:
 
     ```html
     @if (Request.IsAuthenticated)
@@ -453,7 +452,7 @@ AzureAD can handle authentication for web applications. First we will create a n
 
     ```
 
-1. Open the `Views` -> `Shared` -> `_Layout.cshtml` page and paste the following to replace the existing navigation links with the new `_LoginPartial.cshtml`:
+17. Open the `Views` -> `Shared` -> `_Layout.cshtml` page and paste the following (line 30) to replace the existing navigation links with the new `_LoginPartial.cshtml`:
 
     ```html
          <div class="navbar-collapse collapse">
@@ -471,27 +470,27 @@ AzureAD can handle authentication for web applications. First we will create a n
 
     **Before**
 
-    ![image](./media/2017-21-06_10_16_00.png)
+    ![image](./media/2019-10_01_10_Layout_Before_LoginPartial.png)
 
     **After**
 
-    ![image](./media/2017-21-06_10_14_00.png)
+    ![image](./media/2019-10_01_11_Layout_After_LoginPartial.png)
 
-1. Go to the `Controllers` folder.
+18. Go to the `Controllers` folder.
 
-1. Right-click and select `Add` -> `New Scaffolded Item...`:
+19. Right-click and select `Add` -> `New Scaffolded Item...`:
 
     ![image](./media/2017-21-06_10_16_00.png)
 
-1. Select `MVC 5 Controller - Empty` and click `Add`:
+20. Select `MVC 5 Controller - Empty` and click `Add`:
 
     ![image](./media/2017-21-06_10_17_00.png)
 
-1. As the name enter `ProfileController` and click `Add` to create a new controller that handles signins.
+21. As the name enter `ProfileController` and click `Add` to create a new controller that handles signins.
 
     ![image](./media/2017-21-06_10_18_00.png)
 
-1. Paste the following code:
+22. Paste the following code:
 
     ```csharp
         using DevCamp.WebApp.Utils;
@@ -558,7 +557,7 @@ AzureAD can handle authentication for web applications. First we will create a n
         }
     ```
 
-1. Add the `[Authorize]` attribute to the `Controllers` -> `IncidentConroller` methods to block any access to these routes until the user authenticates.
+23. Add the `[Authorize]` attribute to the `Controllers` -> `IncidentController` methods to block any access to these routes until the user authenticates.
 
     ```csharp
     [Authorize]
@@ -571,7 +570,7 @@ AzureAD can handle authentication for web applications. First we will create a n
         ... OMITTED
 
     ```
-1. Compile and hit `F5` to start debuggging. If you receive an error regarding your `Web.config`, open the `Web.config` file and just hit `F5` again until debugging starts.
+24. Compile and hit `F5` to start debuggging. If you receive an error regarding your `Web.config`, open the `Web.config` file and just hit `F5` again until debugging starts.
 
     ![image](./media/2017-21-06_11_39_00.png)
 
@@ -582,24 +581,33 @@ AzureAD can handle authentication for web applications. First we will create a n
     >
     >![image](./media/2017-21-06_10_44_00.png)
     >
-    > 1. In Visual Studio, select the `DevCamp.WebApp` project in the solution explorer. In the `Properties` window at the bottom, ensure that `SSL Enabled` is `True`.  Also make note of the URL and SSL URL:
+    > 1. In Visual Studio, select the `DevCamp.WebApp` project in the solution explorer. In the `Properties` window at the bottom, ensure that `SSL Enabled` is `True`. Also make note of the URL:
     >
     >![image](./media/2017-21-06_10_46_00.png)
     >
     > 1. Right-click on the `DevCamp.WebApp` project in the `Solution Explorer` and choose `Properties`. This should open the properties page in the middle window of Visual Studio. In the left hand list of pages choose `Web`, and ensure that the Project Url in the center is the SSL URL from above.  
-    > 1. Go back to the [apps.dev.microsoft.com](https://apps.dev.microsoft.com) page, and add the Project URL under the `platforms` section of the form. Remove any other URLs that were already there, and save your changes.
+    > 1. Go back to the [portal.azure.com](https://portal.azure.com) page, and add the Project URL under the `platforms` section of the form. Remove any other URLs that were already there, and save your changes.
     > 1. Update the `AAD_APP_REDIRECTURI` value in your `web.config`.
     > 1. Make sure your browsers are closed, then re-run your application.
-    > 1. Closing Visual Studio during the exercise can create new port numbers. Keep the entry in [apps.dev.microsoft.com](https://apps.dev.microsoft.com) and the `web.config` up to date.
+    > 1. Closing Visual Studio during the exercise can create new port numbers. Keep the entry in [portal.azure.com](https://portal.azure.com) and the `web.config` up to date.
     > 1. Run the application hitting `F5`. You could be presented with a screen asking you to trust the certificate. If so, hit `Yes` on that screen and on the following one:
     >
     >![image](./media/2018-07-12_12_01_26.png)
 
-1. Now, when you click on `Report Outage` you should be asked for a login. When you login for the first time, you will be prompted to allow permission for the app to access your data. Click `Accept`.
+25. Now, when you click on `Report Outage` you should be asked for a login. When you login for the first time, you will be prompted to allow permission for the app to access your data. Click `Accept`.
 
-    ![image](./media/2017-21-06_10_31_00.png)
+    ![image](./media/2019-10_01_12_Login.png)
 
-1. Click on the `Report Outage` button. The application now behaves differently for anonymous vs. authenticated users, allowing you the developer flexibility in exposing pieces of your application to anonymous audiences while ensuring sensitive content stays protected.
+
+    ![image](./media/2019-10_01_13_Login_Permissions_request.png)
+
+
+    ![image](./media/2019-10_01_14_Logged_in.png)
+
+    
+    ![image](./media/2019-10_01_15_Profile.png)
+
+26. Click on the `Report Outage` button. The application now behaves differently for anonymous vs. authenticated users, allowing you the developer flexibility in exposing pieces of your application to anonymous audiences while ensuring sensitive content stays protected.
 
 ---
 
