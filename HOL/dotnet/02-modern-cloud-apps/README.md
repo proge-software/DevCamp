@@ -669,7 +669,7 @@ When a new incident is reported, the user can attach a photo.  In this exercise 
 
     > The other storage accounts are used for diagnostics data and virtual machine disks
 
-    ![image](./media/2017-06-16_15_41_00.png)
+    ![image](./media/2019-10_03_01_incident_blobstg.png)
 
     Select `Access Keys` and note the **Storage account name** and **key1** for the storage account.
 
@@ -840,7 +840,7 @@ When a new incident is reported, the user can attach a photo.  In this exercise 
 
 1. Verify that your image and a queue entry were uploaded to Azure storage.
 
-    ![image](./media/2017-06-16_16_29_00.png)
+    ![image](./media/2019-10_03_02_Storage_Explorer.png)
 
     You can also use the Azure Storage Explorer to view the `thumbnails` queue, and verify that there is an entry for the image we uploaded. It is also safe to delete the images and queue entries using Azure Storage Explorer, and enter new Incidents for testing.
 
