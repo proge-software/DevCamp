@@ -604,9 +604,6 @@ AzureAD can handle authentication for web applications. First we will create a n
 
     ![image](./media/2019-10_01_14_Logged_in.png)
 
-    
-    ![image](./media/2019-10_01_15_Profile.png)
-
 26. Click on the `Report Outage` button. The application now behaves differently for anonymous vs. authenticated users, allowing you the developer flexibility in exposing pieces of your application to anonymous audiences while ensuring sensitive content stays protected.
 
 ---
