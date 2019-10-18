@@ -72,19 +72,19 @@ This hands-on-lab has the following exercises:
 
     Select the API app that begins with the name `incidentapi` followed by a random string of characters.
 
-    ![image](./media/2017-06-16_11_29_00.png)
+    ![image](./media/2019-10_01_IncidentAPI_AppService.png)
 
 1. The window that slides out is called a **blade** and contains information and configuration options for the resource.  
 
     On the top toolbar, select `Browse` to open the API in a new browser window.
 
-    ![image](./media/2017-06-16_11_33_00.png)
+    ![image](./media/2019-10_02_IncidentAPI_AppService_Browse.png)
 
     You should be greeted by the default ASP.NET landing page:
 
     ![image](./media/image-05.gif)
 
-1. Since we provisioned a new instance of CosmosDB, there are no records in the database. We will generate some sample data using the shared API. It has a route that can be accessed at any time to create or reset the documents in your collection. In the browser, add the following to your API URL to generate sample documents.
+2. Since we provisioned a new instance of CosmosDB, there are no records in the database. We will generate some sample data using the shared API. It has a route that can be accessed at any time to create or reset the documents in your collection. In the browser, add the following to your API URL to generate sample documents.
 
     >
     > Add `/incidents/sampledata` to the end of your API URL.
@@ -99,9 +99,9 @@ This hands-on-lab has the following exercises:
     >
     > In Chrome you should see a JSON response directly in the browser tab, however in Internet Explorer you may be asked top Open or Download a file. If prompted, Open the file in Notepad or Visual Studio Code to see the return message.
 
-1. After navigating to the `sampledata` route, let's verify that the documents were created in CosmosDB. In the Azure Portal, navigate to the Resource Group blade, select the `Corso-MS-Cloud` and then select the CosmosDB resource which starts with `incidentdb`.
+3. After navigating to the `sampledata` route, let's verify that the documents were created in CosmosDB. In the Azure Portal, navigate to the Resource Group blade, select the `Corso-MS-Cloud` and then select the CosmosDB resource which starts with `incidentdb`.
 
-    ![image](./media/2017-06-16_11_39_00.png)
+    ![image](./media/2019-10_03_Incident_AzureCosmosDBAccount.png)
 
     Select the CosmosDB database. This will open the CosmosDB blade.
 
@@ -115,17 +115,17 @@ This hands-on-lab has the following exercises:
 
     We can see that several incidents have been created and are now available to the API.
 
-1. Back to Visual Studio, use the Solution Explorer to open the Dashboard View located at `DevCamp.WebApp` -> `Views` -> `Dashboard` -> `Index.cshtml`:
+4. Back to Visual Studio, use the Solution Explorer to open the Dashboard View located at `DevCamp.WebApp` -> `Views` -> `Dashboard` -> `Index.cshtml`:
 
     ![image](./media/2017-06-16_11_47_00.png)
 
-1. On the Dashboard page, notice how the static sample incidents are stubbed in between the  `<!--TEMPLATE CODE -->` comment block.
+5. On the Dashboard page, notice how the static sample incidents are stubbed in between the  `<!--TEMPLATE CODE -->` comment block.
 
     ![image](./media/image-10.gif)
 
-1. In Visual Studio, delete the entirety of the `<!--TEMPLATE CODE -->` comment block to remove the sample incidents.
+6. In Visual Studio, delete the entirety of the `<!--TEMPLATE CODE -->` comment block to remove the sample incidents.
 
-1. Between the `<!--INSERT VIEW CODE -->` comment block paste the following. This block handles the display of the incident dashboard. It creates a HTML panel for each incident retrieved via the API and stored in the solution's model:
+7. Between the `<!--INSERT VIEW CODE -->` comment block paste the following. This block handles the display of the incident dashboard. It creates a HTML panel for each incident retrieved via the API and stored in the solution's model:
 
     ```csharp
    <!--VIEW CODE-->
@@ -172,13 +172,13 @@ This hands-on-lab has the following exercises:
     <!--VIEW CODE-->
     ```
 
-1. We need to add a reference to the Web API project. Get the URL by navigating to Azure and copying from the overview blade of the `incidentapi...`:
+8. We need to add a reference to the Web API project. Get the URL by navigating to Azure and copying from the overview blade of the `incidentapi...`:
 
     ![image](./media/2017-06-16_12_07_00.png)
 
-1. Copy the URL of the API app to the clipboard.
+9. Copy the URL of the API app to the clipboard.
 
-1. Add the URL to the 'INCIDENT_API_URL' setting in the `Web.config` located at `DevCamp.WebApp` -> `Web.config`:
+10. Add the URL to the 'INCIDENT_API_URL' setting in the `Web.config` located at `DevCamp.WebApp` -> `Web.config`:
 
     ![image](./media/2017-06-16_12_12_00.png)
 
@@ -189,9 +189,9 @@ This hands-on-lab has the following exercises:
     <add key="INCIDENT_API_URL" value="http://incidentapi32csxy6h3s7bku.azurewebsites.net" />
     ```
 
-    > The URL should not have a `/` on the end!
+    > The URL should not have a `/` on the end and MUST use the http protocol (NOT HTTPS)!
 
-1. To use the API in our application, right click on the `DevCamp.WebApp` project in the Solution Explorer, select `Add` -> `REST API Client`.
+11. To use the API in our application, right click on the `DevCamp.WebApp` project in the Solution Explorer, select `Add` -> `REST API Client`.
 
     ![image](./media/2017-06-16_12_14_00.png)
 
