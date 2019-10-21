@@ -1,17 +1,17 @@
-# DevOps with Visual Studio Team Services (.NET)
+# DevOps with Azure DevOps (.NET)
 
 ## Overview
 
-In this lab, you will create a Visual Studio Team Services repository, check in your code, create a Continuous Integration pipeline, and test your cloud-based application.
+In this lab, you will create a Azure DevOps repository, commit and push your code, create a Continuous Integration pipeline, and test your cloud-based application.
 
 ## Objectives
 
 In this hands-on lab, you will learn how to:
 
-* Create a VSTS Git repository.
-* Add your code to the VSTS Git repository.
-* Create a Continuous Integration pipeline.
-* Deploy a built application to an Azure Web App from VSTS.
+* Create an ADO Git repository.
+* Add your code to the ADO Git repository.
+* Create a Continuous Integration (CI) pipeline.
+* Deploy a built application to an Azure Web App from ADO.
 
 ## Prerequisites
 
@@ -28,50 +28,58 @@ In this hands-on lab, you will learn how to:
 
 This hands-on-lab has the following exercises:
 
-* [Exercise 1: Create VSTS Git repository](#ex1)
-* [Exercise 2: Add application to VSTS Git](#ex2)
+* [Exercise 1: Create ADO Git repository](#ex1)
+* [Exercise 2: Add application to ADO Git](#ex2)
 * [Exercise 3: Create a Continuous Integration pipeline](#ex3)
 * [Exercise 4: Deploy code to an Azure Web App](#ex4)
 
 ---
 
-## Exercise 1: Create VSTS Git repository<a name="ex1"></a>
+## Exercise 1: Create ADO Git repository<a name="ex1"></a>
 
-VSTS gives us the option to use Git or [TFVC](https://www.visualstudio.com/en-us/docs/tfvc/overview) as our project's repository. For this exercise we will use Git, and then clone the repository to our dev machine.
+ADO gives us the option to use Git or [TFVC](https://www.visualstudio.com/en-us/docs/tfvc/overview) as our project's repository.
+For this exercise we will use Git, and then clone the repository to our dev machine.
 
-> Note that if you acquired these lab materials via a `git clone` of the workshop repo then you should select a folder somewhere else on your dev machine. This will minimize conflicts between the two separate repositories.
+> Note that if you acquired these lab materials via a `git clone` of the workshop repo then you should select a folder somewhere else on your dev machine.
+  This will minimize conflicts between the two separate repositories.
 
-1. We will ignore the automatically created `MyFirstProject`. Starting at your TFVC account's landing page (`https://[YOUR_ACCOUNT_NAME]-proge.visualstudio.com`), click `Create Project`.
+1. We will ignore the `devcamp123` project we created in HOL 1.
+   Starting at your ADO account's landing page (`https://dev.azure.com/[YOUR_ACCOUNT_NAME]`), click `New Project`.
 
-    ![image](./media/2017-06-21_13_56_00.png)
+    ![image](./media/2019-10_01_01_ADO_home.png)
 
-1. Enter a project name such as **DevCamp**, ensure `Version control` is set to `Git` and then click `Create`.
+2. Enter a project name such as **DevCamp**, ensure `Version control` is set to `Git` and then click `Create`.
 
-    ![image](./media/2017-06-21_13_58_00.png)
+    ![image](./media/2019-10_01_02_ADO_new_proj.png)
 
-1. Wait for the project to be created. This process may take up to 60 seconds. When finished you will be redirected to the project page
+3. Wait for the project to be created. 
+   This process may take up to 60 seconds.
+   When finished you will be redirected to the project page
+    
+    ![image](./media/2019-10_01_03_ADO_proj_hp.png)
 
-1. Click `Dashboards` and explore your pre-built dashboard. Familiarize yourself with the variety of widgets available, and the customization options.
+4. Click `Dashboards` and explore your pre-built dashboard. Familiarize yourself with the variety of widgets available, and the customization options.
 
-    ![image](./media/2017-06-21_14_01_00.png)
+    ![image](./media/2019-10_01_04_ADO_proj_dashboard.png)
 
-You have now created a project in VSTS with a Git repository. Next we'll clone the repository locally to your developer machine and upload code from our machine to VSTS.
+You have now created a project in ADO with a Git repository. Next we'll clone the repository locally to your developer machine and upload code from our machine to ADO.
 
 ---
 
-## Exercise 2: Add application to VSTS Git<a name="ex2"></a>
+## Exercise 2: Add application to ADO Git<a name="ex2"></a>
 
-1. Click `Code` on the top toolbar to navigate to the Code screen.
+1. Click `Repos` on the left toolbar to navigate to the Code screen.
 
-    ![image](./media/2017-06-21_14_04_00.png)
+    ![image](./media/2019-10_02_01_ADO_proj_repos.png)
 
 1. Click the `Clone in Visual Studio` button.
 
-    ![image](./media/2017-06-21_14_08_00.png)
+    ![image](./media/2019-10_02_02_ADO_proj_clone_vs.png)
 
-    > **Note** if you are using Chrome, you may receive a pop-up message. The Clone in Visual Studio option uses a custom protocol handler to open in the client. Select `Launch Application`.
+    > **Note** if you are using Chrome, you may receive a pop-up message. 
+      The Clone in Visual Studio option uses a custom protocol handler to open in the client. Select `Open Microsoft Visual Studio Handler Selector`.
     >
-    > ![image](./media/image-044.gif)
+    > ![image](./media/2019-10_02_03_chrome_pick_app.png)
     >
     > The Internet Explorer will display a security warning. Click `Allow` to continue:
     >
@@ -79,7 +87,7 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
 1. When Visual Studio launches, you will be prompted in the `Team Explorer` window to create a local folder to clone into. Select the `...` next to the local address:
 
-    ![image](./media/2017-06-21_14_12_00.png)
+    ![image](./media/2019-10_02_03_vs_team_explorer.png)
 
 1. Create a new local folder ***outside*** of the GIT folder you have been using for the other HOLs. In the example below, the folder was created as `DevCampVSO`:
 
@@ -87,13 +95,13 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
 1. Click `OK` and `Clone`.
 
-1. Open Windows Explorer and copy the files from the `start` folder in this HOL and copy the contents into the folder you created above.
+1. Open Windows Explorer and copy the files from the `start` folder in this HOL (you should have it at `C:\DevCamp\HOL\dotnet\04-devops-ci\start`) and copy the contents into the folder you created above.
 
       ![image](./media/2017-06-21_14_17_00.png)
 
 1. Open the **copied solution** file in Visual Studio.
 
-1. Ensure the `Web.config` settings are set to the values for your application (you can copy them from your working copy back from HOL 3).
+1. Ensure the `Web.config` settings are set to the values for your application (you can copy them from your working copy back from HOL 3 - or 2 if you completed the HOL 3 using the HOL 2 solution).
 
     ```xml
     <!--HOL 2-->
@@ -131,13 +139,6 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
     > If you made changes to the files, and you do not see them in the list, ensure that you have cloned the repository from the repo.
 
-    ```CMD
-    cd\DevCampVSO
-    Git init
-    Git commit *
-    Git push origin master -m ‘initial commit’
-    ```
-
 1. Right click on the top level folder and select `Stage`:
 
     ![image](./media/2017-06-21_14_26_00.png)
@@ -154,9 +155,9 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
      ![image](./media/2017-06-21_14_30_00.png)
 
-1. In your browser, navigate to the Visual Studio Team Services site and view the committed files.
+1. In your browser, navigate to the Azure DevOps site and view the committed files.
 
-     ![image](./media/2017-06-21_14_33_00.png)
+     ![image](./media/2019-10_02_04_ADO_committed.png)
 
 1. If you want to return to the changes view of the Team Explorer to stage more commits, click the headline to open a drop-down of all the views.
 
@@ -166,13 +167,13 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
 ## Exercise 3: Create a Continuous Integration pipeline<a name="ex3"></a>
 
-With application code now uploaded to VSTS, we can begin to create builds via a Build Definition. Navigate to the `Build` tab from the top navigation. We will use the hosted agent within VSTS to process our builds in this exercise.
+With application code now uploaded to ADO, we can begin to create builds via a Build Definition. Navigate to the `Build` tab from the top navigation. We will use the hosted agent within ADO to process our builds in this exercise.
 
 1. From the `Build & Release` tab, create a new `Build Definition` by clicking the `New Definition` button:
 
     ![image](./media/2017-06-21_14_35_00.png)
 
-1. On the `Select your repository` step, be sure the source is `VSTS Git`, the `Team project` is your VSTS Project and the `Repository` is the one that was earlier created.
+1. On the `Select your repository` step, be sure the source is `ADO Git`, the `Team project` is your ADO Project and the `Repository` is the one that was earlier created.
 
     ![image](./media/2018-07-22_11_49_55.png)
 
@@ -243,7 +244,7 @@ We now have a Build Definition that will compile the application and create a pa
 
 ## Exercise 4: Deploy code to an Azure Web App<a name="ex4"></a>
 
-In the ARM Template that was originally deployed, a web app was created as a development environment to hold a deployed .NET application. We will use this web app as a deployment target from VSTS. First, we need to prepare this web app for our application code.
+In the ARM Template that was originally deployed, a web app was created as a development environment to hold a deployed .NET application. We will use this web app as a deployment target from ADO. First, we need to prepare this web app for our application code.
 
 1. Visit the Azure Web App by browsing to the [Azure Portal](http://portal.azure.com), opening the `Corso-MS-Cloud` Resource Group, and select the Azure Web App resource that begins with `dotnetapp` before the random string.
 
@@ -257,7 +258,7 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
     ![image](./media/image-031.gif)
 
-1. Now that we have a build being created and a website to deploy into, let's connect them. In VSTS, navigate to the `Build & Release` tab.
+1. Now that we have a build being created and a website to deploy into, let's connect them. In ADO, navigate to the `Build & Release` tab.
 
 1. Click on `Releases`.
 
@@ -313,7 +314,7 @@ In the ARM Template that was originally deployed, a web app was created as a dev
         > provide the information to enter in this dialog:
         >
 
-        1. Open [this PowerShell script](https://raw.githubusercontent.com/Microsoft/vsts-rm-documentation/master/Azure/SPNCreation.ps1) in your browser. Select all the content from the window and copy to the clipboard.
+        1. Open [this PowerShell script](https://raw.githubusercontent.com/Microsoft/ADO-rm-documentation/master/Azure/SPNCreation.ps1) in your browser. Select all the content from the window and copy to the clipboard.
 
         1. Open a PowerShell ISE window. In the text window, paste the PowerShell script from the clipboard.
 
@@ -345,11 +346,11 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
             ![image](./media/image-048a.gif)
 
-        1. If this is the first time you are connecting to this subscription, you will need to authorize VSTS to have access to deploy to Azure. After you select your subscription, click `Authorize`.
+        1. If this is the first time you are connecting to this subscription, you will need to authorize ADO to have access to deploy to Azure. After you select your subscription, click `Authorize`.
 
         ![image](./media/image-067.gif)
 
-    1. Navigate back to the VSTS build tab in the browser and click the click the `Refresh` icon to refresh the connections. The `Azure` connection that we setup should now appear. Select it.
+    1. Navigate back to the ADO build tab in the browser and click the click the `Refresh` icon to refresh the connections. The `Azure` connection that we setup should now appear. Select it.
 
     1. Next, for `App Service Name` choose the name of the .NET Azure Web App. It may take a moment to populate.
 
@@ -402,10 +403,10 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
 In this hands-on lab, you learned how to:
 
-* Create a VSTS Git repository that you utilized to synchronize your source code on your machine and in the cloud.
-* Add your code to the VSTS Git repository.
+* Create a ADO Git repository that you utilized to synchronize your source code on your machine and in the cloud.
+* Add your code to the ADO Git repository.
 * Create a Continuous Integration pipeline that you used to automatically compile your application and create packages for deployment anytime code is checked into the repository.
-* Deploy a built application to an Azure Web App from VSTS and thus automating the final steps of your deployment process.
+* Deploy a built application to an Azure Web App from ADO and thus automating the final steps of your deployment process.
 
 After completing this module, you can continue on to Module 5: ARM.
 
