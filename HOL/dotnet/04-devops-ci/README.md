@@ -264,9 +264,9 @@ We now have a Build Pipeline that will compile the application and create a pack
 
 In the ARM Template that was originally deployed, a web app was created as a development environment to hold a deployed .NET application. We will use this web app as a deployment target from ADO. First, we need to prepare this web app for our application code.
 
-1. Visit the Azure Web App by browsing to the [Azure Portal](http://portal.azure.com), opening the `Corso-MS-Cloud` Resource Group, and select the Azure Web App resource that begins with `dotnetapp` before the random string.
+1. Visit the Azure Web App by browsing to the [Azure Portal](http://portal.azure.com), opening the `Corso-MS-Cloud` Resource Group, and select the Azure Web App resource that begins with `dotnetapp[YOUR_NAME]` before the random string.
 
-    ![image](./media/2017-06-22_11_28_00.png)
+    ![image](./media/2019-10_04_01_AzurePortal_dotnetapp.png)
 
 1. Once the blade expands, select `Browse` from the top toolbar:
 
@@ -274,58 +274,64 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
 1. A new browser tab will open with a splash screen visible. It will look similar to this image (it gets updated regularly with new information) and tell you that the app service has been created:
 
-    ![image](./media/image-031.gif)
+    ![image](./media/2019-10_04_02_Web_Service_Empty.png)
 
-1. Now that we have a build being created and a website to deploy into, let's connect them. In ADO, navigate to the `Build & Release` tab.
+1. Now that we have a build being created and a website to deploy into, let's connect them.
+   In ADO, navigate to the `Pipelines` tab.
 
 1. Click on `Releases`.
 
-1. Click the `+ New Definition` button to create a new release definition:
+1. Click the `New Pipeline` button to create a new release definition:
 
-    ![image](./media/2017-06-22_11_31_00.png)
+    ![image](./media/2019-10_04_03_ADO_Pipelines_Releases.png)
 
-1. Select `Azure App Service Deployment` and click `Apply`.
+1. Select `Azure App Service deployment` and click `Apply`.
 
-    ![image](./media/2017-09-27_10_12_00.png)
+    ![image](./media/2019-10_04_04_ADO_Pipelines_Releases_New.png)
 
-1. Click `Add artifact`. Ensure the `Source (Build definition)` is set to the Build Definition name used in the earlier exercise. Then click `Add` to finish creating the Release Definition.
+1. Click `Add artifact`. Ensure the `Source (Build pipeline)` is set to the Build Pipeline name used in the earlier exercise.
+   Then click `Add` to finish creating the Release Pipeline.
 
-    ![image](./media/image-027.gif)
+    ![image](./media/2019-10_04_05_ADO_Pipelines_Releases_AddAnArtifact.png)
 
-1. We need to connect your VS agent with your Azure subscription so it can deploy resources. Select `Tasks` from the menu. If the drop-down next to `Azure subscription` offers you your subscription:
+1. Now click on the Tab `Tasks` that should present a circular alert icon
 
-    1. Select it, click on the arrow next to `Authorize` and select `Advanced options` from the drop-down:
+    ![image](./media/2019-10_04_06_ADO_Pipelines_Releases_Tasks.png)
+
+2. We need to connect your VS agent with your Azure subscription so it can deploy resources. Select `Tasks` from the menu. 
+
+    1. In the dropdown near `Azure Subscription` Select the voice `Microsoft Azure Sponsorship`, click on the arrow next to `Authorize` and select `Advanced options` from the drop-down:
 
         ![image](./media/2018-07-16_10_03_28.png)
 
-    1. Select `Corso-MS-Cloud` as resource group and click `Ok`:
+    2. Select `Corso-MS-Cloud` as resource group and click `Ok`:
 
         ![image](./media/2018-07-16_10_02_59.png)
 
-    1. Select your `dotnetapp...` Azure Web app resource from the `App Service name` drop-down:
+    3. Select your `dotnetapp...` Azure Web app resource from the `App Service name` drop-down:
 
         ![image](./media/2017-06-22_09_05_00.png)
 
-    1. Move to step 11.
+    4. Move to step 11.
 
-1. If the drop-down next to `Azure subscription` does not offer you your subscription or the drop-down next to `App Service name` does not offer you your Azure Web app resource (give it a moment after selecting the subscription:
+3. If the drop-down next to `Azure subscription` does not offer you your subscription or the drop-down next to `App Service name` does not offer you your Azure Web app resource (give it a moment after selecting the subscription:
 
     1. click on `Manage`:
 
         ![image](./media/2017-06-22_11_35_00.png)
 
-    1. This will open a screen where you can connect to the ARM service endpoint. Select `New Service Endpoint` -> `Azure Resource Manager`.
+    2. This will open a screen where you can connect to the ARM service endpoint. Select `New Service Endpoint` -> `Azure Resource Manager`.
 
         ![image](./media/image-042.gif)
 
-    1. Provide a connection name and select your subscription then click `OK`.
+    3. Provide a connection name and select your subscription then click `OK`.
 
         ![image](./media/image-025.gif)
 
         > If your subscription is not in the dropdown list, click the link at the bottom of the window, and the window
         > format will change to allow you to enter connection information on your subscription:
 
-    1. Another option is to create a service principal. The steps to create a service principal is below.
+    4. Another option is to create a service principal. The steps to create a service principal is below.
 
         > If you have not created a service principal for the subscription, you will have to follow the
         > [instructions](https://go.microsoft.com/fwlink/?LinkID=623000&clcid=0x409) to do so.  This process will
@@ -334,21 +340,21 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
         1. Open [this PowerShell script](https://raw.githubusercontent.com/Microsoft/ADO-rm-documentation/master/Azure/SPNCreation.ps1) in your browser. Select all the content from the window and copy to the clipboard.
 
-        1. Open a PowerShell ISE window. In the text window, paste the PowerShell script from the clipboard.
+        2. Open a PowerShell ISE window. In the text window, paste the PowerShell script from the clipboard.
 
             ![image](./media/image-044a.gif)
 
-        1. Click the green arrow to run the PowerShell script.
+        3. Click the green arrow to run the PowerShell script.
 
             ![image](./media/image-045a.gif)
 
             > If the PowerShell gives an error at runtime regarding a missing AzureRM module, please install it by executing the following command in a PowerShell window with admin privileges: `Install-Module AzureRM`. Then run `Set-ExecutionPolicy RemoteSigned -Scope process` to adjust the execution level
 
-        1. The PowerShell script will ask for your **subscription name** and a **password**. This password is for the service principal only, not the password for your subscription. So you can use whatever password you would like, just remember it.
+        4. The PowerShell script will ask for your **subscription name** and a **password**. This password is for the service principal only, not the password for your subscription. So you can use whatever password you would like, just remember it.
 
             ![image](./media/image-046a.gif)
 
-        1. You will then be asked for your Azure login credentials. Enter your Azure username and password. The script will print out several values that you will need to enter into the `Add Azure Resource Manager Service Endpoint` window. Copy and paste these values from the PowerShell window:
+        5. You will then be asked for your Azure login credentials. Enter your Azure username and password. The script will print out several values that you will need to enter into the `Add Azure Resource Manager Service Endpoint` window. Copy and paste these values from the PowerShell window:
 
             * Subscription ID
             * Subscription Name
@@ -360,57 +366,57 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
                 ![image](./media/image-047a.gif)
 
-        1. Click `Verify connection`, and ensure that the window indicates that the connection was verified. Then Click `OK` and `Close`.
+        6. Click `Verify connection`, and ensure that the window indicates that the connection was verified. Then Click `OK` and `Close`.
 
             ![image](./media/image-048a.gif)
 
-        1. If this is the first time you are connecting to this subscription, you will need to authorize ADO to have access to deploy to Azure. After you select your subscription, click `Authorize`.
+        7. If this is the first time you are connecting to this subscription, you will need to authorize ADO to have access to deploy to Azure. After you select your subscription, click `Authorize`.
 
         ![image](./media/image-067.gif)
 
-    1. Navigate back to the ADO build tab in the browser and click the click the `Refresh` icon to refresh the connections. The `Azure` connection that we setup should now appear. Select it.
+    5. Navigate back to the ADO build tab in the browser and click the click the `Refresh` icon to refresh the connections. The `Azure` connection that we setup should now appear. Select it.
 
-    1. Next, for `App Service Name` choose the name of the .NET Azure Web App. It may take a moment to populate.
+    6. Next, for `App Service Name` choose the name of the .NET Azure Web App. It may take a moment to populate.
 
         ![image](./media/image-062.gif)
 
-1. From the menu bar select `Save` to save the Release Definition, and select `Release` -> `Create Release`.
+4. From the menu bar select `Save` to save the Release Definition, and select `Release` -> `Create Release`.
 
     ![image](./media/2017-06-22_09_21_00.png)
 
-1. Enter the release information and select the build to deploy. Ensure that the latest successful build is selected from the drop-down box. Click `Create`.
+5. Enter the release information and select the build to deploy. Ensure that the latest successful build is selected from the drop-down box. Click `Create`.
 
     ![image](./media/image-063.gif)
 
-1. Click on the release number in navigation header. This will allow you view the current release information.
+6. Click on the release number in navigation header. This will allow you view the current release information.
 
     ![image](./media/image-064.gif)
 
-1. After a successful build you should see the application deployed to your web app.
+7. After a successful build you should see the application deployed to your web app.
 
     ![image](./media/image-065.gif)
 
-1. Update the application configuration to match the current settings you have deployed. Copy the values from the `Web.config` to the Application configuration in Azure if they do not match. Open the Azure portal and find the .NET web application.
+8. Update the application configuration to match the current settings you have deployed. Copy the values from the `Web.config` to the Application configuration in Azure if they do not match. Open the Azure portal and find the .NET web application.
 
-1. Open the Application Settings.
+9.  Open the Application Settings.
 
      ![image](./media/2017-06-22_11_47_00.png)
 
-1. Copy the values from the `Web.config` into the application settings (you also need to include a new key named `AAD_APP_REDIRECTURI` and set the value to the URL on the application in Azure `https://dotnetapp[YOUR_ACCOUT_NAME][...].azurewebsites.net/`). If you do not have values for these settings, please review the previous labs for the correct values.
+10. Copy the values from the `Web.config` into the application settings (you also need to include a new key named `AAD_APP_REDIRECTURI` and set the value to the URL on the application in Azure `https://dotnetapp[YOUR_ACCOUT_NAME][...].azurewebsites.net/`). If you do not have values for these settings, please review the previous labs for the correct values.
 
-1. Click `Save`.
+11. Click `Save`.
 
     ![image](./media/2017-06-22_11_49_00.png)
 
-1. Navigate to the [Application Registration Portal](https://apps.dev.microsoft.com).
+12. Navigate to the [Application Registration Portal](https://apps.dev.microsoft.com).
 
-1. Open the configuration for your application and add the Azure web application URL to the list of Redirect URLs. Click `Save`.
+13. Open the configuration for your application and add the Azure web application URL to the list of Redirect URLs. Click `Save`.
 
     ![image](./media/image-033.gif)
 
     > Note: Be sure to include the trailing slash **/** in the URL and ensure this address is using **https**.
 
-1. Open a browser and navigate to the site. You should see the running site on Azure.
+14. Open a browser and navigate to the site. You should see the running site on Azure.
 
     ![image](./media/2017-06-22_12_12_00.jpg)
 
