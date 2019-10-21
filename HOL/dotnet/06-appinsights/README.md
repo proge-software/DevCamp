@@ -155,7 +155,7 @@ We will add both components to our application and enable the sending of telemet
 
 1. Back in the Azure Portal, refresh the browser tab (or click `Refresh` from the top toolbar) until you see data appear.
 
-    ![image](./media/2019-10_01_07_DevCamp_insights_overview_wstats.png)
+    ![image](./media/2019-10_02_01_DevCamp_insights_overview_wstats.png)
 
     > It may take 3-5 minutes for data to appear even when manually refreshing.
 
@@ -186,9 +186,9 @@ We will add both components to our application and enable the sending of telemet
 2. Redeploy the application and load several pages to generate more sample telemetry.
    Opening the `Performance` tab in the left bar we will see now metrics for the `Server` and for the `Browser`:
 
-    ![image](./media/2019-10_01_08_DevCamp_insights_performances_server.png)
-    
-    ![image](./media/2019-10_01_09_DevCamp_insights_performances_browser.png)
+    ![image](./media/2019-10_02_02_DevCamp_insights_performances_server.png)
+
+    ![image](./media/2019-10_02_03_DevCamp_insights_performances_browser.png)
 
 Our application is now providing the Application Insights service telemetry data from both the server and client.
 
@@ -196,7 +196,9 @@ Our application is now providing the Application Insights service telemetry data
 
 ## Exercise 3: Monitor custom events<a name="ex3"></a>
 
-Up until this point the telemetry provided has been an automatic, out-of-the-box experience. For custom events we need to use the SDK. Let's create an event where any time a user views their Profile page, we record their name and AzureAD tenant ID.
+Up until this point the telemetry provided has been an automatic, out-of-the-box experience. 
+For custom events we need to use the SDK. 
+Let's create an event where any time a user views their Profile page, we record their name and AzureAD tenant ID.
 
 1. Open the `Controllers` -> `Profilecontroller.cs` file.
 
@@ -234,7 +236,9 @@ Up until this point the telemetry provided has been an automatic, out-of-the-box
 
 1. Hit F5 to begin debugging. Sign in, view your profile and Sign out a few times. Then view the custom events in the portal by opening the `Application Insights` blade and pressing the `Search` button. Clicking on one of the custom events gives us more details including the custom data we defined. For exceptions, we get the call stack and more information associated with the event.
 
-    ![image](./media/2017-06-29_13_01_00.png)
+    ![image](./media/2019-10_03_01_DevCamp_insights_custom_events.png)
+
+    ![image](./media/2019-10_03_02_DevCamp_insights_custom_events_details.png)
 
     > ***Note:*** If you do not see your custom events, look at the URL you are redirected to after your sign in. If you are redirected to the Azure hosted instance of your app, update your settings on [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com) to reflect your current debugging environment. Remove the Azure addresses and enter the current port number that Visual Studio uses for debugging.
 
