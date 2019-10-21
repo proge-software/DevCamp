@@ -169,76 +169,94 @@ You have now created a project in ADO with a Git repository. Next we'll clone th
 
 With application code now uploaded to ADO, we can begin to create builds via a Build Definition. Navigate to the `Build` tab from the top navigation. We will use the hosted agent within ADO to process our builds in this exercise.
 
-1. From the `Build & Release` tab, create a new `Build Definition` by clicking the `New Definition` button:
+1. From the `Pipelines` menu select the `Builds` tab, and select the `New pipeline` button:
 
-    ![image](./media/2017-06-21_14_35_00.png)
+    ![image](./media/2019-10_03_01_Pipelines_Build_New.png)
 
-1. On the `Select your repository` step, be sure the source is `ADO Git`, the `Team project` is your ADO Project and the `Repository` is the one that was earlier created.
+2. Select `Azure Repos Git` as code hosting platform
 
-    ![image](./media/2018-07-22_11_49_55.png)
+    ![image](./media/2019-10_03_02_Pipelines_Build_New_Connect.png)
 
-1. There are pre-built definitions for a variety of programming languages and application stacks. For this exercise select `.NET Desktop` and click `Apply`:
+3. Then select `DevCamp` as repository
 
-    ![image](./media/2018-07-22_11_54_11.png)
+    ![image](./media/2019-10_03_03_Pipelines_Build_New_Select.png)
 
-1. The build tasks are created for us as part of the template.
+4. There are pre-built definitions for a variety of programming languages and application stacks. For this exercise select `.NET Desktop` and click `Apply`:
 
-1. In the `Process` settings select `Hosted` as the `Agent queue`:
+    ![image](./media/2019-10_03_04_Pipelines_Build_New_Configure.png)
 
-    ![image](./media/2017-10-23_13_50_00.png)
+5. The build tasks are created for us as part of the template and showed as yaml file in the `Review` step
 
-1. Navigate to the `Build Solution` step. Add the following in the `MSBuild Arguments` text box to create a web deployment package as part of the build:
+    ![image](./media/2019-10_03_05_Pipelines_Build_New_Review.png)
 
-    ```xml
-    /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="bin\deploymentpackage"
-    ```
-    ![image](./media/2017-06-22_11_04_00.png)
 
-1. In the build step `Copy Files to: $(build.artifactstagingdirectory)`, the default setting uses build definition folders. We are not using custom build configurations so we need to update the contents value.
+6. Navigate to the `VSBuild@1` task. 
+   Add the following in the `inputs` to create a web deployment package as part of the build:
 
     ```xml
-    **\bin\**
+    msbuildArgs: /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="bin\deploymentpackage"
     ```
+    ![image](./media/2019-10_03_06_Pipelines_Build_New_VBuild.png)
 
-    ![image](./media/2017-06-22_11_06_00.png)
+7. Click on the `Show Assistant` on the right
 
-1. Click `Save & queue`. Our saved Build Definition is ready to be processed by the Hosted Build Agent.
+    ![image](./media/2019-10_03_07_Pipelines_Build_New_Assistant.png)
 
-    ![image](./media/2017-06-22_11_12_00.png)
+8. Use the search box to search `copy` and select the `Copy Files` task
 
-1. Accept the defaults and click `Save & Queue`. Your build will then be queued until the Hosted Build Agent can pick it up for processing. This typically takes less than 60 seconds to begin.
+    ![image](./media/2019-10_03_08_Pipelines_Build_New_CopyFiles.png)
 
-1. Click the build number to proceed.
+9. Fill the form using the following values and finally select `Add`:
+   - Source Folder: `$(build.sourcesdirectory)`
+   - Contents: `**\bin\**`
+   - Target Folder: `$(build.artifactstagingdirectory)`
 
-    ![image](./media/2017-11-01_11_15_00.png)
+    ![image](./media/2019-10_03_09_Pipelines_Build_New_CopyFiles_Filled.png)
 
-1. Once your build completes, click each step on the left navigation bar and inspect the output.
+10. Add a `Publish build artifacts` Task after the `Copy Files` one
+    
+    ![image](./media/2019-10_03_10_Pipelines_Build_New_PublishBuildArtifacts.png)
 
-    ![image](./media/2017-06-22_11_17_00.png)
+11. Accept default and press `Add`
+
+    ![image](./media/2019-10_03_11_Pipelines_Build_New_PublishBuildArtifacts_Add.png)
+
+12. Click `Save and run`. Our saved Build Definition is ready to be processed by the Hosted Build Agent.
+
+    ![image](./media/2019-10_03_12_Pipelines_Build_New_SaveAndRun.png)
+
+13. Accept the defaults and click `Save and run`. 
+    Your build will then be queued until the Hosted Build Agent can pick it up for processing. 
+    This typically takes less than 60 seconds to begin.
+
+    ![image](./media/2019-10_03_13_Pipelines_Build_New_SaveAndRun_Confirm.png)
+
+14. You should be now automatically redirected to the started build.
+
+    ![image](./media/2019-10_03_14_Pipelines_Build_Started.png)
+
+15. Once your build completes, click each step and inspect the output.
+
+    ![image](./media/2019-10_03_15_Pipelines_Build_Result.png)
 
     > ***Note:*** If your build fails go back to Visual Studio and make sure the solution can be build. Make any neccessary fixes and commit the changes by staging the changes, synchronizing and pushing.
 
-1. Let's inspect the output artifacts that were published. Click the `Build XXX` header in the left pane to view the build's landing page.
+16. Let's inspect the output artifacts that were published. 
+    Click the `Artifacts` button in the top right angle of the screen the list of artifacts produced by the pipeline and click on `drop` (that is the name of the produced artifact).
+    
+    ![image](./media/2019-10_03_16_Pipelines_Build_Result_Artifact.png)
 
-1. Select `Artifacts` from the horizontal toolbar.
+19. Expand the `drop` folder and view the build artifacts. Click `Close` when complete.
 
-    ![image](./media/2017-06-22_11_18_00.png)
+    ![image](./media/2019-10_03_17_Pipelines_Build_Result_ArtifactExplorer.png)
 
-1. A `drop` folder has been created containing the compiled output. Click `Explore` to see them.
+20. Click the `..` near the `drop` folder and select `Download as zip`
 
-    ![image](./media/2017-06-22_11_20_00.png)
+    ![image](./media/2019-10_03_18_Pipelines_Build_Result_ArtifactExplorer_Download.png)
 
-1. Expand the `drop` folder and view the build artifacts. Click `Close` when complete.
+21. Unzip `drop.zip` to see the application files created by the build agent. This artifact will be deployed to an Azure Web App in a later exercise.
 
-    ![image](./media/2017-06-22_11_22_00.png)
-
-1. Click `Download` next to the `drop` folder to save the build locally.
-
-    ![image](./media/2017-06-22_11_20_00.png)
-
-1. Unzip `drop.zip` to see the application files created by the build agent. This artifact will be deployed to an Azure Web App in a later exercise.
-
-We now have a Build Definition that will compile the application and create a package for deployment anytime code is checked into the repository, or a manual build is queued.
+We now have a Build Pipeline that will compile the application and create a package for deployment anytime code is pushed into the repository, or a manual build is queued.
 
 ---
 
