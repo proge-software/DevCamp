@@ -191,15 +191,6 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
     ![image](./media/201910-08_ADO_clone_project.PNG)
     
-
-5. Enter a repository name, select `Git` and click `Continue`:
-
-    ![image](./media/2017-10-30_12_05_00.png)
-
-6. After the repository has been created click `Clone in Visual Studio`:
-
-    ![image](./media/2017-10-30_12_08_00.png)
-
 ---
 
 ## Exercise 4: Deploy shared API application<a name="ex4"></a>
