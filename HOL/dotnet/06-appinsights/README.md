@@ -49,25 +49,28 @@ An instance of Application Insights can be created in a variety of ways, includi
 
 1. Open the Resource Group `Corso-MS-Cloud` that was originally deployed. Click `Add` on the top toolbar to add a new Azure resource to this group.
 
-    ![image](./media/2017-06-23_11_52_00.png)
+    ![image](./media/2019-10_01_01_DevCamp_create_insights.png)
 
 1. Search for `Application Insights` and select the entry from the results list:
 
-    ![image](./media/2017-06-23_11_54_00.png)
+    ![image](./media/2019-10_01_02_DevCamp_create_insights_2.png)
 
-1. In the overview blade that opens, click `Create` to open the creation settings blade. Enter your account name and `CityPower` as name, configure `Application Type` to `ASP.NET Web Application`, set to use the existing `Corso-MS-Cloud` as resource group and then click the `Create` button.
+1. In the overview blade that opens, click `Create` to open the creation settings blade. Enter your account name and `CityPower` as name, configure `Application Type` to `ASP.NET Web Application`, set to use the existing `Corso-MS-Cloud` as resource group and then click the `Review + Create` button and then the `Create` one.
+
+
+    ![image](./media/2019-10_01_03_DevCamp_create_insights_3.png)
 
     Creation typically takes less than a minute.
 
-    ![image](./media/2018-07-22_12_06_17.png)
+    ![image](./media/2019-10_01_04_DevCamp_create_insights_4.png)
+    
+2. Once provisioning completes, click on `Go to resource`.
 
-1. Once provisioning completes, return to your Resource Group and open the resource. You may need to hit the refresh button within the resource group blade.
+    ![image](./media/2019-10_01_05_DevCamp_insights_created.png)
 
-    ![image](./media/2017-06-23_12_07_00.png)
+3. In the `Essentials` section, take note of the `Instrumentation Key`. We will need that in future exercises.
 
-1. In the `Essentials` section, take note of the `Instrumentation Key`. We will need that in future exercises.
-
-    ![image](./media/2017-06-23_12_12_00.png)
+    ![image](./media/2019-10_01_06_DevCamp_insights_overview.png)
 
 We now have an instance of Application Insights created and ready for data. The Instrumentation Key is important, as it is the link that ties an application to the AI service.
 
@@ -152,27 +155,14 @@ We will add both components to our application and enable the sending of telemet
 
 1. Back in the Azure Portal, refresh the browser tab (or click `Refresh` from the top toolbar) until you see data appear.
 
-    ![image](./media/2017-06-23_14_06_00.png)
+    ![image](./media/2019-10_01_07_DevCamp_insights_overview_wstats.png)
 
     > It may take 3-5 minutes for data to appear even when manually refreshing.
 
-1. Our server is now sending data, but what about the client side? Let's add the JavaScript library.
-
-    In the portal, click the tile that says `Learn how to collect browser page load data`:
-
-    ![image](./media/2017-06-23_15_28_00.png)
-
-1. The next blade will give you a JavaScript snippet pre-loaded with the Instrumentation Key. This snippet, when placed on an HTML page, will download the full Application Insights JavaScript library and configure itself. The HTML snippet in the portal integrates the App Insights key into the markup. We will replace the key with a value from our settings class to allow for dynamic configuration of the App Insights resource. By doing this, we can configure the specific setting using a configuration value.
-
-    ![image](./media/2017-06-23_15_29_00.png)
-
-1. Let's integrate the snippet into our views. In Visual Studio open the `Views` -> `Shared` -> `Layout.cshtml` file. This file controls the outer layout for all of the pages.
-
-1. Paste the following snippet below the existing script tags.
-
-    >**Notice that we replaced the static instrumentation key with the constant from our settings.cs class**:
-    >instrumentationKey: "@DevCamp.WebApp.Utils.Settings.APPINSIGHTS_KEY"
-    >
+1. Our server is now sending data, but what about the client side? Let's add the JavaScript library into our views. 
+   In Visual Studio open the `Views` -> `Shared` -> `Layout.cshtml` file.
+   This file controls the outer layout for all of the pages.
+   Paste the following snippet .
 
     ```html
     <!-- 
@@ -193,9 +183,12 @@ We will add both components to our application and enable the sending of telemet
         appInsights.trackPageView();
     </script>
     ```
-1. Redeploy the application and load several pages to generate more sample telemetry. The Azure Portal should now light up data for **Page View Load Time**:
+2. Redeploy the application and load several pages to generate more sample telemetry.
+   Opening the `Performance` tab in the left bar we will see now metrics for the `Server` and for the `Browser`:
 
-    ![image](./media/2017-06-23_15_35_00.png)
+    ![image](./media/2019-10_01_08_DevCamp_insights_performances_server.png)
+    
+    ![image](./media/2019-10_01_09_DevCamp_insights_performances_browser.png)
 
 Our application is now providing the Application Insights service telemetry data from both the server and client.
 
