@@ -250,13 +250,15 @@ These custom events (and the related concept of custom metrics) are a powerful w
 
 Application Insights has the ability to do performance and availability testing of your application from multiple locations around the world, all configured from the Azure portal.  
 
-1. To show the Application Insights availability monitoring capability, we first need to make sure the application is deployed to the Azure App service. This is done in the [DevOps with Visual Studio Team Services](../04-devops-ci) hands-on-lab. To verify the application is running in the cloud, first go to the Azure portal, open your resource group, and click on the dotnet app service:
+1. To show the Application Insights availability monitoring capability, we first need to make sure the application is deployed to the Azure App service.
+   This is done in the [Azure DevOps](../04-devops-ci) hands-on-lab.
+   To verify the application is running in the cloud, first go to the Azure portal, open your resource group, and click on the dotnet app service:
 
-    ![image](./media/2017-06-29_11_54_00.png)
+    ![image](./media/2019-10_04_01_DevCamp_dotnetapp.png)
 
     Then, click the `Browse` link in the App service blade:
 
-    ![image](./media/2017-06-29_11_53_00.png)
+    ![image](./media/2019-10_04_02_DevCamp_dotnetapp_details.png)
 
     This should open another window with the City Power and Light application in it. Make note of the URL at the top of the browser.
 
