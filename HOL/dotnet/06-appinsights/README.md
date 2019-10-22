@@ -264,20 +264,24 @@ Application Insights has the ability to do performance and availability testing 
 
 2. In the Azure portal, click on the City Power Application Insights deployment in your resource group to open its blade. Availability is under `INVESTIGATE` in the scrolling pane - click on it to open the `Availability` tab:
 
-    ![image](./media/2017-06-29_11_10_00.png)
+    ![image](./media/2019-10_04_03_DevCamp_dotnetapp_insights_availability.png)
 
     Click on `Add test`. In the `Create test` blade, give the test a name, put the URL for your application in the URL box, and choose several
     locations to test your application from. You can choose to receive an alert email when the availability test fails by clicking on the `Alerts` box and entering the alert configuration. Click `OK` and `Create`.  
 
-    ![image](./media/2017-06-29_11_15_00.png)
+    ![image](./media/2019-10_04_04_DevCamp_dotnetapp_insights_availability_test_basic.png)
+
+    ![image](./media/2019-10_04_05_DevCamp_dotnetapp_insights_availability_test_locations.png)
+
+    ![image](./media/2019-10_04_06_DevCamp_dotnetapp_insights_availability_test_create.png)
 
     It may take 5-10 minutes for your web test to start running. When it is executing and collecting data, you should see availability information on the `Availability` tab of the Application Insights blade. You can click on the web test to get more information:
 
-    ![image](./media/2017-06-29_11_28_00.png)
+    ![image](./media/2019-10_04_07_DevCamp_dotnetapp_insights_availability_test_results.png)
 
     And clicking on one of the dots on the graph will give you information about that specific test. Clicking on the request will show you the response that was received from your application:
 
-    ![image](./media/2017-06-29_11_32_00.png)
+    ![image](./media/2019-10_04_08_DevCamp_dotnetapp_insights_availability_test_results_details.png)
 
     > With all of this testing, you may exceed the limits of the free service tier for Azure app services. If that occurs, you can click on the App Service, and you'll see a notification that your App Service has been stopped due to it's consumption. All you need to do is change the App service plan to basic, which will start the application again.
 
