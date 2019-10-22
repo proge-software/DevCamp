@@ -92,7 +92,7 @@ AzureAD can handle authentication for web applications. First we will create a n
 
 1. On `Authentication` tab, enable `Implicit Grants` for `Access tokens` and for `ID tokens`
 
-    ![image](./media/2019-2019-10_01_03b_ImplicitGrant.png)
+    ![image](./media/2019-10_01_03b_ImplicitGrant.png)
 
 
 2. We also need to generate a client secret. Open the `Certificates & secrets` blade and in the section `Client Secrets` select the `New client secret` button.
