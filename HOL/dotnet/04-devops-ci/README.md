@@ -306,11 +306,11 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
     2. Select `Corso-MS-Cloud` as resource group and click `Ok`:
 
-        ![image](./media/2018-07-16_10_02_59.png)
+        ![image](./media/2019-10_04_07_ADO_Pipelines_AzureResourceManagerServiceConnection.png)
 
     3. Select your `dotnetapp...` Azure Web app resource from the `App Service name` drop-down:
 
-        ![image](./media/2017-06-22_09_05_00.png)
+        ![image](./media/2019-10_04_08_ADO_Pipelines_Stage1.png)
 
     4. Move to step 11.
 
@@ -382,43 +382,45 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
 4. From the menu bar select `Save` to save the Release Definition, and select `Release` -> `Create Release`.
 
-    ![image](./media/2017-06-22_09_21_00.png)
+    ![image](./media/2019-10_04_09_ADO_Pipelines_Release.png)
 
 5. Enter the release information and select the build to deploy. Ensure that the latest successful build is selected from the drop-down box. Click `Create`.
 
-    ![image](./media/image-063.gif)
+    ![image](./media/2019-10_04_10_ADO_Pipelines_Create_Release.png)
 
 6. Click on the release number in navigation header. This will allow you view the current release information.
 
-    ![image](./media/image-064.gif)
+    ![image](./media/2019-10_04_11_ADO_Pipelines_Release_Created.png)
 
 7. After a successful build you should see the application deployed to your web app.
 
-    ![image](./media/image-065.gif)
+    ![image](./media/2019-10_04_12_ADO_Pipelines_Release_Released.png)
 
-8. Update the application configuration to match the current settings you have deployed. Copy the values from the `Web.config` to the Application configuration in Azure if they do not match. Open the Azure portal and find the .NET web application.
+8. Update the application configuration to match the current settings you have deployed.
+   Copy the values from the `Web.config` to the Application configuration in Azure if they do not match.
+   Open the [Azure portal](https://www.portal.azure.com) and find the .NET web application.
 
-9.  Open the Application Settings.
+9.  In the `dotnetapp[YOU_NAME]...` details on [Azure portal](https://www.portal.azure.com), select the `Configuration` tab and update the values
 
-     ![image](./media/2017-06-22_11_47_00.png)
+     ![image](./media/2019-10_04_13_AzurePortal_dotnetapp_Configuration.png)
 
 10. Copy the values from the `Web.config` into the application settings (you also need to include a new key named `AAD_APP_REDIRECTURI` and set the value to the URL on the application in Azure `https://dotnetapp[YOUR_ACCOUT_NAME][...].azurewebsites.net/`). If you do not have values for these settings, please review the previous labs for the correct values.
 
 11. Click `Save`.
 
-    ![image](./media/2017-06-22_11_49_00.png)
+    ![image](./media/2019-10_04_14_AzurePortal_dotnetapp_Configuration_Save.png)
 
 12. Navigate to the [Application Registration Portal](https://apps.dev.microsoft.com).
 
 13. Open the configuration for your application and add the Azure web application URL to the list of Redirect URLs. Click `Save`.
 
-    ![image](./media/image-033.gif)
+    ![image](./media/2019-10_04_15_AzurePortal_CityPowerAuthentication_AddURI.png)
 
     > Note: Be sure to include the trailing slash **/** in the URL and ensure this address is using **https**.
 
 14. Open a browser and navigate to the site. You should see the running site on Azure.
 
-    ![image](./media/2017-06-22_12_12_00.jpg)
+    ![image](./media/2019-10_04_16_AzurePortal_CityPowerDeployed.png)
 
     > If your browser displays the error `Could not load file or assembly 'System.IdentityModel.Tokens.Jwt' [...]` you have to downgrade the NuGet package `System.IdentityModel.Tokens.Jwt` to 4.0.3 in Visual Studio.
 ---
