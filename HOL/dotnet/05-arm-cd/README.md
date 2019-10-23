@@ -228,23 +228,31 @@ With the updated Release Definition, we can now execute a release.
 
 1. Click on the `Release` button and in the drop-down choose `Create Release`.
 
-    ![image](./media/2017-06-23_10_41_00.png)
+    ![image](./media/2019-10_05_04_01_ARM_CD_Release_Create.png)
 
-1. Select a Build to release into the environments. This is likely the largest numbered Build. Then click the `Create` button.
+1. Select a Build to release into the environments. 
+   This is likely the largest numbered Build.
+   Then click the `Create` button.
 
-    ![image](./media/2017-06-23_10_42_00.png)
+    ![image](./media/2019-10_05_04_02_ARM_CD_Release_Create_build.png)
 
 1. Click the Release number to navigate to the Release Details screen
 
-    ![image](./media/2017-06-23_10_43_00.png)
+    ![image](./media/2019-10_05_04_03_ARM_CD_Release_Released.png)
 
-1. On the top toolbar, select `Logs` to monitor the release process. When the release for the dev environment finishes, you will be prompted to approve the release to the test environment. Click `Approve` to continue the release.
+1. On the top toolbar, select `View Logs` to monitor the release process. When the release for the dev environment finishes, you will be prompted to approve the release to the test environment. Click `Approve` to continue the release.
 
-    ![image](./media/2017-06-23_10_45_00.png)
+    ![image](./media/2019-10_05_04_04_ARM_CD_Release_Released_PendingApproval.png)
+    
+    ![image](./media/2019-10_05_04_05_ARM_CD_Release_Released_PendingApproval_2.png)
+    
+    ![image](./media/2019-10_05_04_06_ARM_CD_Release_Released_Approved.png)
 
-1. Once the test environment app has finished its release, open the app in the browser and login.
+    ![image](./media/2019-10_05_04_07_ARM_CD_Release_Released_Approved.png)
+    
+2. Once the test environment app has finished its release, open the app in the browser and login.
 
-    ![image](./media/2017-06-23_10_50_00.jpg)
+    ![image](./media/2019-10_05_04_08_ARM_CD_SiteRunning.png)
 
     > Before you are trying to login make sure that you are browsing the https version of the app or a redirect loop will occur.
 
