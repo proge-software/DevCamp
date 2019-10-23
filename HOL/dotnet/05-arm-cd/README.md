@@ -10,7 +10,7 @@ In this hands-on lab, you will learn how to:
 
 * Author Azure Resource Manager templates.
 * Deploy ARM Templates to Azure.
-* Integrate environments into VSTS Release pipelines.
+* Integrate environments into ADO Release pipelines.
 * Deploy City Power & Light to new Web App.
 
 ## Prerequisites
@@ -24,7 +24,7 @@ This hands-on-lab has the following exercises:
 
 * [Exercise 1: Create an ARM Template in Visual Studio](#ex1)
 * [Exercise 2: Deploy ARM Template to Azure](#ex2)
-* [Exercise 3: Integrate new Web App into VSTS](#ex3)
+* [Exercise 3: Integrate new Web App into ADO](#ex3)
 * [Exercise 4: Deploy City Power & Light to new Web App](#ex4)
 
 ### Note
@@ -35,57 +35,72 @@ This hands-on-lab has the following exercises:
 
 ## Exercise 1: Create an ARM Template in Visual Studio<a name="ex1"></a>
 
-1. Open Visual Studio 2015.
+1. Install [Visual Studio 2019](https://visualstudio.microsoft.com/vs/)
+2. Install the `Azure development` extension
 
-1. Select `File` -> `New` > `Project...`.
+    ![image](./media/2019-10_05_01_ARM_CD_VS2019_AzureExtensions.png)
+
+3. Log In with your account Proge-Software
+
+    ![image](./media/2019-10_05_02_ARM_CD_VS2019_LogIn.png)
+
+4. Select `Create a new Project`.
   
-    ![image](./media/image-01.gif)
+    ![image](./media/2019-10_05_03_ARM_CD_VS2019_NewProject.png)
 
-1. Select the `Cloud` -> `Azure Resource Group` project template and provide a name for the new solution. In the screenshot, we choose ***DevCampWebApp***. Select a location. Create a new folder if you wish.
+5. Search for `Azure Resource Group` and select `Azure Resource Group`
 
-    ![image](./media/image-02.gif)
+    ![image](./media/2019-10_05_04_ARM_CD_VS2019_New_ARG.png)
 
-1. In the `Select Azure Template` window, find the `Web App` template and select it. Click `OK`. This will create an Azure Resource project and add a web application resource.
 
-    ![image](./media/image-03.gif)
+6. Fill the Project configuration form
 
-1. Open `Solution Explorer` and review the assets. Select the `WebSite.json` file and open it in the editor.
+    ![image](./media/2019-10_05_05_ARM_CD_VS2019_New_ARG_Conf_Proj.png)
+
+7. In the `Select Azure Template` window, find the `Web App` template and select it. Click `OK`.
+   This will create an Azure Resource project and add a web application resource.
+
+    ![image](./media/2019-10_05_06_ARM_CD_VS2019_New_ARG_Conf_Proj_WebApp.png)
+
+8. Open `Solution Explorer` and review the assets. Select the `WebSite.json` file and open it in the editor.
 
     ![image](./media/image-04.gif)
 
-1. The `JSON Editor` tool pane will open and provide an outline of the ARM Template. Expand each section to view the content.
+9.  The `JSON Editor` tool pane will open and provide an outline of the ARM Template. Expand each section to view the content.
 
     ![image](./media/image-05.gif)
 
     > Note: If the tool pane does not open, ensure that you have the latest Azure SDK installed. At the time of this writing, the latest version is 2.9.
 
-1. Our new web application will need a globally unique DNS name. Locate the `webSiteName` variable. This will synchronize the editor view with the outline view. In the editor, replace the existing value ***webSite*** with ***dotnetapptest*** and your account name as usual e.g. ***gdinardo***.
+10. Our new web application will need a globally unique DNS name. Locate the `webSiteName` variable. This will synchronize the editor view with the outline view. In the editor, replace the existing value ***webSite*** with ***dotnetapptest*** and your account name as usual e.g. ***gdinardo***.
 
     ![image](./media/2018-07-12_13_32_25.png)
 
-    > At the time when this training has been prepared, there is a bug in the Visual Studio `Web App` ARM template. You should fix it manually. Find the resource type `Microsoft.Insights/components` and change the location from `East US` to `[resourceGroup().location]`:
+    > At the time when this training has been prepared, there is a bug in the Visual Studio `Web App` ARM template. 
+    You should fix it manually. 
+    Find the resource type `Microsoft.Insights/components` (line 282) and change the location from `East US` to `[resourceGroup().location]`:
     >
     > ![image](./media/2018-07-16_14_03_30.png)
 
-1. The web application needs to be configured to work with the AzureAD, Azure Storage, Azure Redis Cache, and ASP.NET WebAPI that we configured earlier.
+11. The web application needs to be configured to work with the AzureAD, Azure Storage, Azure Redis Cache, and ASP.NET WebAPI that we configured earlier.
 
     In earlier exercises we have configured these settings as `Web.config` variables on our local machines, and in the Azure Portal for our `DevCamp` Azure Web App.  
 
     ARM Templates can include child `resources`, which define options for a given parent resource. For a web app, we can add `appsettings` to adjust the environment variables present on our app, instead of or in addition to using web.config.
 
-1. In the JSON outline tool pane, select the `Website` parent resource. Right-click and select `Add New Resource`.
+12. In the JSON outline tool pane, select the `Website` parent resource. Right-click and select `Add New Resource`.
 
      ![image](./media/image-07.gif)
 
-1. Locate the `Application Settings for Web Apps` resource and select it. Enter a name and click `Add`.
+13. Locate the `Application Settings for Web Apps` resource and select it. Enter a name and click `Add`.
 
      ![image](./media/image-08.gif)
 
-1. Locate the `Properties` node in the Application Settings resource.
+14. Locate the `Properties` node in the Application Settings resource.
 
      ![image](./media/image-09.gif)
 
-1. Replace the properties node with the following:
+15. Replace the properties node with the following:
 
     ```JSON
     "properties": {
@@ -109,15 +124,15 @@ This hands-on-lab has the following exercises:
     }
     ```
 
-1. Locate the values surrounded by `[YOUR ...]`. We will need to replace these values with the correct settings for your web application. You can get these values from the `Web.config` created in the previous labs.
+16. Locate the values surrounded by `[YOUR ...]`. We will need to replace these values with the correct settings for your web application. You can get these values from the `Web.config` created in the previous labs.
 
-1. If you do not have the values from the previous labs, open the Azure portal and find the web application in your resource group that starts with `dotnetapp...`.
+17. If you do not have the values from the previous labs, open the Azure portal and find the web application in your resource group that starts with `dotnetapp...`.
 
-1. Select `Application Settings` from the settings blade:
+18. Select `Application Settings` from the settings blade:
 
     ![image](./media/image-13.gif)
 
-1. Copy the values by double-clicking in the cell and copying the values. Paste them into the ARM template in the correct location that matches the key name.
+19. Copy the values by double-clicking in the cell and copying the values. Paste them into the ARM template in the correct location that matches the key name.
 
     > If you do not have the `Application Settings` you may have not completed the previous HOL and have to manually add them.
 
@@ -139,7 +154,8 @@ We are now ready to deploy our ARM Template containing an App Service Plan, and 
 
     ![image](./media/2018-07-12_16_27_34.png)
 
-1. A pop up will appear where you can enter a name for your app service and select the App Service plan. Enter the name of the existing plan `incidentappplan4ig5etm56nkem`.
+1. A pop up will appear where you can enter a name for your app service and select the App Service plan.
+    Enter the name of the existing plan `incidentappplan4ig5etm56nkem`.
 
      ![image](./media/2018-07-12_16_37_24.png)
 
@@ -152,15 +168,17 @@ We are now ready to deploy our ARM Template containing an App Service Plan, and 
 
 1. Open the [Azure Portal](https://portal.azure.com) and verify that the app has been created in your resource group with the defined resources.
 
-    ![image](./media/2017-06-23_09_04_00.png)
+    ![image](./media/2019-10_05_07_ARM_CD_Portal_Deployed.png)
 
-    Also check the `Application Settings` blade to verify that the environment variables were created as expected:
+    Also check the `Configuration` blade to verify that the environment variables were created as expected:
 
-    ![image](./media/2017-06-23_09_30_00.png)
+    ![image](./media/2019-10_05_08_ARM_CD_Portal_Deployed_Configuration.png)
 
-1. To use authentication with this new web app, we need to update our AzureAD app registration to whitelist its URL. In the browser, navigate to the [Application Registration Portal](https://apps.dev.microsoft.com/#/appList) and select your application. Under the `Platforms` heading, select `Add Url` and paste in the URL of your newly created Azure Web App. Also, since two of our applications share the same `*.azurewebsites.net` domain we need to add an entry for `https://azurewebsites.net` into the list. Click `Save`.
+1. To use authentication with this new web app, we need to update our AzureAD app registration to whitelist your application URI. 
+   Navigate to the [Application Registration Portal](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) and select the blade `Authentication`.
+   Add the URI in a new spot in the section `Redirect URIs` and finally select `Save`.
 
-    ![image](./media/2017-06-23_09_26_00.png)
+    ![image](./media/2019-10_05_09_ARM_CD_Portal_Authorizing_RedirectURL.png)
 
     > See [here](https://azure.microsoft.com/en-us/documentation/articles/active-directory-v2-limitations/#restrictions-on-redirect-uris) for more information about redirect URIs.
     >
@@ -170,23 +188,23 @@ The resource group is now holding our "Test" environment web app and has been ad
 
 ---
 
-## Exercise 3: Integrate new Web App into VSTS<a name="ex3"></a>
+## Exercise 3: Integrate new Web App into ADO<a name="ex3"></a>
 
-1. In [VSTS](https://www.visualstudio.com/), open the **Release Definition** that we started in a previous lab. You should be be able to find this by navigating to `Releases` in the `Build & Release` menu on the top navigation. We need to create a second environment to serve as our test web app.
+1. In [ADO](https://www.visualstudio.com/), open the **Release Definition** that we started in a previous lab. You should be be able to find this by navigating to `Releases` in the `Build & Release` menu on the top navigation. We need to create a second environment to serve as our test web app.
 
     ![image](./media/2017-06-23_10_07_00.png)
 
-1. Click the drop-down arrow next to the existing Release Definition, and select `Edit`:
+2. Click the drop-down arrow next to the existing Release Definition, and select `Edit`:
 
     ![image](./media/2017-06-23_10_09_00.png)
 
-1. In the Release Definition, first select `Environment 1`, then select `Add` and select `Clone environment`. We will use our existing Dev web app configuration as the template for the new test web app configuration.
+3. In the Release Definition, first select `Environment 1`, then select `Add` and select `Clone environment`. We will use our existing Dev web app configuration as the template for the new test web app configuration.
 
     ![image](./media/2017-06-23_10_11_00.png)
 
-1. Rename the environment from **Copy of...** to **Test** by clicking on it's title.
+4. Rename the environment from **Copy of...** to **Test** by clicking on it's title.
 
-1. VSTS allows us to control and govern how releases happen between environments. Instead of automatically deploying our test environment after our dev environment, let's add an approval step. A user can look at the dev environment, confirm it is is ready, and then authorize a release to the test environment. Click the `Pre-deployment conditions` icon on the left side of the test environment, select the `After environment` trigger and the first environment:
+5. ADO allows us to control and govern how releases happen between environments. Instead of automatically deploying our test environment after our dev environment, let's add an approval step. A user can look at the dev environment, confirm it is is ready, and then authorize a release to the test environment. Click the `Pre-deployment conditions` icon on the left side of the test environment, select the `After environment` trigger and the first environment:
 
     ![image](./media/2017-06-23_10_34_00.png)
 
@@ -194,11 +212,11 @@ The resource group is now holding our "Test" environment web app and has been ad
 
     ![image](./media/2017-11-01_13_01_00.png)
 
-1. Switch to the `Tasks` blade. Update the `App service name` to match the web app that you just deployed via the ARM Template. The task now targets the test environment web app, rather than the dev environment web app.
+6. Switch to the `Tasks` blade. Update the `App service name` to match the web app that you just deployed via the ARM Template. The task now targets the test environment web app, rather than the dev environment web app.
 
     ![image](./media/2017-06-23_10_39_00.png)
 
-1. Save your Release Definition to finish adding the additional environment.
+7. Save your Release Definition to finish adding the additional environment.
 
 ---
 
@@ -228,7 +246,7 @@ With the updated Release Definition, we can now execute a release.
 
     > Before you are trying to login make sure that you are browsing the https version of the app or a redirect loop will occur.
 
-We have now created a new "test" environment web app and app service plan via an ARM Template, and integrated the new environment into our VSTS Release Definition.
+We have now created a new "test" environment web app and app service plan via an ARM Template, and integrated the new environment into our ADO Release Definition.
 
 ---
 
@@ -238,7 +256,7 @@ In this hands-on lab, you learned how to:
 
 * Create an ARM Template in Visual Studio Code.
 * Deploy ARM Template to Azure via the XPlat CLI.
-* Integrate new Web App into VSTS.
+* Integrate new Web App into ADO.
 * Deploy City Power & Light to new Web App.
 
 After completing this module, you can continue on to Module 6: Monitoring with Application Insights.
