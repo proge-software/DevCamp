@@ -289,25 +289,26 @@ Application Insights has the ability to do performance and availability testing 
 
 ## Exercise 5: Interact with your telemetry data<a name="ex5"></a>
 
-In the `Metrics Explorer`, you can create charts and grids based on the telemetry data received, and you can relate data points over time. These charts and graphs are very configurable, so you can see the metrics that matter to you.
+In the `Live Metrics Stream`, you can create charts and grids based on the telemetry data received, and you can relate data points over time. 
+These charts and graphs are very configurable, so you can see the metrics that matter to you.
 
 1. Here is an example of page views vs process CPU and processor time:
 
-    ![image](./media/2016-10-25_22-10-19.gif)
+    ![image](./media/2019-10_05_01_DevCamp_dotnetapp_insights_live_metrics_stream.png)
 
     In `Search` you can see the raw telemetry events, you can filter on the specific events you want to see, and you can drill into more detail on those events. You can also search for properties on the telemetry event. Here is the basic view:
 
-    ![image](./media/2016-10-25_22-13-47.gif)
+    ![image](./media/2019-10_05_02_DevCamp_dotnetapp_insights_search.png)
 
     Clicking on one of the events gives you a detail blade for that event:
 
-    ![image](./media/2016-10-25_22-15-49.gif)
+    ![image](./media/2019-10_05_03_DevCamp_dotnetapp_insights_search_details.png)
 
     If there are remote dependencies, such as calls to a database or other resources, those will appear under `Calls to Remote Dependencies`. If there were exceptions, traces or failed calls to dependencies, you could get detail on that under `Related Items`.
 
 1. When we go to `Application map`, we can see a diagram of the monitored items that make up the application:
 
-   ![image](./media/2016-10-25_22-29-02.gif)
+   ![image](./media/2019-10_05_04_DevCamp_dotnetapp_insights_app_map.png)
 
 ---
 
