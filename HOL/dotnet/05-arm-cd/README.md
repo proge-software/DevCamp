@@ -190,33 +190,35 @@ The resource group is now holding our "Test" environment web app and has been ad
 
 ## Exercise 3: Integrate new Web App into ADO<a name="ex3"></a>
 
-1. In [ADO](https://www.visualstudio.com/), open the **Release Definition** that we started in a previous lab. You should be be able to find this by navigating to `Releases` in the `Build & Release` menu on the top navigation. We need to create a second environment to serve as our test web app.
+1. In [ADO](https://dev.azure.com/), open the `Pipelines` blade and then select the `Releases` one. 
+   Select the `Release Pipeline` that we started in a previous lab. 
+   We need to create a second environment to serve as our test web app.
+   Select `Edit`.
 
-    ![image](./media/2017-06-23_10_07_00.png)
+    ![image](./media/2019-10_05_03_01_ARM_CD_ReleasePipeline.png)
 
-2. Click the drop-down arrow next to the existing Release Definition, and select `Edit`:
+2. In the Release pipeline, first select `Stage 1`, then select `Clone`. 
+   We will use our existing Dev web app configuration as the template for the new test web app configuration.
 
-    ![image](./media/2017-06-23_10_09_00.png)
+    ![image](./media/2019-10_05_03_02_ARM_CD_ReleasePipeline_CloneEnv.png)
 
-3. In the Release Definition, first select `Environment 1`, then select `Add` and select `Clone environment`. We will use our existing Dev web app configuration as the template for the new test web app configuration.
+3. Rename the environment from **Copy of...** to **Test** by clicking on it's title.
 
-    ![image](./media/2017-06-23_10_11_00.png)
+    ![image](./media/2019-10_05_03_03_ARM_CD_ReleasePipeline_Test.png)
 
-4. Rename the environment from **Copy of...** to **Test** by clicking on it's title.
+4. ADO allows us to control and govern how releases happen between environments. Instead of automatically deploying our test environment after our dev environment, let's add an approval step. A user can look at the dev environment, confirm it is is ready, and then authorize a release to the test environment. Click the `Pre-deployment conditions` icon on the left side of the test environment, select the `After environment` trigger and the first environment:
 
-5. ADO allows us to control and govern how releases happen between environments. Instead of automatically deploying our test environment after our dev environment, let's add an approval step. A user can look at the dev environment, confirm it is is ready, and then authorize a release to the test environment. Click the `Pre-deployment conditions` icon on the left side of the test environment, select the `After environment` trigger and the first environment:
-
-    ![image](./media/2017-06-23_10_34_00.png)
+    ![image](./media/2019-10_05_03_04_ARM_CD_ReleasePipeline_Test_PreDeploymentCond.png)
 
     For the `Pre-deployment approvers` option, enter your account name and make sure `User requesting a release or deployment should not approve` is **not** checked. Then click the `Save` button:
 
-    ![image](./media/2017-11-01_13_01_00.png)
+    ![image](./media/2019-10_05_03_05_ARM_CD_ReleasePipeline_Test_PreDeploymentAppr.png)
 
-6. Switch to the `Tasks` blade. Update the `App service name` to match the web app that you just deployed via the ARM Template. The task now targets the test environment web app, rather than the dev environment web app.
+5. Switch to the `Tasks` blade. Update the `App service name` to match the web app that you just deployed via the ARM Template. The task now targets the test environment web app, rather than the dev environment web app.
 
-    ![image](./media/2017-06-23_10_39_00.png)
+    ![image](./media/2019-10_05_03_06_ARM_CD_ReleasePipeline_Test_AppService.png)
 
-7. Save your Release Definition to finish adding the additional environment.
+6. Save your Release Definition to finish adding the additional environment.
 
 ---
 
