@@ -83,6 +83,78 @@ With Compose, you use a YAML file to configure your application’s services. Th
    ![image](./media/15-01-02_DockerRunHelloWorld.png)
 
 
+## Excercise 2: Execute an ASP.NET Core 3.0 sample container
+
+1. Pull the ASP.NET Core sample image from [DockerHub](https://hub.docker.com)
+
+    ```bash
+        docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
+    ```
+
+    ![image](./media/15-02-01_DockerPullASPNETSample.png)
+
+
+1. Run the sample 
+
+    ```bash
+        docker run -it --rm --port 8000:80 --name aspnetcore_sample mcr.microsoft.com/dotnet/core/samples:aspnetapp
+    ```
+    
+    > **Explanation**
+    > - **-it** runs the application in *interactive* mode, the run *container* is binded to the displaying shell
+    > - **--rm** removes the *container* when the main program executed exits
+    > - **--name** gives a unique human-readable name to the *container* that can be used instead of the long ID automatically provided to the *container*.
+        A human-readable name is always given to a *container* even if not *defined*.
+        If not explicitly defined it will be composed by an adjective and underscore and a name (like "quizzical_gararin", "flamboyant_beaver", or "jovial_dewdney").
+    > - **--port** maps a port of the operative system running docker with one of the docker *container*
+
+    ![image](./media/15-02-02_DockerRunASPNETSample.png)
+
+
+1. In a browser navigate to [http://localhost:8000](http://localhost:8000) to use the deployed sample
+
+    ![image](./media/15-02-03_ASPNETSampleRunning.png)
+
+
+1. Open another terminal leaving the first one open and run the following command to display the list of currently running container
+
+    ```bash
+    docker ps
+    ```
+
+    ![image](./media/15-02-04_DockerPS.png)
+
+
+1. Deploy another container in detached mode, on port 8001, and without giving an explicit name
+
+    ```bash
+        docker run -d --rm -p 8001:80 mcr.microsoft.com/dotnet/core/samples:aspnetapp
+    ```
+
+    ![image](./media/15-02-05_DockerRunDetached.png)
+
+
+1. Run again the command to display currently active containers and dockers will now display two container
+
+    ```bash
+    docker ps
+    ```
+
+    ![image](./media/15-02-06_DockerPS2.png)
+
+1. Stop the containers using the ID of the container or the Name
+   
+   ```bash
+   docker stop aspnetcore_sample
+   docker stop {ID|NAME}
+   ```
+
+   Now calling `docker ps` will display an empty table
+
+## Excercise 3: Create your first containerized web app
+
+
+
 ## Containers orchestrators
 - Docker Swarm
 - Kubernetes
