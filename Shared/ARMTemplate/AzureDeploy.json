@@ -14,7 +14,7 @@
         "apiAppName": "[concat('incidentapi', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "dotnetAppName": "[concat('dotnetapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "hostingPlanName": "[concat('incidentappplan', uniqueString(resourceGroup().id))]",
-        "repoURL": "https://github.com/AzureCAT-GSI/DevCamp.git",
+        "repoURL": "https://github.com/Proge-Software/DevCamp.git",
         "repoBranch": "master",
         "storageName": "[substring(toLower(concat('incidentblobstg', toLower(parameters('userName')), uniqueString(resourceGroup().id))), 0, 24)]",
         "diagStorageName": "[substring(toLower(concat('incidentdiagstg', toLower(parameters('userName')), uniqueString(resourceGroup().id))), 0, 24)]",
@@ -268,7 +268,7 @@
                         "parameters": [
                             {
                                 "name": "scriptFileUris",
-                                "value": "[[\"https://raw.githubusercontent.com/AzureCAT-GSI/DevCamp/master/Shared/ARMTemplate/Scripts/InstallNodeJS.ps1\"]"
+                                "value": "[[\"https://raw.githubusercontent.com/Proge-Software/DevCamp/master/Shared/ARMTemplate/Scripts/InstallNodeJS.ps1\"]"
                             },
                             {
                                 "name": "scriptToRun",
@@ -285,7 +285,7 @@
                         "parameters": [
                             {
                                 "name": "scriptFileUris",
-                                "value": "[[\"https://raw.githubusercontent.com/AzureCAT-GSI/DevCamp/master/Shared/ARMTemplate/Scripts/extrachocolatey.ps1\"]"
+                                "value": "[[\"https://raw.githubusercontent.com/Proge-Software/DevCamp/master/Shared/ARMTemplate/Scripts/extrachocolatey.ps1\"]"
                             },
                             {
                                 "name": "scriptToRun",
