@@ -32,7 +32,7 @@
         "dtlVmStorage": "Premium",
         "dtlVmUsername": "l-admin",
         "dtlVmPassword": "Devc@mp2016!",
-        "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd,eclipse,jre8,javaruntime"
+        "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd"
     },
     "resources": [
         {
@@ -229,7 +229,7 @@
             "properties": {
                 "labVirtualNetworkId": "[variables('dtlVnetId')]",
                 "labSubnetName": "[concat(variables('dtlVnetName'), 'Subnet')]",
-                "notes": "WinServer 2012R2 DC + VS2015",
+                "notes": "WinServer 2019 with containers and VS2019",
                 "galleryImageReference": {
                     "offer": "WindowsServer",
                     "publisher": "MicrosoftWindowsServer",
