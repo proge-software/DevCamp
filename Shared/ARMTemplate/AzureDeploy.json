@@ -231,9 +231,9 @@
                 "labSubnetName": "[concat(variables('dtlVnetName'), 'Subnet')]",
                 "notes": "WinServer 2012R2 DC + VS2015",
                 "galleryImageReference": {
-                    "offer": "VisualStudio",
-                    "publisher": "MicrosoftVisualStudio",
-                    "sku": "VS-2015-Comm-VSU3-AzureSDK-29-WS2012R2",
+                    "offer": "WindowsServer",
+                    "publisher": "MicrosoftWindowsServer",
+                    "sku": "2019-Datacenter-with-Containers-smalldisk",
                     "osType": "Windows",
                     "version": "latest"
                 },
