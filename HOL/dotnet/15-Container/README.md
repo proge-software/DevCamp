@@ -7,8 +7,6 @@
 
 ## Prerequisites
 
-## What are containers?
-
 - Visual Studio 2019
 - .NET Core 2.2 Development Tools
 - To publish to Azure Container Registry, an Azure subscription.
@@ -156,21 +154,61 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
 ## Exercise 3: Create your first containerized web app
 
-1. Open Visual Studio 2019 and click on `Create a new Project`
+1. Open Azure DevOps
 
-    ![image](./media/15-03-05_VisualStudio2019_NewProject.png)
+    ![image](./media/15-03-01_DevOps.png)
+
+1. Create a new Project named `MyFirstContainerizedApp`
+
+    ![image](./media/15-03-02_DevOps_NewProject.png)
+
+1. Select the `Repos` blade, then select the `Visual Studio` configuration for the .gitignore file and finally click `Initialize`
+
+    ![image](./media/15-03-03_DevOps_InitializeRepo.png)
+
+1. Click on the `Clone` button
+
+    ![image](./media/15-03-04_DevOps_Clone.png)
+
+
+1. Select `Clone in Visual Studio` use the arrow on the right of the clone button if it is not the default value.
+
+    ![image](./media/15-03-05_DevOps_CloneInVisualStudio.png)
+
+1. Visual Studio 2019 will start.
+   Set as directory the path `C:\Repo\DevCamp\HOL-15\MyFirstContainerizedApp` and hit `Clone`.
+
+   ![image](./media/15-03-06_VisualStudio2019_Clone.png)
+
+1. Visual Studio 2019 will download the repo and display you an project with a `README.md` and a `.gitinore` files.
+   Now click on `File`, then `New` and finally on `Project...`
+
+    ![image](./media/15-03-07_VisualStudio2019_NewProject.png)
 
 1. Select `ASP.NET Core Web Application` and click `Next`
 
-    ![image](./media/15-03-06_VisualStudio2019_NewAspNetCoreWebApp.png)
+    ![image](./media/15-03-08_VisualStudio2019_NewAspNetCoreWebApp.png)
 
-1. Complete the form giving the Application the name `MyFirstContainerizedApp`
+1. Complete the form giving the Application the name `MyFirstContainerizedApp` and Location `C:\Repo\HOL-15\MyFirstContainerizedApp`.
+   Finally hit `Create`.
 
-    ![image](./media/15-03-07_VisualStudio2019_MyFirstContainerizedWebApp.png)
+    ![image](./media/15-03-09_VisualStudio2019_MyFirstContainerizedWebApp.png)
 
-1. Select `Enable Docker Support` and set `Linux` as type of Container
+1. Select `Enable Docker Support` and set `Linux` as type of Container and hit `Create`.
 
-    ![image](./media/15-03-08_VisualStudio2019_MyFirstContainerizedWebAppMVC.png)
+    ![image](./media/15-03-10_VisualStudio2019_MyFirstContainerizedWebAppMVC.png)
+
+1. Now commit and push everything on the DevOps Git Repo.
+   Click on the `pencil` in the bottom right of Visual Studio 2019.
+   Then insert a message in the Box over the `Commit All` button and press that button.
+
+   ![image](./media/15-03-11_VisualStudio2019_Commit.png)
+
+
+1. Now in the bottom right of Visual Studio 2019 click on the arrow with a `1` at its right and finally press the `push` action link.
+
+   ![image](./media/15-03-12_VisualStudio2019_Push.png)
+
 
 1. In the solution explorer open the `Controllers` folder and then the file `HomeController.cs`.
    Place a breakpoint on the `Privacy` method and run the application with Docker using the `Play` button.
@@ -183,6 +221,15 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
 1. In the web app click on the `Privacy` button in the navbar and the breakpoint in Visual Studio 2019 will be hit.
    Press the play button in Visual Studio 2019 (the same button you used to launch the application) to continue.
+
+
+## Exercise 4: Create a build pipeline to the Proge's ACR (Azure Container Registry)
+
+
+
+
+## Exerise 5: Create a release pipeline that gets the image from container and deploy on a slot
+
 
 
 
