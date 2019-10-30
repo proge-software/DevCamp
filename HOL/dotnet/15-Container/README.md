@@ -49,9 +49,12 @@ With Compose, you use a YAML file to configure your application’s services. Th
 - [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
 
 
-## Excercise 1: Run the Hello-world container from Docker.Hub
+## Exercise 0: Install Docker-Desktop
 
-1. In our VM open your preferred terminal - cmd, powershell, gitbash, cygwin, etc.
+
+## Exercise 1: Run the Hello-world container from Docker.Hub
+
+1. Open your preferred terminal - cmd, powershell, gitbash, cygwin, etc.
 
 
 2. In the terminal run the following command to download the `hello-world:latest` image.
@@ -83,7 +86,7 @@ With Compose, you use a YAML file to configure your application’s services. Th
    ![image](./media/15-01-02_DockerRunHelloWorld.png)
 
 
-## Excercise 2: Execute an ASP.NET Core 3.0 sample container
+## Exercise 2: Execute an ASP.NET Core 3.0 sample container
 
 1. Pull the ASP.NET Core sample image from [DockerHub](https://hub.docker.com)
 
@@ -151,7 +154,35 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
    Now calling `docker ps` will display an empty table
 
-## Excercise 3: Create your first containerized web app
+## Exercise 3: Create your first containerized web app
+
+1. Open Visual Studio 2019 and click on `Create a new Project`
+
+    ![image](./media/15-03-05_VisualStudio2019_NewProject.png)
+
+1. Select `ASP.NET Core Web Application` and click `Next`
+
+    ![image](./media/15-03-06_VisualStudio2019_NewAspNetCoreWebApp.png)
+
+1. Complete the form giving the Application the name `MyFirstContainerizedApp`
+
+    ![image](./media/15-03-07_VisualStudio2019_MyFirstContainerizedWebApp.png)
+
+1. Select `Enable Docker Support` and set `Linux` as type of Container
+
+    ![image](./media/15-03-08_VisualStudio2019_MyFirstContainerizedWebAppMVC.png)
+
+1. In the solution explorer open the `Controllers` folder and then the file `HomeController.cs`.
+   Place a breakpoint on the `Privacy` method and run the application with Docker using the `Play` button.
+
+    ![image](./media/15-03-09_VisualStudio2019_MFCWAMVC_HomeController.png)
+
+1. Docker now starts to build the image, then runs a new container using the built image, and finally the home page of the application should be shown in your default browser.
+   
+   ![image](./media/15-03-10_VisualStudio2019_MFCWAMVC_Homepage.png)
+
+1. In the web app click on the `Privacy` button in the navbar and the breakpoint in Visual Studio 2019 will be hit.
+   Press the play button in Visual Studio 2019 (the same button you used to launch the application) to continue.
 
 
 
