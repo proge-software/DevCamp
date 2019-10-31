@@ -213,17 +213,49 @@ With Compose, you use a YAML file to configure your application’s services. Th
 1. In the solution explorer open the `Controllers` folder and then the file `HomeController.cs`.
    Place a breakpoint on the `Privacy` method and run the application with Docker using the `Play` button.
 
-    ![image](./media/15-03-09_VisualStudio2019_MFCWAMVC_HomeController.png)
+    ![image](./media/15-03-13_VisualStudio2019_MFCWAMVC_HomeController.png)
 
 1. Docker now starts to build the image, then runs a new container using the built image, and finally the home page of the application should be shown in your default browser.
    
-   ![image](./media/15-03-10_VisualStudio2019_MFCWAMVC_Homepage.png)
+   ![image](./media/15-03-14_VisualStudio2019_MFCWAMVC_Homepage.png)
 
 1. In the web app click on the `Privacy` button in the navbar and the breakpoint in Visual Studio 2019 will be hit.
    Press the play button in Visual Studio 2019 (the same button you used to launch the application) to continue.
 
 
 ## Exercise 4: Create a build pipeline to the Proge's ACR (Azure Container Registry)
+
+1. Open the project in Azure DevOps click on the `Pipelines` Blade and then `Builds`.
+   Hit the `New Pipelines` button.
+
+    ![image](./media/15-04-01_DevOps_NewBuildPipeline.png)
+
+1. Select `Azure Repos Git`
+
+    ![image](./media/15-04-02_DevOps_NewBuildPipeline_2.png)
+
+1. Select `MyFirstContainerizedApp`
+
+    ![image](./media/15-04-03_DevOps_NewBuildPipeline_3.png)
+
+1. Select `Docker`. If not showed use the button `Show more`.
+
+    ![image](./media/15-04-04_DevOps_NewBuildPipeline_4.png)
+
+1. Hit `Validate and configure`
+
+    ![image](./media/15-04-05_DevOps_NewBuildPipeline_5.png)
+
+## TODO: configure the docker step to build and PUSH to Proge's ACR in Corso-MS-Cloud
+
+1. A yaml configuration of the pipeline is shown now; hit the `Save and run` configuration
+
+    ![image](./media/15-04-06_DevOps_NewBuildPipeline_6.png)
+
+
+2. Hit `Save and run`
+
+    ![image](./media/15-04-07_DevOps_NewBuildPipeline_7.png)
 
 
 
