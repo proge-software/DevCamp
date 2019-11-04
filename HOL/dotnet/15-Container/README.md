@@ -289,6 +289,41 @@ With Compose, you use a YAML file to configure your application’s services. Th
     ![image](./media/15-04-16_Portal_ACR_PulledImage.png)
 
 
+## Exercise 5: Run our docker image locally
+
+1. In Portal open the `progedevcamp` ACR in `Corso-MS-Cloud` Resource Group, select the `Access Keys`, and take note of `Username` and `Password`
+
+    ![image](./media/15-05-01_ACR_AccessKeys.png)
+
+1. Open a powershell and run the following command to login docker in our ACR
+
+    ```powershell
+        docker login progedevcamp.azurecr.io
+    ```
+
+    When it asks for Username and Password, use the ones shown int the page `Access keys` of `progedevcamp`
+
+1. Now we can pull the image we recently uploaded in the repository.
+   Select the blade `Repositories` of `progedevcamp` ACR.
+   Select your repository, then the latest tag and finally copy the `Docker pull command`.
+   
+   ![image](./media/15-05-02_ACR_PullImage.png)
+
+1. In the previously opened Powershell run the copied Docker pull command.
+
+   ![image](./media/15-05-03_ACR_PullImage_Locale.png)
+
+1. Run a container built upon the downloaded image
+
+    ```bash
+        docker run -it --rm -p 9000:80 progedevcamp.azurecr.io/{YOUR_USERNAME}-mfca:{buildID}
+    ```
+
+    Then open a browser and go to [http://localhost:9000](http://localhost:9000)
+
+    ![image](./media/15-05-04_ACR_RunContainer.png)
+
+
 ## Exercise 5: Create a release pipeline that gets the image from container and deploy on a slot
 
 
