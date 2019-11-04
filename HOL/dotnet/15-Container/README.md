@@ -225,6 +225,16 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
 ## Exercise 4: Create a build pipeline to the Proge's ACR (Azure Container Registry)
 
+1. First of all we need to configure the service connections for the project.
+   Click on `Project Settings`, then `Service connections`, `New Service connection` and finally `Docker Registry`.
+
+    ![image](./media/15-04-01_DevOps_ServiceConnections.png)
+
+1. Select `Azure Container Registry` as `Registry type`.
+   Compile the form with `progedevcamp` as `Connection name`, `Microsoft Azure Sponsorship` as `Azure subscription`, and `progedevcamp` as `Azure container registry`.
+
+    ![image](./media/15-04-02_DevOps_ServiceConnections_NewConnection.png)
+
 1. Open the project in Azure DevOps click on the `Pipelines` Blade and then `Builds`.
    Hit the `New Pipelines` button.
 
@@ -246,21 +256,40 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
     ![image](./media/15-04-05_DevOps_NewBuildPipeline_5.png)
 
-## TODO: configure the docker step to build and PUSH to Proge's ACR in Corso-MS-Cloud
+1. Remove the task ADO has created for you, i.e. task `Docker@2`
+
+    ![image](./media/15-04-08_DevOps_NoTasks.png)
+
+1. On the right of the screen click on the `Show assistant` button and search for `Docker`
+ 
+    ![image](./media/15-04-09_DevOps_ShowAssistant.png)
+
+1. Select `Docker`
+
+    ![image](./media/15-04-10_DevOps_Assistant_Docker.png)
+
+1. As container registry select `progedevcamp` and as Container repository insert `{YOUR_PROGE_MAIL_PREFIX}/mfca`.
+
+    ![image](./media/15-04-11_DevOps_Assistant_Docker_buildPush.png)
 
 1. A yaml configuration of the pipeline is shown now; hit the `Save and run` configuration
 
-    ![image](./media/15-04-06_DevOps_NewBuildPipeline_6.png)
+    ![image](./media/15-04-12_DevOps_Assistant_Docker_SaveAndRun.png)
+
+1. Hit `Save and run`
+
+    ![image](./media/15-04-13_DevOps_Assistant_Docker_SaveAndRun_Confirm.png)
+
+1. The build pipeline is now run
+
+    ![image](./media/15-04-14_DevOps_BuildPipeline_Run_Logs.png)
+
+1. When the build pipeline is complete we will find our docker image pulled in the `devcamp` Azure Container Registry (ACR)
+
+    ![image](./media/15-04-16_Portal_ACR_PulledImage.png)
 
 
-2. Hit `Save and run`
-
-    ![image](./media/15-04-07_DevOps_NewBuildPipeline_7.png)
-
-
-
-
-## Exerise 5: Create a release pipeline that gets the image from container and deploy on a slot
+## Exercise 5: Create a release pipeline that gets the image from container and deploy on a slot
 
 
 
