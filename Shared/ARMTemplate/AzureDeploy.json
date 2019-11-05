@@ -232,9 +232,9 @@
                 "labSubnetName": "[concat(variables('dtlVnetName'), 'Subnet')]",
                 "notes": "WinServer 2019 with containers and VS2019",
                 "galleryImageReference": {
-                    "offer": "WindowsServer",
-                    "publisher": "MicrosoftWindowsServer",
-                    "sku": "2019-Datacenter-with-Containers-smalldisk",
+                    "offer": "VisualStudio",
+                    "publisher": "MicrosoftVisualStudio",
+                    "sku": "VS-2015-Comm-VSU3-AzureSDK-29-WS2012R2",
                     "osType": "Windows",
                     "version": "latest"
                 },

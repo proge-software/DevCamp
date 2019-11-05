@@ -27,26 +27,3 @@ if (-not $?) {
 else {
     Write-Host "Successfully installed Github via Chocolatey."
 }
-
-# Install VisualStudio 2019 Enterprise via Chocolatey
-# choco install visualstudio2019enterprise
-Write-Host "Installing package: VisualStudio 2019 Enterprise..."
-
-choco install visualstudio2019enterprise --x86 --force --yes --acceptlicense --verbose --allow-empty-checksums --ignore-checksums | Out-Null  
-if (-not $?) {
-    Write-Host "Installation of Visual Studio 2019 Enterprise failed via Chocolatey."
-}
-else {
-    Write-Host "Successfully installed Visual Studio 2019 Enterprise via Chocolatey."
-
-    # Install visualstudio2019-workload-azure via Chocolatey
-    Write-Host "Installing package: visualstudio2019-workload-azure..."
-
-    choco install visualstudio2019-workload-azure --x86 --force --yes --acceptlicense --verbose --allow-empty-checksums --ignore-checksums | Out-Null  
-    if (-not $?) {
-        Write-Host "Installation of visualstudio2019-workload-azure failed via Chocolatey."
-    }
-    else {
-        Write-Host "Successfully installed visualstudio2019-workload-azure via Chocolatey."
-    }
-}
