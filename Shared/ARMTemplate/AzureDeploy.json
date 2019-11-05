@@ -47,7 +47,7 @@
         "linuxFxVersion": "DOCKER|nginx",
         "dockerRegistryUrl": "https://index.docker.io",
         "dockerRegistryUsername": "",
-        "dockerRegistryPassword": null,
+        "dockerRegistryPassword": "",
         "dockerRegistryStartupCommand": ""
     },
     "resources": [
