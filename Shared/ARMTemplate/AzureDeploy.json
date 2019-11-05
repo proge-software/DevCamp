@@ -36,7 +36,6 @@
         "containerAppName": "[concat('containerapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "subscriptionId": "5d71b05c-3bd6-4055-836d-99b7558bd920",
         "hostingEnvironment": "",
-        "containerHostingPlanName": "ASP-CorsoMSCloud-915c",
         "serverFarmResourceGroup": "Corso-MS-Cloud",
         "alwaysOn": "false",
         "sku": "Free",
@@ -320,7 +319,7 @@
             "location": "[resourceGroup().location]",
             "tags": {},
             "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', variables('containerHostingPlanName'))]"
+                "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
             ],
             "properties": {
                 "name": "[variables('containerAppName')]",
@@ -338,30 +337,9 @@
                     "linuxFxVersion": "[variables('linuxFxVersion')]",
                     "alwaysOn": "[variables('alwaysOn')]"
                 },
-                "serverFarmId": "[concat('/subscriptions/', variables('subscriptionId'),'/resourcegroups/', variables('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('containerHostingPlanName'))]",
+                "serverFarmId": "[concat('/subscriptions/', variables('subscriptionId'),'/resourcegroups/', variables('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
                 "hostingEnvironment": "[variables('hostingEnvironment')]",
                 "clientAffinityEnabled": false
-            }
-        },
-        {
-            "apiVersion": "2018-11-01",
-            "name": "[variables('containerHostingPlanName')]",
-            "type": "Microsoft.Web/serverfarms",
-            "location": "[resourceGroup().location]",
-            "kind": "linux",
-            "tags": {},
-            "dependsOn": [],
-            "properties": {
-                "name": "[variables('containerHostingPlanName')]",
-                "workerSize": "[variables('workerSize')]",
-                "workerSizeId": "[variables('workerSizeId')]",
-                "numberOfWorkers": "[variables('numberOfWorkers')]",
-                "reserved": true,
-                "hostingEnvironment": "[variables('hostingEnvironment')]"
-            },
-            "sku": {
-                "Tier": "[variables('sku')]",
-                "Name": "[variables('skuCode')]"
             }
         }
     ],
