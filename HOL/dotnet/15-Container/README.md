@@ -324,6 +324,20 @@ With Compose, you use a YAML file to configure your application’s services. Th
     ![image](./media/15-05-04_ACR_RunContainer.png)
 
 
+## Exercise 6: Access your App Service for Container
+
+1. In Portal open the [Corso-MS-Cloud](https://portal.azure.com/#@progesoftware.it/resource/subscriptions/5d71b05c-3bd6-4055-836d-99b7558bd920/resourceGroups/Corso-MS-Cloud/overview) resource group and search your `containerapp` App Service
+
+    ![image](media/15-06-01_CorsoMSCloud_ContainerApp.png)
+
+1. Select your `containerapp` instance and then click `Browse`
+
+    ![image](media/15-06-02_CorsoMSCloud_ContainerApp_Browse.png)
+
+1. The browsed site should appear like in the following picture
+
+    ![image](./media/15-06-03_ContainerApp_Running.png)
+
 ## Exercise 5: Create a release pipeline that gets the image from container and deploy on a slot
 
 
