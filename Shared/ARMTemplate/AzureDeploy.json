@@ -8,57 +8,11 @@
             "metadata": {
                 "description": "Your Proge-Software account name."
             }
-        },
-        "subscriptionId": {
-            "type": "string"
-        },
-        "hostingEnvironment": {
-            "type": "string"
-        },
-        "hostingPlanName": {
-            "type": "string"
-        },
-        "serverFarmResourceGroup": {
-            "type": "string"
-        },
-        "alwaysOn": {
-            "type": "bool"
-        },
-        "sku": {
-            "type": "string"
-        },
-        "skuCode": {
-            "type": "string"
-        },
-        "workerSize": {
-            "type": "string"
-        },
-        "workerSizeId": {
-            "type": "string"
-        },
-        "numberOfWorkers": {
-            "type": "string"
-        },
-        "linuxFxVersion": {
-            "type": "string"
-        },
-        "dockerRegistryUrl": {
-            "type": "string"
-        },
-        "dockerRegistryUsername": {
-            "type": "string"
-        },
-        "dockerRegistryPassword": {
-            "type": "securestring"
-        },
-        "dockerRegistryStartupCommand": {
-            "type": "string"
         }
     },
     "variables": {
         "apiAppName": "[concat('incidentapi', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "dotnetAppName": "[concat('dotnetapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
-        "containerAppName": "[concat('containerapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "hostingPlanName": "[concat('incidentappplan', uniqueString(resourceGroup().id))]",
         "repoURL": "https://github.com/FrancescoIlario/DevCamp.git",
         "repoBranch": "feature/filario/update",
@@ -78,7 +32,23 @@
         "dtlVmStorage": "Premium",
         "dtlVmUsername": "l-admin",
         "dtlVmPassword": "Devc@mp2016!",
-        "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd"
+        "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd",
+        "containerAppName": "[concat('containerapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
+        "subscriptionId": "5d71b05c-3bd6-4055-836d-99b7558bd920",
+        "hostingEnvironment": "",
+        "containerHostingPlanName": "ASP-CorsoMSCloud-915c",
+        "serverFarmResourceGroup": "Corso-MS-Cloud",
+        "alwaysOn": false,
+        "sku": "Free",
+        "skuCode": "F1",
+        "workerSize":"0",
+        "workerSizeId": "0",
+        "numberOfWorkers": "1",
+        "linuxFxVersion": "DOCKER|nginx",
+        "dockerRegistryUrl": "https://index.docker.io",
+        "dockerRegistryUsername": "",
+        "dockerRegistryPassword": null,
+        "dockerRegistryStartupCommand": ""
     },
     "resources": [
         {
@@ -353,7 +323,7 @@
             "location": "[resourceGroup().location]",
             "tags": {},
             "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]"
+                "[concat('Microsoft.Web/serverfarms/', variables('containerHostingPlanName'))]"
             ],
             "properties": {
                 "name": "[variables('containerAppName')]",
@@ -361,49 +331,49 @@
                     "appSettings": [
                         {
                             "name": "DOCKER_REGISTRY_SERVER_URL",
-                            "value": "[parameters('dockerRegistryUrl')]"
+                            "value": "[variables('dockerRegistryUrl')]"
                         },
                         {
                             "name": "DOCKER_REGISTRY_SERVER_USERNAME",
-                            "value": "[parameters('dockerRegistryUsername')]"
+                            "value": "[variables('dockerRegistryUsername')]"
                         },
                         {
                             "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-                            "value": "[parameters('dockerRegistryPassword')]"
+                            "value": "[variables('dockerRegistryPassword')]"
                         },
                         {
                             "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
                             "value": "false"
                         }
                     ],
-                    "linuxFxVersion": "[parameters('linuxFxVersion')]",
-                    "appCommandLine": "[parameters('dockerRegistryStartupCommand')]",
-                    "alwaysOn": "[parameters('alwaysOn')]"
+                    "linuxFxVersion": "[variables('linuxFxVersion')]",
+                    "appCommandLine": "[variables('dockerRegistryStartupCommand')]",
+                    "alwaysOn": "[variables('alwaysOn')]"
                 },
-                "serverFarmId": "[concat('/subscriptions/', parameters('subscriptionId'),'/resourcegroups/', parameters('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', parameters('hostingPlanName'))]",
-                "hostingEnvironment": "[parameters('hostingEnvironment')]",
+                "serverFarmId": "[concat('/subscriptions/', variables('subscriptionId'),'/resourcegroups/', variables('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('containerHostingPlanName'))]",
+                "hostingEnvironment": "[variables('hostingEnvironment')]",
                 "clientAffinityEnabled": false
             }
         },
         {
             "apiVersion": "2018-11-01",
-            "name": "[parameters('hostingPlanName')]",
+            "name": "[variables('containerHostingPlanName')]",
             "type": "Microsoft.Web/serverfarms",
-            "location": "[parameters('location')]",
+            "location": "[variables('location')]",
             "kind": "linux",
             "tags": {},
             "dependsOn": [],
             "properties": {
-                "name": "[parameters('hostingPlanName')]",
-                "workerSize": "[parameters('workerSize')]",
-                "workerSizeId": "[parameters('workerSizeId')]",
-                "numberOfWorkers": "[parameters('numberOfWorkers')]",
+                "name": "[variables('containerHostingPlanName')]",
+                "workerSize": "[variables('workerSize')]",
+                "workerSizeId": "[variables('workerSizeId')]",
+                "numberOfWorkers": "[variables('numberOfWorkers')]",
                 "reserved": true,
-                "hostingEnvironment": "[parameters('hostingEnvironment')]"
+                "hostingEnvironment": "[variables('hostingEnvironment')]"
             },
             "sku": {
-                "Tier": "[parameters('sku')]",
-                "Name": "[parameters('skuCode')]"
+                "Tier": "[variables('sku')]",
+                "Name": "[variables('skuCode')]"
             }
         }
     ],
