@@ -347,7 +347,7 @@
             "apiVersion": "2018-11-01",
             "name": "[variables('containerHostingPlanName')]",
             "type": "Microsoft.Web/serverfarms",
-            "location": "[variables('location')]",
+            "location": "[resourceGroup().location]",
             "kind": "linux",
             "tags": {},
             "dependsOn": [],
