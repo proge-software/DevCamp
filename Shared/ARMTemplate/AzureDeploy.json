@@ -45,7 +45,7 @@
         "workerSizeId": "0",
         "numberOfWorkers": "1",
         "linuxFxVersion": "DOCKER|nginx",
-        "dockerRegistryUrl": "https://index.docker.io",
+        "dockerRegistryUrl": "https://index.docker.io"
     },
     "resources": [
         {
