@@ -38,7 +38,7 @@
         "hostingEnvironment": "",
         "containerHostingPlanName": "ASP-CorsoMSCloud-915c",
         "serverFarmResourceGroup": "Corso-MS-Cloud",
-        "alwaysOn": false,
+        "alwaysOn": "false",
         "sku": "Free",
         "skuCode": "F1",
         "workerSize":"0",
