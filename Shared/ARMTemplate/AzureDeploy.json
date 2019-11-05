@@ -34,15 +34,14 @@
         "dtlVmPassword": "Devc@mp2016!",
         "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd",
         "containerAppName": "[concat('containerapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
-        "subscriptionId": "5d71b05c-3bd6-4055-836d-99b7558bd920",
-        "hostingEnvironment": "",
-        "serverFarmResourceGroup": "Corso-MS-Cloud",
+        "dockerRegistryUsername": "",
+        "dockerRegistryPassword": "",
+        "dockerRegistryStartupCommand": "",
         "alwaysOn": "false",
-        "sku": "Free",
-        "skuCode": "F1",
-        "workerSize":"0",
-        "workerSizeId": "0",
-        "numberOfWorkers": "1",
+        "subscriptionId": "5d71b05c-3bd6-4055-836d-99b7558bd920",
+        "serverFarmResourceGroup": "Corso-MS-Cloud-linux",
+        "containerHostingPlanName": "appsrvplanlinux",
+        "hostingEnvironment": "",
         "linuxFxVersion": "DOCKER|nginx",
         "dockerRegistryUrl": "https://index.docker.io"
     },
@@ -317,10 +316,10 @@
             "name": "[variables('containerAppName')]",
             "type": "Microsoft.Web/sites",
             "location": "[resourceGroup().location]",
-            "tags": {},
-            "dependsOn": [
-                "[concat('Microsoft.Web/serverfarms/', variables('hostingPlanName'))]"
-            ],
+            "tags": {
+                "scope": "devcamp"
+            },
+            "dependsOn": [],
             "properties": {
                 "name": "[variables('containerAppName')]",
                 "siteConfig": {
@@ -330,14 +329,23 @@
                             "value": "[variables('dockerRegistryUrl')]"
                         },
                         {
+                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                            "value": "[variables('dockerRegistryUsername')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                            "value": "[variables('dockerRegistryPassword')]"
+                        },
+                        {
                             "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
                             "value": "false"
                         }
                     ],
                     "linuxFxVersion": "[variables('linuxFxVersion')]",
+                    "appCommandLine": "[variables('dockerRegistryStartupCommand')]",
                     "alwaysOn": "[variables('alwaysOn')]"
                 },
-                "serverFarmId": "[concat('/subscriptions/', variables('subscriptionId'),'/resourcegroups/', variables('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('hostingPlanName'))]",
+                "serverFarmId": "[concat('/subscriptions/', variables('subscriptionId'),'/resourcegroups/', variables('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('containerHostingPlanName'))]",
                 "hostingEnvironment": "[variables('hostingEnvironment')]",
                 "clientAffinityEnabled": false
             }
