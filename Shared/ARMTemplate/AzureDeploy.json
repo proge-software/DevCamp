@@ -46,9 +46,6 @@
         "numberOfWorkers": "1",
         "linuxFxVersion": "DOCKER|nginx",
         "dockerRegistryUrl": "https://index.docker.io",
-        "dockerRegistryUsername": "",
-        "dockerRegistryPassword": "",
-        "dockerRegistryStartupCommand": ""
     },
     "resources": [
         {
@@ -334,20 +331,11 @@
                             "value": "[variables('dockerRegistryUrl')]"
                         },
                         {
-                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
-                            "value": "[variables('dockerRegistryUsername')]"
-                        },
-                        {
-                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-                            "value": "[variables('dockerRegistryPassword')]"
-                        },
-                        {
                             "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
                             "value": "false"
                         }
                     ],
                     "linuxFxVersion": "[variables('linuxFxVersion')]",
-                    "appCommandLine": "[variables('dockerRegistryStartupCommand')]",
                     "alwaysOn": "[variables('alwaysOn')]"
                 },
                 "serverFarmId": "[concat('/subscriptions/', variables('subscriptionId'),'/resourcegroups/', variables('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('containerHostingPlanName'))]",
