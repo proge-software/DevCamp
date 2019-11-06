@@ -338,7 +338,8 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
     ![image](./media/15-06-03_ContainerApp_Running.png)
 
-## Exercise 5: Create a release pipeline that gets the image from container and deploy on a slot
+
+## Exercise 7: Create a release pipeline that gets the image from container and deploy on a slot
 
 
 
