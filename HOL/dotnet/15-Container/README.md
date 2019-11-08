@@ -324,7 +324,7 @@ With Compose, you use a YAML file to configure your application’s services. Th
     ![image](./media/15-05-04_ACR_RunContainer.png)
 
 
-## Exercise 6: Access your App Service for Container
+## Exercise 6: Configure your App Service for Container to access Proge's ACR 
 
 1. In Portal open the [Corso-MS-Cloud](https://portal.azure.com/#@progesoftware.it/resource/subscriptions/5d71b05c-3bd6-4055-836d-99b7558bd920/resourceGroups/Corso-MS-Cloud/overview) resource group and search your `containerapp` App Service
 
@@ -334,13 +334,24 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
     ![image](media/15-06-02_CorsoMSCloud_ContainerApp_Browse.png)
 
-1. The browsed site should appear like in the following picture
+1. If it's all ok, the browsed site will appear like in the following picture
 
     ![image](./media/15-06-03_ContainerApp_Running.png)
 
+1. Use this [link](https://portal.azure.com/#@progesoftware.it/resource/subscriptions/5d71b05c-3bd6-4055-836d-99b7558bd920/resourceGroups/Corso-MS-Cloud/providers/Microsoft.ContainerRegistry/registries/progedevcamp/accessKey) to access the `Access keys` page of the Proge's Azure Container Registry for this Devcamp, and take note of the fields `Username` and `Password`.
+   
+    ![image](./media/15-06-04_ACR_AccessKeys.png)
+
+1. In the resource group [Corso-MS-Cloud](https://portal.azure.com/#@progesoftware.it/resource/subscriptions/5d71b05c-3bd6-4055-836d-99b7558bd920/resourceGroups/Corso-MS-Cloud/overview) look for your Web App for Container and select it
+
+    ![image](./media/15-06-05_Corso-MS-Cloud-SearchContainer.png)
+
+1. Open the `Configuration` blade and use the pencil on the right of the following to update them with the `Access Keys` from the `progedevcamp` ACR 
+
+    ![image](./media/15-06-06_Corso-MS-Cloud_Container_Configuration.png)
+
 
 ## Exercise 7: Create a release pipeline that gets the image from container and deploy on a slot
-
 
 
 
