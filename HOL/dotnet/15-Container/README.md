@@ -286,7 +286,7 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
 1. When the build pipeline is complete we will find our docker image pulled in the `devcamp` Azure Container Registry (ACR)
 
-    ![image](./media/15-04-16_Portal_ACR_PulledImage.png)
+    ![image](./media/15-04-16_Portal_ACR_PushedImage.png)
 
 
 ## Exercise 5: Run our docker image locally
@@ -353,6 +353,58 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
 ## Exercise 7: Create a release pipeline that gets the image from container and deploy on a slot
 
+1. In ADO select the `Releases` blade under the `Pipelines` one anche hit `New Pipeline`
+
+    ![image](./media/15-07-01_ADO_Pipeline_Release.png)
+
+1. Look for `containers`, select `Azure App Service deployment`, and click on the `Apply` button that will appear in the selected box.
+
+    ![image](./media/15-07-02_ADO_Pipeline_Release_NewPipeline.png)
+
+1. Click on the tab `Tasks` and in the azure subscription select the `Microsoft Azure Sponsorship` one.
+
+    ![image](./media/15-07-03_ADO_Pipeline_Release_Tasks_Subscription.png)
+
+1. Click on the arrow in the button `Authorize` and select `Advanced Options`
+
+    ![image](./media/15-07-04_ADO_Pipeline_Release_New_Auth_AdvancedOptions.png)
+
+1. Select the resource group `Corso-MS-Cloud` and hit `OK`
+
+    ![image](./media/15-07-05_ADO_Pipeline_Release_New_AuthConnection.png)
+
+1. Fill the form as follows and finally hit `Save`:
+   - App Type: `Web App for Containers (Linux)`
+   - App service name: choose in the dropdown your containerapp
+   - Registry or Namespace: `progedevcamp.azurecr.io`
+   - Repository: {YOUR_PROGE_NAME}/mfca:latest
+
+    ![image](./media/15-07-06_ADO_Pipeline_Release_New_Task.png)
+
+1. Now click the `Create Release` button
+
+    ![image](./media/15-07-07_ADO_Pipeline_Release_CreateRelease.png)
+
+1. Hit `Create`
+
+    ![image](./media/15-07-08_ADO_Pipeline_Release_CreateRelease_Create.png)
+
+1. Click on the link `Release 1` contained in the notification appeared
+
+    ![image](./media/15-07-09_ADO_Pipeline_Release_CreateRelease_Created.png)
+
+1. Wait for the process to complete
+
+    ![image](./media/15-07-10_ADO_Pipeline_Release_Running.png)
+
+1. In Azure Portal open the details of your container app Web Service in the resource group
+   Corso-MS-Cloud, then click on the `Browse`button.
+   
+    ![image](./media/15-07-11_Portal_AppService_Container_Deployed_Overview_Browse.png)
+
+1. The browsed website is your running container and appear like the following image
+
+    ![image](./media/15-07-12_AppService_Container_VisitedSite.png)
 
 
 ## Containers orchestrators

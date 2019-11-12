@@ -34,16 +34,16 @@
         "dtlVmPassword": "Devc@mp2016!",
         "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd",
         "containerAppName": "[concat('containerapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
-        "dockerRegistryUsername": "",
-        "dockerRegistryPassword": "",
+        "dockerRegistryUsername": "progedevcamp",
+        "dockerRegistryPassword": null,
         "dockerRegistryStartupCommand": "",
         "alwaysOn": "false",
         "subscriptionId": "5d71b05c-3bd6-4055-836d-99b7558bd920",
         "serverFarmResourceGroup": "Corso-MS-Cloud-linux",
         "containerHostingPlanName": "appsrvplanlinux",
         "hostingEnvironment": "",
-        "linuxFxVersion": "DOCKER|nginx",
-        "dockerRegistryUrl": "https://index.docker.io"
+        "linuxFxVersion": "DOCKER|progedevcamp.azurecr.io/proge/welcome:latest",
+        "dockerRegistryUrl": "https://progedevcamp.azurecr.io"
     },
     "resources": [
         {
