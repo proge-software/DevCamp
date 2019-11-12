@@ -10,6 +10,7 @@
 - Visual Studio 2019
 - .NET Core 2.2 Development Tools
 - To publish to Azure Container Registry, an Azure subscription.
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) 
 
 ## What are containers?
 
@@ -26,29 +27,33 @@ However, in this HOL we will use Windows Server 2019 with Containers support ena
 
 ### References
 - [https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/)
-- [https://www.redhat.com/en/topics/containers/whats-a-linux-container](https://www.redhat.com/en/topics/containers/whats-a-linux-container)
-
-## Why develop in containers?
-- It works on my machine (then we'll ship you machine)
 
 ## Docker [:link:](https://docs.docker.com/)
 
+### Docker Engine [:link:](https://www.docker.com/products/container-runtime)
+
+Docker Engine powers millions of applications worldwide, providing a standardized packaging format for diverse applications.
+Docker Engine is the industry’s de facto container runtime that runs on various Linux (CentOS, Debian, Fedora, Oracle Linux, RHEL, SUSE, and Ubuntu) and Windows Server operating systems. 
+Docker creates simple tooling and a universal packaging approach that bundles up all application dependencies inside a container which is then run on Docker Engine.
+Docker Engine enables containerized applications to run anywhere consistently on any infrastructure, solving “dependency hell” for developers and operations teams, and eliminating the “it works on my laptop!” problem.
+
 ### Docker Desktop [:link:](https://docs.docker.com/docker-for-windows/)
+
 Docker is a full development platform for creating containerized applications. 
 [Docker Desktop](https://docs.docker.com/docker-for-windows/) is the best way to get started with Docker on Windows.
 
+
 ### Docker Compose [:link:](https://docs.docker.com/compose)
+
 Compose is a tool for defining and running multi-container Docker applications. 
 With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.
 
+
 ### References 
 - [https://docs.docker.com/](https://docs.docker.com/)
+- [https://www.docker.com/products/container-runtime](https://www.docker.com/products/container-runtime)
 - [https://docs.docker.com/docker-for-windows/](https://docs.docker.com/docker-for-windows/)
 - [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
-
-
-## Exercise 0: Install Docker-Desktop
-
 
 ## Exercise 1: Run the Hello-world container from Docker.Hub
 
