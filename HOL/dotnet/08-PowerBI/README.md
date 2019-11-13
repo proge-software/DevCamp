@@ -164,7 +164,7 @@ This hands-on-lab has the following exercises:
 
 1. On the formatting options, find the `Title Text` field. Change the name to `Top 10 Zip Codes`
 
-    ![image](./media/pbi-dashboard-24.png)
+    ![image](./media/08-01-06_PowerBI_Visualization_Map_ChangeTitle.png)
 
 1. Chose the `Average Of Days Open` visualization card.
 
