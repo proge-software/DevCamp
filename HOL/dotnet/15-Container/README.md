@@ -103,7 +103,7 @@ With Compose, you use a YAML file to configure your application’s services. Th
 1. Run the sample 
 
     ```bash
-        docker run -it --rm --port 8000:80 --name aspnetcore_sample mcr.microsoft.com/dotnet/core/samples:aspnetapp
+        docker run -it --rm --publish 8000:80 --name aspnetcore_sample mcr.microsoft.com/dotnet/core/samples:aspnetapp
     ```
     
     > **Explanation**
@@ -112,7 +112,7 @@ With Compose, you use a YAML file to configure your application’s services. Th
     > - **--name** gives a unique human-readable name to the *container* that can be used instead of the long ID automatically provided to the *container*.
         A human-readable name is always given to a *container* even if not *defined*.
         If not explicitly defined it will be composed by an adjective and underscore and a name (like "quizzical_gararin", "flamboyant_beaver", or "jovial_dewdney").
-    > - **--port** maps a port of the operative system running docker with one of the docker *container*
+    > - **--publish** maps a port of the operative system running docker with one of the docker *container*
 
     ![image](./media/15-02-02_DockerRunASPNETSample.png)
 
