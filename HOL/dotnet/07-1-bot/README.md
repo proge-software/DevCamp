@@ -130,7 +130,7 @@ This hands-on-lab has the following exercises:
 
     ![image](./media/07-02-10_BFE_Chatted.png)
 
-## Exercise 3: Web App Bot <a name="ex3"></a>
+## Exercise 3: Web App Echo Bot <a name="ex3"></a>
 
 1. In Azure Portal open the resource group `Corso-MS-Cloud` and click on the `+ Add` button
 
@@ -186,7 +186,30 @@ This hands-on-lab has the following exercises:
     ![image](./media/07-03-13_BFE_WebBot_Chat.png)
 
 
-## Exercise 4: Integrate the API<a name="ex4"></a>
+## Exercise 4: Publish the Bot on Teams for testing <a name="ex4"></a>
+
+1. In the `Corso-MS-Cloud` resource group open your bot and click on the `Channels` blade.
+   Finally, hit the `Teams` button.
+
+   ![image](./media/07-04-01_WebBot_Channels.png)
+
+1. Click the `Save` Button
+
+    ![image](./media/07-04-02_WebBot_Channels_Teams.png)
+
+1. Tick the checkbox and click on the `Agree` button
+
+    ![image](./media/07-04-03_WebBot_Channels_Teams_Agreements.png)
+
+1. Click on the `Settings` blade and copy the `MicrosoftAppID`
+
+    ![image](./media/07-04-04_WebBot_Settings_AppID.png)
+
+1. Open `Teams` and paste the copied GUID in the searchbox on top of the window.
+   Click on the `People` tab and you find the bot you published.
+
+    ![image](./media/07-04-05_WebBot_Teams_Chat.png)
+
 
 ## Exercise 5: Analyze submitted pictures automatically<a name="ex5"></a>
 
