@@ -9,16 +9,11 @@ In this hands-on lab, you will learn how to:
 
 * Set up the developing environment to support the creation of bot applications.
 * Create your own bot from scratch.
-* Create your own bot using Azure Bot Service.
-<!-- * Call Azure Cognitive Services to leverage computer vision API -->
 * Hosting your bot in Azure.
 
 ## Prerequisites
 
-<!-- * The source for the starter app is located in the [start](start) folder.
-* The finished project is located in the [end](end) folder. -->
 * Deployed the starter ARM Template [HOL 1](../01-developer-environment).
-* Completion of the [HOL 5](../05-arm-cd).
 * Visual Studio 2019
 
 ## Exercises
@@ -26,13 +21,11 @@ In this hands-on lab, you will learn how to:
 This hands-on-lab has the following exercises:
 
 * [Exercise 1: Set up your environment](#ex1)
-* [Exercise 2: Create an interactive dialog](#ex2)
-* [Exercise 3: Integrate the API](#ex3)
-* [Exercise 4: Send attachments to the bot](#ex4)
-* [Exercise 5: Analyze submitted pictures automatically](#ex5)
-* [Exercise 6: Host your bot in Azure](#ex6)
-* [Exercise 7: Azure Bot Service](#ex7)
-* [Exercise 8: Azure Functions Bot](#ex8)
+* [Exercise 2: Create your first echo bot](#ex2)
+* [Exercise 3: Web App Echo Bot](#ex3)
+* [Exercise 4: Publish the Bot on Teams for testing](#ex4)
+* [Exercise 5: A more complex Bot](#ex5)
+* [Exercise 6: Add a new Question to the Core Bot](#ex6)
 
 
 ## References
@@ -45,41 +38,41 @@ This hands-on-lab has the following exercises:
 
 1. Install Visual Studio 2019 if you did not
 
-1. Open Visual Studio 2019 and click on `Continue without code`
+2. Open Visual Studio 2019 and click on `Continue without code`
 
     ![image](./media/07-01-01_VS2019_Startup.png)
 
-1. In the top bar click open `Extensions` and then `Manage Extensions`
+3. In the top bar click open `Extensions` and then `Manage Extensions`
 
     ![image](./media/07-01-02_VS2019_Extensions.png)
 
-1. In the form use the top-right box to search for `Bot Framework`, select `Bot Framework v4 SDK Templates for Visual Studio 2019` and then hit `Download`
+4. In the form use the top-right box to search for `Bot Framework`, select `Bot Framework v4 SDK Templates for Visual Studio 2019` and then hit `Download`
 
     ![image](./media/07-01-03_VS2019_Extensions_BotFrameworkV4Templates.png)
 
-1. When it finished, hit `Close` and close Visual Studio 2019
+5. When it finished, hit `Close` and close Visual Studio 2019
 
     ![image](./media/07-01-04_VS2019_Extensions_BotFrameworkV4Templates_CloseToInstall.png)
 
-1. In the prompted dialog click on `Modify`
+6. In the prompted dialog click on `Modify`
 
     ![image](./media/07-01-05_VS2019_Extensions_BotFrameworkV4Templates_Install.png)
 
-1. When it finish hit `Close`
+7. When it finish hit `Close`
 
     ![image](./media/07-01-06_VS2019_Extensions_BotFrameworkV4Templates_Installed.png)
 
-1. Click on this [link](https://github.com/microsoft/BotFramework-Emulator/releases/) to the `BotFramework-Emulator` releases page and download the latest.
+8. Click on this [link](https://github.com/microsoft/BotFramework-Emulator/releases/) to the `BotFramework-Emulator` releases page and download the latest.
    At the time of writing it is the `4.6.0`.
 
    ![image](./media/07-01-01_BotFramework-Emulator_Github_Releases.png)
 
-1. Download the installer for the Operative System you are working with.
+9. Download the installer for the Operative System you are working with.
    In the image the release for Windows is highlighted.
 
    ![image](./media/07-01-08_BotFramework-Emulator_Github_Releases_Download.png)
 
-1. Install the BotFramework-Emulator.
+10. Install the BotFramework-Emulator.
 
 
 ## Exercise 2: Create your first echo bot<a name="ex2"></a>
@@ -130,7 +123,7 @@ This hands-on-lab has the following exercises:
 
     ![image](./media/07-02-10_BFE_Chatted.png)
 
-## Exercise 3: Web App Echo Bot <a name="ex3"></a>
+## Exercise 3: Web App Echo Bot<a name="ex3"></a>
 
 1. In Azure Portal open the resource group `Corso-MS-Cloud` and click on the `+ Add` button
 
@@ -186,7 +179,7 @@ This hands-on-lab has the following exercises:
     ![image](./media/07-03-13_BFE_WebBot_Chat.png)
 
 
-## Exercise 4: Publish the Bot on Teams for testing <a name="ex4"></a>
+## Exercise 4: Publish the Bot on Teams for testing<a name="ex4"></a>
 
 1. In the `Corso-MS-Cloud` resource group open your bot and click on the `Channels` blade.
    Finally, hit the `Teams` button.
@@ -249,11 +242,68 @@ This hands-on-lab has the following exercises:
 
    ![image](./media/07-05-08_BotFrameworkEmulator_InitChat.png)
 
-## Exercise 6: Host your bot in Azure<a name="ex6"></a>
+## Exercise 6: Add a new Question to the Core Bot<a name="ex6"></a>
 
-## Exercise 7: Azure Bot Service<a name="ex7"></a>
+1. In Visual Studio 2019 stop the execution of the bot.
 
-## Exercise 8: Azure Functions Bot<a name="ex8"></a>
+1. Open the `BookingDetails.cs` file
+
+    ```c#
+    public string Traveler { get; set; }
+    ```
+
+1. Open in the folder `Dialogs` the file `BookingDialog.cs` and add the following code to the class.
+
+    ```c#
+    private const string OriginStepMsgText = "Where are you traveling from?";
+
+    private async Task<DialogTurnResult> TravelerStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+    {
+        var bookingDetails = (BookingDetails)stepContext.Options;
+
+        bookingDetails.Origin = (string)stepContext.Result;
+
+        if (bookingDetails.Traveler == null)
+        {
+            var promptMessage = MessageFactory.Text(TravelerStepMsgText, TravelerStepMsgText, InputHints.ExpectingInput);
+            return await stepContext.PromptAsync(nameof(TextPrompt), new PromptOptions { Prompt = promptMessage }, cancellationToken);
+        }
+
+        return await stepContext.NextAsync(bookingDetails.Traveler, cancellationToken);
+    }
+    ```
+
+1. Change the `BookingDialog.cs` constructor to look like the following snippet:
+
+    ```c#
+    public BookingDialog()
+        : base(nameof(BookingDialog))
+    {
+        AddDialog(new TextPrompt(nameof(TextPrompt)));
+        AddDialog(new ConfirmPrompt(nameof(ConfirmPrompt)));
+        AddDialog(new DateResolverDialog());
+        AddDialog(new WaterfallDialog(nameof(WaterfallDialog), new WaterfallStep[]
+        {
+            DestinationStepAsync,
+            OriginStepAsync,
+            TravelerStepAsync,
+            TravelDateStepAsync,
+            ConfirmStepAsync,
+            FinalStepAsync,
+        }));
+
+        // The initial child Dialog to run.
+        InitialDialogId = nameof(WaterfallDialog);
+    }
+    ```
+
+1. Open the class `Dialog\MainDialog.cs` and modify the `FinalStepAsync` method changing the `messageText` variable like follows:
+
+```c#
+var messageText = $"Hi {result.Traveler}, I have you booked to {result.Destination} from {result.Origin} on {travelDateMsg}";
+```
+
+1. Run again the bot, in the bot framework `restart the conversation` and complete the dialog
 
 ## Summary
 
@@ -261,13 +311,4 @@ In this hands-on lab, you learned how to:
 
 * Set up the developing environment to support the creation of bot applications.
 * Create your own bot from scratch.
-* Create your own bot using Azure Bot Service.
-* Call Azure Cognitive Services to leverage Computer Vision API and Translator Text API.
-* Hosting your bot in Azure and Azure Functions.
-
-After completing this module, you can continue on to Module 9: IoT.
-
-### View Module 9 instructions for [.NET](../11-IoT/)
-
----
-Copyright 2018 Microsoft Corporation. All rights reserved. Except where otherwise noted, these materials are licensed under the terms of the MIT License. You may use them according to the license as is most appropriate for your project. The terms of this license can be found at <https://opensource.org/licenses/MIT>.
+* Hosting your bot in Azure.
