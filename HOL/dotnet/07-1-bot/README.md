@@ -211,7 +211,43 @@ This hands-on-lab has the following exercises:
     ![image](./media/07-04-05_WebBot_Teams_Chat.png)
 
 
-## Exercise 5: Analyze submitted pictures automatically<a name="ex5"></a>
+## Exercise 5: A more complex Bot<a name="ex5"></a>
+
+1. Open Visual Studio 2019 and `Create a new project`
+
+    ![image](./media/07-05-01_VS2019_Startup.png)
+
+1. Use the search box to find the `Core Bort (Bot Framework v4)` template and select it and hit `Next`
+
+    ![image](./media/07-05-02_VS2019_NewProject_CoreBot.png)
+
+1. Set `CoreBot` as `Project Name` and `C:\Projects\HOL7` as `Location`.
+   Finally hit `Create` and wait for Visual Studio 2019 to set up the project.
+
+    ![image](./media/07-05-03_VS2019_NewProject_CoreBot_Configuration.png)
+
+1. Use the dropdown near the run button to select the `CoreBot` configuration and then press the run button.
+
+    ![image](./media/07-05-04_VS2019_CoreBot_Start.png)
+
+1. Once the bot has been successfully run a browser will be opened and display a page like this.
+   Copy the URL in the navigation bar of the browser.
+
+    ![image](./media/07-05-05_VS2019_CoreBot_Started.png)
+
+1. Open the `Bot Framework Emulator` and click on `Open a Bot`
+
+    ![image](./media/07-05-06_BotFrameworkEmulator.png)
+
+1. Paste the URL copied from the browser, append to it `/api/messages`, and finally hit `Connect`.
+
+    ![image](./media/07-05-07_BotFrameworkEmulator_OpenBot.png)
+
+1. The bot will load and send you a `Card` and two messages.
+   The former is a negligible message about [LUIS](https://www.luis.ai/home), while the latter is a question the bot asked you about the destination of the travel you want to book using this bot.
+   Answer all the questions the bot will ask you.
+
+   ![image](./media/07-05-08_BotFrameworkEmulator_InitChat.png)
 
 ## Exercise 6: Host your bot in Azure<a name="ex6"></a>
 
