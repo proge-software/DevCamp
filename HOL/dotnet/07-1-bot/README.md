@@ -11,6 +11,8 @@ In this hands-on lab, you will learn how to:
 * Create your own bot from scratch.
 * Hosting your bot in Azure.
 
+In the `start` and `end` directories you will find the bot created during this HOL.
+
 ## Prerequisites
 
 * Deployed the starter ARM Template [HOL 1](../01-developer-environment).
