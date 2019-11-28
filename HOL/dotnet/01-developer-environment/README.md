@@ -58,7 +58,7 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
 1. We have created an Azure Resource Group template that will configure the resources you need in Azure for the DevCamp. To deploy these resources in your Azure subscription, `control + click` on the blue ***Deploy to Azure*** button below:
 
-    :point_right:    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FFrancescoIlario%2FDevCamp%2Fmaster%2FShared%2FARMTemplate%2FAzureDeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>    :point_left:
+    :point_right:    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fproge-software%2FDevCamp%2Fmaster%2FShared%2FARMTemplate%2FAzureDeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>    :point_left:
 
 1. You should see a new tab open in your browser and open the Azure portal, with a blade that looks like this:
 
@@ -150,7 +150,7 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
 1. Change directory to the root using `cd c:\`.
 
-1. Type `git clone https://github.com/FrancescoIlario/DevCamp.git`:
+1. Type `git clone https://github.com/proge-software/DevCamp.git`:
 
     ![image](./media/2016-10-18_17-03-51.gif)
 
