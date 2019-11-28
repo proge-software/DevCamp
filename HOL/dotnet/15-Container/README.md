@@ -411,9 +411,3 @@ With Compose, you use a YAML file to configure your application’s services. Th
 
     ![image](./media/15-07-12_AppService_Container_VisitedSite.png)
 
-
-## Containers orchestrators
-- Docker Swarm
-- Kubernetes
-- Openshift
-
