@@ -14,7 +14,7 @@
         "apiAppName": "[concat('incidentapi', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "dotnetAppName": "[concat('dotnetapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "hostingPlanName": "[concat('incidentappplan', uniqueString(resourceGroup().id))]",
-        "repoURL": "https://github.com/AzureCAT-GSI/DevCamp.git",
+        "repoURL": "https://github.com/Proge-Software/DevCamp.git",
         "repoBranch": "master",
         "storageName": "[substring(toLower(concat('incidentblobstg', toLower(parameters('userName')), uniqueString(resourceGroup().id))), 0, 24)]",
         "diagStorageName": "[substring(toLower(concat('incidentdiagstg', toLower(parameters('userName')), uniqueString(resourceGroup().id))), 0, 24)]",
@@ -32,7 +32,18 @@
         "dtlVmStorage": "Premium",
         "dtlVmUsername": "l-admin",
         "dtlVmPassword": "Devc@mp2016!",
-        "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd,eclipse,jre8,javaruntime"
+        "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd",
+        "containerAppName": "[concat('containerapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
+        "dockerRegistryUsername": "progedevcamp",
+        "dockerRegistryPassword": null,
+        "dockerRegistryStartupCommand": "",
+        "alwaysOn": "false",
+        "subscriptionId": "5d71b05c-3bd6-4055-836d-99b7558bd920",
+        "serverFarmResourceGroup": "Corso-MS-Cloud-linux",
+        "containerHostingPlanName": "appsrvplanlinux",
+        "hostingEnvironment": "",
+        "linuxFxVersion": "DOCKER|progedevcamp.azurecr.io/proge/welcome:latest",
+        "dockerRegistryUrl": "https://progedevcamp.azurecr.io"
     },
     "resources": [
         {
@@ -229,7 +240,7 @@
             "properties": {
                 "labVirtualNetworkId": "[variables('dtlVnetId')]",
                 "labSubnetName": "[concat(variables('dtlVnetName'), 'Subnet')]",
-                "notes": "WinServer 2012R2 DC + VS2015",
+                "notes": "WinServer 2019 with containers and VS2019",
                 "galleryImageReference": {
                     "offer": "VisualStudio",
                     "publisher": "MicrosoftVisualStudio",
@@ -268,7 +279,7 @@
                         "parameters": [
                             {
                                 "name": "scriptFileUris",
-                                "value": "[[\"https://raw.githubusercontent.com/AzureCAT-GSI/DevCamp/master/Shared/ARMTemplate/Scripts/InstallNodeJS.ps1\"]"
+                                "value": "[[\"https://raw.githubusercontent.com/Proge-Software/DevCamp/master/Shared/ARMTemplate/Scripts/InstallNodeJS.ps1\"]"
                             },
                             {
                                 "name": "scriptToRun",
@@ -285,7 +296,7 @@
                         "parameters": [
                             {
                                 "name": "scriptFileUris",
-                                "value": "[[\"https://raw.githubusercontent.com/AzureCAT-GSI/DevCamp/master/Shared/ARMTemplate/Scripts/extrachocolatey.ps1\"]"
+                                "value": "[[\"https://raw.githubusercontent.com/Proge-Software/DevCamp/master/Shared/ARMTemplate/Scripts/extrachocolatey.ps1\"]"
                             },
                             {
                                 "name": "scriptToRun",
@@ -298,6 +309,45 @@
                         ]
                     }
                 ]
+            }
+        },
+        {
+            "apiVersion": "2018-11-01",
+            "name": "[variables('containerAppName')]",
+            "type": "Microsoft.Web/sites",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "scope": "devcamp"
+            },
+            "dependsOn": [],
+            "properties": {
+                "name": "[variables('containerAppName')]",
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_URL",
+                            "value": "[variables('dockerRegistryUrl')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                            "value": "[variables('dockerRegistryUsername')]"
+                        },
+                        {
+                            "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                            "value": "[variables('dockerRegistryPassword')]"
+                        },
+                        {
+                            "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                            "value": "false"
+                        }
+                    ],
+                    "linuxFxVersion": "[variables('linuxFxVersion')]",
+                    "appCommandLine": "[variables('dockerRegistryStartupCommand')]",
+                    "alwaysOn": "[variables('alwaysOn')]"
+                },
+                "serverFarmId": "[concat('/subscriptions/', variables('subscriptionId'),'/resourcegroups/', variables('serverFarmResourceGroup'), '/providers/Microsoft.Web/serverfarms/', variables('containerHostingPlanName'))]",
+                "hostingEnvironment": "[variables('hostingEnvironment')]",
+                "clientAffinityEnabled": false
             }
         }
     ],

@@ -1,17 +1,17 @@
-# DevOps with Visual Studio Team Services (.NET)
+# DevOps with Azure DevOps (.NET)
 
 ## Overview
 
-In this lab, you will create a Visual Studio Team Services repository, check in your code, create a Continuous Integration pipeline, and test your cloud-based application.
+In this lab, you will create a Azure DevOps repository, commit and push your code, create a Continuous Integration pipeline, and test your cloud-based application.
 
 ## Objectives
 
 In this hands-on lab, you will learn how to:
 
-* Create a VSTS Git repository.
-* Add your code to the VSTS Git repository.
-* Create a Continuous Integration pipeline.
-* Deploy a built application to an Azure Web App from VSTS.
+* Create an ADO Git repository.
+* Add your code to the ADO Git repository.
+* Create a Continuous Integration (CI) pipeline.
+* Deploy a built application to an Azure Web App from ADO.
 
 ## Prerequisites
 
@@ -28,50 +28,58 @@ In this hands-on lab, you will learn how to:
 
 This hands-on-lab has the following exercises:
 
-* [Exercise 1: Create VSTS Git repository](#ex1)
-* [Exercise 2: Add application to VSTS Git](#ex2)
+* [Exercise 1: Create ADO Git repository](#ex1)
+* [Exercise 2: Add application to ADO Git](#ex2)
 * [Exercise 3: Create a Continuous Integration pipeline](#ex3)
 * [Exercise 4: Deploy code to an Azure Web App](#ex4)
 
 ---
 
-## Exercise 1: Create VSTS Git repository<a name="ex1"></a>
+## Exercise 1: Create ADO Git repository<a name="ex1"></a>
 
-VSTS gives us the option to use Git or [TFVC](https://www.visualstudio.com/en-us/docs/tfvc/overview) as our project's repository. For this exercise we will use Git, and then clone the repository to our dev machine.
+ADO gives us the option to use Git or [TFVC](https://www.visualstudio.com/en-us/docs/tfvc/overview) as our project's repository.
+For this exercise we will use Git, and then clone the repository to our dev machine.
 
-> Note that if you acquired these lab materials via a `git clone` of the workshop repo then you should select a folder somewhere else on your dev machine. This will minimize conflicts between the two separate repositories.
+> Note that if you acquired these lab materials via a `git clone` of the workshop repo then you should select a folder somewhere else on your dev machine.
+  This will minimize conflicts between the two separate repositories.
 
-1. We will ignore the automatically created `MyFirstProject`. Starting at your TFVC account's landing page (`https://[YOUR_ACCOUNT_NAME]-proge.visualstudio.com`), click `Create Project`.
+1. We will ignore the `devcamp123` project we created in HOL 1.
+   Starting at your ADO account's landing page (`https://dev.azure.com/[YOUR_ACCOUNT_NAME]`), click `New Project`.
 
-    ![image](./media/2017-06-21_13_56_00.png)
+    ![image](./media/2019-10_01_01_ADO_home.png)
 
-1. Enter a project name such as **DevCamp**, ensure `Version control` is set to `Git` and then click `Create`.
+2. Enter a project name such as **DevCamp**, ensure `Version control` is set to `Git` and then click `Create`.
 
-    ![image](./media/2017-06-21_13_58_00.png)
+    ![image](./media/2019-10_01_02_ADO_new_proj.png)
 
-1. Wait for the project to be created. This process may take up to 60 seconds. When finished you will be redirected to the project page
+3. Wait for the project to be created. 
+   This process may take up to 60 seconds.
+   When finished you will be redirected to the project page
+    
+    ![image](./media/2019-10_01_03_ADO_proj_hp.png)
 
-1. Click `Dashboards` and explore your pre-built dashboard. Familiarize yourself with the variety of widgets available, and the customization options.
+4. Click `Dashboards` and explore your pre-built dashboard. Familiarize yourself with the variety of widgets available, and the customization options.
 
-    ![image](./media/2017-06-21_14_01_00.png)
+    ![image](./media/2019-10_01_04_ADO_proj_dashboard.png)
 
-You have now created a project in VSTS with a Git repository. Next we'll clone the repository locally to your developer machine and upload code from our machine to VSTS.
+You have now created a project in ADO with a Git repository. Next we'll clone the repository locally to your developer machine and upload code from our machine to ADO.
 
 ---
 
-## Exercise 2: Add application to VSTS Git<a name="ex2"></a>
+## Exercise 2: Add application to ADO Git<a name="ex2"></a>
 
-1. Click `Code` on the top toolbar to navigate to the Code screen.
+1. Click `Repos` on the left toolbar to navigate to the Code screen.
 
-    ![image](./media/2017-06-21_14_04_00.png)
+    ![image](./media/2019-10_02_01_ADO_proj_repos.png)
 
 1. Click the `Clone in Visual Studio` button.
 
-    ![image](./media/2017-06-21_14_08_00.png)
+    ![image](./media/2019-10_02_02_ADO_proj_clone_vs.png)
 
-    > **Note** if you are using Chrome, you may receive a pop-up message. The Clone in Visual Studio option uses a custom protocol handler to open in the client. Select `Launch Application`.
+    > **Note** if you are using Chrome, you may receive a pop-up message. 
+      The Clone in Visual Studio option uses a custom protocol handler to open in the client. Select `Open Microsoft Visual Studio Handler Selector`.
     >
-    > ![image](./media/image-044.gif)
+    > ![image](./media/2019-10_02_03_chrome_pick_app.png)
     >
     > The Internet Explorer will display a security warning. Click `Allow` to continue:
     >
@@ -79,7 +87,7 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
 1. When Visual Studio launches, you will be prompted in the `Team Explorer` window to create a local folder to clone into. Select the `...` next to the local address:
 
-    ![image](./media/2017-06-21_14_12_00.png)
+    ![image](./media/2019-10_02_03_vs_team_explorer.png)
 
 1. Create a new local folder ***outside*** of the GIT folder you have been using for the other HOLs. In the example below, the folder was created as `DevCampVSO`:
 
@@ -87,13 +95,13 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
 1. Click `OK` and `Clone`.
 
-1. Open Windows Explorer and copy the files from the `start` folder in this HOL and copy the contents into the folder you created above.
+1. Open Windows Explorer and copy the files from the `start` folder in this HOL (you should have it at `C:\DevCamp\HOL\dotnet\04-devops-ci\start`) and copy the contents into the folder you created above.
 
       ![image](./media/2017-06-21_14_17_00.png)
 
 1. Open the **copied solution** file in Visual Studio.
 
-1. Ensure the `Web.config` settings are set to the values for your application (you can copy them from your working copy back from HOL 3).
+1. Ensure the `Web.config` settings are set to the values for your application (you can copy them from your working copy back from HOL 3 - or 2 if you completed the HOL 3 using the HOL 2 solution).
 
     ```xml
     <!--HOL 2-->
@@ -131,13 +139,6 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
     > If you made changes to the files, and you do not see them in the list, ensure that you have cloned the repository from the repo.
 
-    ```CMD
-    cd\DevCampVSO
-    Git init
-    Git commit *
-    Git push origin master -m ‘initial commit’
-    ```
-
 1. Right click on the top level folder and select `Stage`:
 
     ![image](./media/2017-06-21_14_26_00.png)
@@ -154,9 +155,9 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
      ![image](./media/2017-06-21_14_30_00.png)
 
-1. In your browser, navigate to the Visual Studio Team Services site and view the committed files.
+1. In your browser, navigate to the Azure DevOps site and view the committed files.
 
-     ![image](./media/2017-06-21_14_33_00.png)
+     ![image](./media/2019-10_02_04_ADO_committed.png)
 
 1. If you want to return to the changes view of the Team Explorer to stage more commits, click the headline to open a drop-down of all the views.
 
@@ -166,88 +167,106 @@ You have now created a project in VSTS with a Git repository. Next we'll clone t
 
 ## Exercise 3: Create a Continuous Integration pipeline<a name="ex3"></a>
 
-With application code now uploaded to VSTS, we can begin to create builds via a Build Definition. Navigate to the `Build` tab from the top navigation. We will use the hosted agent within VSTS to process our builds in this exercise.
+With application code now uploaded to ADO, we can begin to create builds via a Build Definition. Navigate to the `Build` tab from the top navigation. We will use the hosted agent within ADO to process our builds in this exercise.
 
-1. From the `Build & Release` tab, create a new `Build Definition` by clicking the `New Definition` button:
+1. From the `Pipelines` menu select the `Builds` tab, and select the `New pipeline` button:
 
-    ![image](./media/2017-06-21_14_35_00.png)
+    ![image](./media/2019-10_03_01_Pipelines_Build_New.png)
 
-1. On the `Select your repository` step, be sure the source is `VSTS Git`, the `Team project` is your VSTS Project and the `Repository` is the one that was earlier created.
+2. Select `Azure Repos Git` as code hosting platform
 
-    ![image](./media/2018-07-22_11_49_55.png)
+    ![image](./media/2019-10_03_02_Pipelines_Build_New_Connect.png)
 
-1. There are pre-built definitions for a variety of programming languages and application stacks. For this exercise select `.NET Desktop` and click `Apply`:
+3. Then select `DevCamp` as repository
 
-    ![image](./media/2018-07-22_11_54_11.png)
+    ![image](./media/2019-10_03_03_Pipelines_Build_New_Select.png)
 
-1. The build tasks are created for us as part of the template.
+4. There are pre-built definitions for a variety of programming languages and application stacks. For this exercise select `.NET Desktop` and click `Apply`:
 
-1. In the `Process` settings select `Hosted` as the `Agent queue`:
+    ![image](./media/2019-10_03_04_Pipelines_Build_New_Configure.png)
 
-    ![image](./media/2017-10-23_13_50_00.png)
+5. The build tasks are created for us as part of the template and showed as yaml file in the `Review` step
 
-1. Navigate to the `Build Solution` step. Add the following in the `MSBuild Arguments` text box to create a web deployment package as part of the build:
+    ![image](./media/2019-10_03_05_Pipelines_Build_New_Review.png)
 
-    ```xml
-    /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="bin\deploymentpackage"
-    ```
-    ![image](./media/2017-06-22_11_04_00.png)
 
-1. In the build step `Copy Files to: $(build.artifactstagingdirectory)`, the default setting uses build definition folders. We are not using custom build configurations so we need to update the contents value.
+6. Navigate to the `VSBuild@1` task. 
+   Add the following in the `inputs` to create a web deployment package as part of the build:
 
     ```xml
-    **\bin\**
+    msbuildArgs: /p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="bin\deploymentpackage"
     ```
+    ![image](./media/2019-10_03_06_Pipelines_Build_New_VBuild.png)
 
-    ![image](./media/2017-06-22_11_06_00.png)
+7. Click on the `Show Assistant` on the right
 
-1. Click `Save & queue`. Our saved Build Definition is ready to be processed by the Hosted Build Agent.
+    ![image](./media/2019-10_03_07_Pipelines_Build_New_Assistant.png)
 
-    ![image](./media/2017-06-22_11_12_00.png)
+8. Use the search box to search `copy` and select the `Copy Files` task
 
-1. Accept the defaults and click `Save & Queue`. Your build will then be queued until the Hosted Build Agent can pick it up for processing. This typically takes less than 60 seconds to begin.
+    ![image](./media/2019-10_03_08_Pipelines_Build_New_CopyFiles.png)
 
-1. Click the build number to proceed.
+9. Fill the form using the following values and finally select `Add`:
+   - Source Folder: `$(build.sourcesdirectory)`
+   - Contents: `**\bin\**`
+   - Target Folder: `$(build.artifactstagingdirectory)`
 
-    ![image](./media/2017-11-01_11_15_00.png)
+    ![image](./media/2019-10_03_09_Pipelines_Build_New_CopyFiles_Filled.png)
 
-1. Once your build completes, click each step on the left navigation bar and inspect the output.
+10. Add a `Publish build artifacts` Task after the `Copy Files` one
+    
+    ![image](./media/2019-10_03_10_Pipelines_Build_New_PublishBuildArtifacts.png)
 
-    ![image](./media/2017-06-22_11_17_00.png)
+11. Accept default and press `Add`
+
+    ![image](./media/2019-10_03_11_Pipelines_Build_New_PublishBuildArtifacts_Add.png)
+
+12. Click `Save and run`. Our saved Build Definition is ready to be processed by the Hosted Build Agent.
+
+    ![image](./media/2019-10_03_12_Pipelines_Build_New_SaveAndRun.png)
+
+13. Accept the defaults and click `Save and run`. 
+    Your build will then be queued until the Hosted Build Agent can pick it up for processing. 
+    This typically takes less than 60 seconds to begin.
+
+    ![image](./media/2019-10_03_13_Pipelines_Build_New_SaveAndRun_Confirm.png)
+
+14. You should be now automatically redirected to the started build.
+
+    ![image](./media/2019-10_03_14_Pipelines_Build_Started.png)
+
+15. Once your build completes, click each step and inspect the output.
+
+    ![image](./media/2019-10_03_15_Pipelines_Build_Result.png)
 
     > ***Note:*** If your build fails go back to Visual Studio and make sure the solution can be build. Make any neccessary fixes and commit the changes by staging the changes, synchronizing and pushing.
 
-1. Let's inspect the output artifacts that were published. Click the `Build XXX` header in the left pane to view the build's landing page.
+16. Let's inspect the output artifacts that were published. 
+    Click the `Artifacts` button in the top right angle of the screen the list of artifacts produced by the pipeline and click on `drop` (that is the name of the produced artifact).
+    
+    ![image](./media/2019-10_03_16_Pipelines_Build_Result_Artifact.png)
 
-1. Select `Artifacts` from the horizontal toolbar.
+19. Expand the `drop` folder and view the build artifacts. Click `Close` when complete.
 
-    ![image](./media/2017-06-22_11_18_00.png)
+    ![image](./media/2019-10_03_17_Pipelines_Build_Result_ArtifactExplorer.png)
 
-1. A `drop` folder has been created containing the compiled output. Click `Explore` to see them.
+20. Click the `..` near the `drop` folder and select `Download as zip`
 
-    ![image](./media/2017-06-22_11_20_00.png)
+    ![image](./media/2019-10_03_18_Pipelines_Build_Result_ArtifactExplorer_Download.png)
 
-1. Expand the `drop` folder and view the build artifacts. Click `Close` when complete.
+21. Unzip `drop.zip` to see the application files created by the build agent. This artifact will be deployed to an Azure Web App in a later exercise.
 
-    ![image](./media/2017-06-22_11_22_00.png)
-
-1. Click `Download` next to the `drop` folder to save the build locally.
-
-    ![image](./media/2017-06-22_11_20_00.png)
-
-1. Unzip `drop.zip` to see the application files created by the build agent. This artifact will be deployed to an Azure Web App in a later exercise.
-
-We now have a Build Definition that will compile the application and create a package for deployment anytime code is checked into the repository, or a manual build is queued.
+We now have a Build Pipeline that will compile the application and create a package for deployment anytime code is pushed into the repository, or a manual build is queued.
 
 ---
 
 ## Exercise 4: Deploy code to an Azure Web App<a name="ex4"></a>
 
-In the ARM Template that was originally deployed, a web app was created as a development environment to hold a deployed .NET application. We will use this web app as a deployment target from VSTS. First, we need to prepare this web app for our application code.
+In the ARM Template that was originally deployed, a web app was created as a development environment to hold a deployed .NET application. We will use this web app as a deployment target from ADO. First, we need to prepare this web app for our application code.
 
-1. Visit the Azure Web App by browsing to the [Azure Portal](http://portal.azure.com), opening the `Corso-MS-Cloud` Resource Group, and select the Azure Web App resource that begins with `dotnetapp` before the random string.
+1. Visit the Azure Web App by browsing to the [Azure Portal](http://portal.azure.com), opening the `Corso-MS-Cloud` Resource Group, and select the Azure Web App resource that begins with `dotnetapp[YOUR_NAME]` before the random string.
 
-    ![image](./media/2017-06-22_11_28_00.png)
+    ![image](./media/2019-10_04_01_AzurePortal_dotnetapp.png)
 
 1. Once the blade expands, select `Browse` from the top toolbar:
 
@@ -255,81 +274,87 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
 1. A new browser tab will open with a splash screen visible. It will look similar to this image (it gets updated regularly with new information) and tell you that the app service has been created:
 
-    ![image](./media/image-031.gif)
+    ![image](./media/2019-10_04_02_Web_Service_Empty.png)
 
-1. Now that we have a build being created and a website to deploy into, let's connect them. In VSTS, navigate to the `Build & Release` tab.
+1. Now that we have a build being created and a website to deploy into, let's connect them.
+   In ADO, navigate to the `Pipelines` tab.
 
 1. Click on `Releases`.
 
-1. Click the `+ New Definition` button to create a new release definition:
+1. Click the `New Pipeline` button to create a new release definition:
 
-    ![image](./media/2017-06-22_11_31_00.png)
+    ![image](./media/2019-10_04_03_ADO_Pipelines_Releases.png)
 
-1. Select `Azure App Service Deployment` and click `Apply`.
+1. Select `Azure App Service deployment` and click `Apply`.
 
-    ![image](./media/2017-09-27_10_12_00.png)
+    ![image](./media/2019-10_04_04_ADO_Pipelines_Releases_New.png)
 
-1. Click `Add artifact`. Ensure the `Source (Build definition)` is set to the Build Definition name used in the earlier exercise. Then click `Add` to finish creating the Release Definition.
+1. Click `Add artifact`. Ensure the `Source (Build pipeline)` is set to the Build Pipeline name used in the earlier exercise.
+   Then click `Add` to finish creating the Release Pipeline.
 
-    ![image](./media/image-027.gif)
+    ![image](./media/2019-10_04_05_ADO_Pipelines_Releases_AddAnArtifact.png)
 
-1. We need to connect your VS agent with your Azure subscription so it can deploy resources. Select `Tasks` from the menu. If the drop-down next to `Azure subscription` offers you your subscription:
+1. Now click on the Tab `Tasks` that should present a circular alert icon
 
-    1. Select it, click on the arrow next to `Authorize` and select `Advanced options` from the drop-down:
+    ![image](./media/2019-10_04_06_ADO_Pipelines_Releases_Tasks.png)
+
+2. We need to connect your VS agent with your Azure subscription so it can deploy resources. Select `Tasks` from the menu. 
+
+    1. In the dropdown near `Azure Subscription` Select the voice `Microsoft Azure Sponsorship`, click on the arrow next to `Authorize` and select `Advanced options` from the drop-down:
 
         ![image](./media/2018-07-16_10_03_28.png)
 
-    1. Select `Corso-MS-Cloud` as resource group and click `Ok`:
+    2. Select `Corso-MS-Cloud` as resource group and click `Ok`:
 
-        ![image](./media/2018-07-16_10_02_59.png)
+        ![image](./media/2019-10_04_07_ADO_Pipelines_AzureResourceManagerServiceConnection.png)
 
-    1. Select your `dotnetapp...` Azure Web app resource from the `App Service name` drop-down:
+    3. Select your `dotnetapp...` Azure Web app resource from the `App Service name` drop-down:
 
-        ![image](./media/2017-06-22_09_05_00.png)
+        ![image](./media/2019-10_04_08_ADO_Pipelines_Stage1.png)
 
-    1. Move to step 11.
+    4. Move to step 11.
 
-1. If the drop-down next to `Azure subscription` does not offer you your subscription or the drop-down next to `App Service name` does not offer you your Azure Web app resource (give it a moment after selecting the subscription:
+3. If the drop-down next to `Azure subscription` does not offer you your subscription or the drop-down next to `App Service name` does not offer you your Azure Web app resource (give it a moment after selecting the subscription:
 
     1. click on `Manage`:
 
         ![image](./media/2017-06-22_11_35_00.png)
 
-    1. This will open a screen where you can connect to the ARM service endpoint. Select `New Service Endpoint` -> `Azure Resource Manager`.
+    2. This will open a screen where you can connect to the ARM service endpoint. Select `New Service Endpoint` -> `Azure Resource Manager`.
 
         ![image](./media/image-042.gif)
 
-    1. Provide a connection name and select your subscription then click `OK`.
+    3. Provide a connection name and select your subscription then click `OK`.
 
         ![image](./media/image-025.gif)
 
         > If your subscription is not in the dropdown list, click the link at the bottom of the window, and the window
         > format will change to allow you to enter connection information on your subscription:
 
-    1. Another option is to create a service principal. The steps to create a service principal is below.
+    4. Another option is to create a service principal. The steps to create a service principal is below.
 
         > If you have not created a service principal for the subscription, you will have to follow the
         > [instructions](https://go.microsoft.com/fwlink/?LinkID=623000&clcid=0x409) to do so.  This process will
         > provide the information to enter in this dialog:
         >
 
-        1. Open [this PowerShell script](https://raw.githubusercontent.com/Microsoft/vsts-rm-documentation/master/Azure/SPNCreation.ps1) in your browser. Select all the content from the window and copy to the clipboard.
+        1. Open [this PowerShell script](https://raw.githubusercontent.com/Microsoft/ADO-rm-documentation/master/Azure/SPNCreation.ps1) in your browser. Select all the content from the window and copy to the clipboard.
 
-        1. Open a PowerShell ISE window. In the text window, paste the PowerShell script from the clipboard.
+        2. Open a PowerShell ISE window. In the text window, paste the PowerShell script from the clipboard.
 
             ![image](./media/image-044a.gif)
 
-        1. Click the green arrow to run the PowerShell script.
+        3. Click the green arrow to run the PowerShell script.
 
             ![image](./media/image-045a.gif)
 
             > If the PowerShell gives an error at runtime regarding a missing AzureRM module, please install it by executing the following command in a PowerShell window with admin privileges: `Install-Module AzureRM`. Then run `Set-ExecutionPolicy RemoteSigned -Scope process` to adjust the execution level
 
-        1. The PowerShell script will ask for your **subscription name** and a **password**. This password is for the service principal only, not the password for your subscription. So you can use whatever password you would like, just remember it.
+        4. The PowerShell script will ask for your **subscription name** and a **password**. This password is for the service principal only, not the password for your subscription. So you can use whatever password you would like, just remember it.
 
             ![image](./media/image-046a.gif)
 
-        1. You will then be asked for your Azure login credentials. Enter your Azure username and password. The script will print out several values that you will need to enter into the `Add Azure Resource Manager Service Endpoint` window. Copy and paste these values from the PowerShell window:
+        5. You will then be asked for your Azure login credentials. Enter your Azure username and password. The script will print out several values that you will need to enter into the `Add Azure Resource Manager Service Endpoint` window. Copy and paste these values from the PowerShell window:
 
             * Subscription ID
             * Subscription Name
@@ -341,59 +366,61 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
                 ![image](./media/image-047a.gif)
 
-        1. Click `Verify connection`, and ensure that the window indicates that the connection was verified. Then Click `OK` and `Close`.
+        6. Click `Verify connection`, and ensure that the window indicates that the connection was verified. Then Click `OK` and `Close`.
 
             ![image](./media/image-048a.gif)
 
-        1. If this is the first time you are connecting to this subscription, you will need to authorize VSTS to have access to deploy to Azure. After you select your subscription, click `Authorize`.
+        7. If this is the first time you are connecting to this subscription, you will need to authorize ADO to have access to deploy to Azure. After you select your subscription, click `Authorize`.
 
         ![image](./media/image-067.gif)
 
-    1. Navigate back to the VSTS build tab in the browser and click the click the `Refresh` icon to refresh the connections. The `Azure` connection that we setup should now appear. Select it.
+    5. Navigate back to the ADO build tab in the browser and click the click the `Refresh` icon to refresh the connections. The `Azure` connection that we setup should now appear. Select it.
 
-    1. Next, for `App Service Name` choose the name of the .NET Azure Web App. It may take a moment to populate.
+    6. Next, for `App Service Name` choose the name of the .NET Azure Web App. It may take a moment to populate.
 
         ![image](./media/image-062.gif)
 
-1. From the menu bar select `Save` to save the Release Definition, and select `Release` -> `Create Release`.
+4. From the menu bar select `Save` to save the Release Definition, and select `Release` -> `Create Release`.
 
-    ![image](./media/2017-06-22_09_21_00.png)
+    ![image](./media/2019-10_04_09_ADO_Pipelines_Release.png)
 
-1. Enter the release information and select the build to deploy. Ensure that the latest successful build is selected from the drop-down box. Click `Create`.
+5. Enter the release information and select the build to deploy. Ensure that the latest successful build is selected from the drop-down box. Click `Create`.
 
-    ![image](./media/image-063.gif)
+    ![image](./media/2019-10_04_10_ADO_Pipelines_Create_Release.png)
 
-1. Click on the release number in navigation header. This will allow you view the current release information.
+6. Click on the release number in navigation header. This will allow you view the current release information.
 
-    ![image](./media/image-064.gif)
+    ![image](./media/2019-10_04_11_ADO_Pipelines_Release_Created.png)
 
-1. After a successful build you should see the application deployed to your web app.
+7. After a successful build you should see the application deployed to your web app.
 
-    ![image](./media/image-065.gif)
+    ![image](./media/2019-10_04_12_ADO_Pipelines_Release_Released.png)
 
-1. Update the application configuration to match the current settings you have deployed. Copy the values from the `Web.config` to the Application configuration in Azure if they do not match. Open the Azure portal and find the .NET web application.
+8. Update the application configuration to match the current settings you have deployed.
+   Copy the values from the `Web.config` to the Application configuration in Azure if they do not match.
+   Open the [Azure portal](https://www.portal.azure.com) and find the .NET web application.
 
-1. Open the Application Settings.
+9.  In the `dotnetapp[YOU_NAME]...` details on [Azure portal](https://www.portal.azure.com), select the `Configuration` tab and update the values
 
-     ![image](./media/2017-06-22_11_47_00.png)
+     ![image](./media/2019-10_04_13_AzurePortal_dotnetapp_Configuration.png)
 
-1. Copy the values from the `Web.config` into the application settings (you also need to include a new key named `AAD_APP_REDIRECTURI` and set the value to the URL on the application in Azure `https://dotnetapp[YOUR_ACCOUT_NAME][...].azurewebsites.net/`). If you do not have values for these settings, please review the previous labs for the correct values.
+10. Copy the values from the `Web.config` into the application settings (you also need to include a new key named `AAD_APP_REDIRECTURI` and set the value to the URL on the application in Azure `https://dotnetapp[YOUR_ACCOUT_NAME][...].azurewebsites.net/`). If you do not have values for these settings, please review the previous labs for the correct values.
 
-1. Click `Save`.
+11. Click `Save`.
 
-    ![image](./media/2017-06-22_11_49_00.png)
+    ![image](./media/2019-10_04_14_AzurePortal_dotnetapp_Configuration_Save.png)
 
-1. Navigate to the [Application Registration Portal](https://apps.dev.microsoft.com).
+12. Navigate to the [Application Registration Portal](https://apps.dev.microsoft.com).
 
-1. Open the configuration for your application and add the Azure web application URL to the list of Redirect URLs. Click `Save`.
+13. Open the configuration for your application and add the Azure web application URL to the list of Redirect URLs. Click `Save`.
 
-    ![image](./media/image-033.gif)
+    ![image](./media/2019-10_04_15_AzurePortal_CityPowerAuthentication_AddURI.png)
 
     > Note: Be sure to include the trailing slash **/** in the URL and ensure this address is using **https**.
 
-1. Open a browser and navigate to the site. You should see the running site on Azure.
+14. Open a browser and navigate to the site. You should see the running site on Azure.
 
-    ![image](./media/2017-06-22_12_12_00.jpg)
+    ![image](./media/2019-10_04_16_AzurePortal_CityPowerDeployed.png)
 
     > If your browser displays the error `Could not load file or assembly 'System.IdentityModel.Tokens.Jwt' [...]` you have to downgrade the NuGet package `System.IdentityModel.Tokens.Jwt` to 4.0.3 in Visual Studio.
 ---
@@ -402,10 +429,10 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
 In this hands-on lab, you learned how to:
 
-* Create a VSTS Git repository that you utilized to synchronize your source code on your machine and in the cloud.
-* Add your code to the VSTS Git repository.
+* Create a ADO Git repository that you utilized to synchronize your source code on your machine and in the cloud.
+* Add your code to the ADO Git repository.
 * Create a Continuous Integration pipeline that you used to automatically compile your application and create packages for deployment anytime code is checked into the repository.
-* Deploy a built application to an Azure Web App from VSTS and thus automating the final steps of your deployment process.
+* Deploy a built application to an Azure Web App from ADO and thus automating the final steps of your deployment process.
 
 After completing this module, you can continue on to Module 5: ARM.
 

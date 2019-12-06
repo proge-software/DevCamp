@@ -31,27 +31,26 @@ This hands-on-lab has the following exercises:
 
 ---
 
-## Exercise 1: Start your VSTS trial subscription<a name="ex1"></a>
+## Exercise 1: Start your ADO Account<a name="ex1"></a>
 
-In a future lab we will use [Visual Studio Team Services](https://www.visualstudio.com/team-services/), or "VSTS" for short. In this exercise we will enable a free trial subscription.
+In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for short.
 
-1. In your browser, go to [www.visualstudio.com/team-services](http://www.visualstudio.com/team-services) and click on `Free Account` in the upper right corner.  
+1. In your browser, go to [https://aex.dev.azure.com/me?mkt=en-US&campaign=o\~msft\~vsts\~usercard](https://aex.dev.azure.com/me?mkt=en-US&campaign=o~msft~vsts~usercard) and complete the sign in process if needed using your Proge-Software account:
 
-    ![image](./media/2018-07-05_15_36_42.png)
-
-    Complete the sign in process if needed using your Proge-Software account:
-
-    ![image](./media/2018-07-05_15_37_19.png)
+    ![image](./media/201910-00_login.png)
 
     You should be taken to a screen that looks like this:
 
-    ![image](./media/2018-07-05_15_38_22.png)
+    ![image](./media/201910-01_profile.png)
 
-    Click on `Create new account` to set your VSTS account. Please note that sometimes you may be taken to the following screen directly:
+    Click on `Create new organization` to set your new organization.
 
-    ![image](./media/2018-07-05_15_39_08.png)
+    ![image](./media/201910-02_new_org.png)
 
-    Enter your email name followed by `-proge` and click `Continue`.
+    Enter your email name followed by `-proge` and click `Next`.
+    You will be finally lead to the following page, that means the new organization was correctly set up and it is possibile to create the first project
+
+    ![image](./media/201910-03_new_proj.png)
 
 ---
 
@@ -59,7 +58,7 @@ In a future lab we will use [Visual Studio Team Services](https://www.visualstud
 
 1. We have created an Azure Resource Group template that will configure the resources you need in Azure for the DevCamp. To deploy these resources in your Azure subscription, `control + click` on the blue ***Deploy to Azure*** button below:
 
-    :point_right:    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAkelitz%2FDevCamp%2Fmaster%2FShared%2FARMTemplate%2FAzureDeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>    :point_left:
+    :point_right:    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fproge-software%2FDevCamp%2Fmaster%2FShared%2FARMTemplate%2FAzureDeploy.json" target="_blank"><img src="http://azuredeploy.net/deploybutton.png"/></a>    :point_left:
 
 1. You should see a new tab open in your browser and open the Azure portal, with a blade that looks like this:
 
@@ -151,7 +150,7 @@ In a future lab we will use [Visual Studio Team Services](https://www.visualstud
 
 1. Change directory to the root using `cd c:\`.
 
-1. Type `git clone https://github.com/AzureCAT-GSI/DevCamp.git`:
+1. Type `git clone https://github.com/proge-software/DevCamp.git`:
 
     ![image](./media/2016-10-18_17-03-51.gif)
 
@@ -173,49 +172,42 @@ In a future lab we will use [Visual Studio Team Services](https://www.visualstud
 
     ![image](./media/2016-10-18_17-59-21.gif)
 
-1. Create a VSTS repository. Enter a repository name and click continue:
+1. Connect to ADO:
 
-    ![image](./media/2016-10-18_18-07-34.gif)
+    ![image](./media/201910-04_Setup_ADO.png)
+    ![image](./media/201910-05_Setup_ADO.png)
 
-1. Create your first team project, and name it `DevCamp`:
+2. Open the ADO web portal to create a new project:
 
-    ![image](./media/2016-10-18_18-10-39.gif)
+    ![image](./media/201910-06_WebPortal_new_project.png)
 
-1. If the VSTS dialog does not appear during your setup process use the `Team Explorer` to open it manually by selecting `Get started for free` in the `Visual Studio Team Services` section.
+3. Complete the form inserting a `Project name` and selecting `Git` as `Version control` system and `Agile` as Work item process
 
-    ![image](./media/2017-10-30_12_01_00.png)
+   ![image](./media/201910-07_WebPortal_new_project.PNG)
 
-1. Enter a repository name, select `Git` and click `Continue`:
+4. Open the created project and in the left column select select `Repos` and then `Files`.
+   Finally click on the button `Clone in Visual Studio`. 
+   In case the button does not display Visual Studio as first choice, then use its right arrow to select it.
 
-    ![image](./media/2017-10-30_12_05_00.png)
-
-1. After the repository has been created click `Clone in Visual Studio`:
-
-    ![image](./media/2017-10-30_12_08_00.png)
-
-1. In Visual Studio click `Clone` to confirm the settings.
-
-1. Click close. You are done with the Visual Studio setup.
-
-1. Close the remote desktop connection.
-
+    ![image](./media/201910-08_ADO_clone_project.PNG)
+    
 ---
 
 ## Exercise 4: Deploy shared API application<a name="ex4"></a>
 
 1. The API application has been prepared for you to be available as a communication partner during different exercises and just needs to be deployed once. It will be first used in the second hands on lab.
 
-1. Open a browser and navigate to [https://portal.azure.com](https://portal.azure.com). Open the resource group `Corso-MS-Cloud` and filter resources by your account name:
+2. Open a browser and navigate to [https://portal.azure.com](https://portal.azure.com). Open the resource group `Corso-MS-Cloud` and filter resources by your account name:
 
-    ![image](./media/2018-07-07_08_58_27.png)
+    ![image](./media/201910-e04-01-filtered_rg.png)
 
-1. Locate the app service named `incidentapi...` in the resource group blade:
+3. Locate the app service named `incidentapi...` in the resource group blade:
 
-    ![image](./media/2018-07-07_08_59_43.png)
+    ![image](./media/201910-e04-02_incident_api.PNG)
 
-1. Click on the app service, which will bring up the app service blade. Click on `Browse` at the top:
+4. Click on the app service, which will bring up the app service blade. Click on `Browse` at the top:
 
-    ![image](./media/2017-06-15_13_08_00.png)
+    ![image](./media/201910-e04-03_incident_api_browse.PNG)
 
     A new browser tab will open.
 
@@ -227,27 +219,27 @@ In a future lab we will use [Visual Studio Team Services](https://www.visualstud
 
     ![image](./media/2016-11-14_12-03-50.gif)
 
-1. In the Azure portal, select the API Application (noted with the ![image](./media/image-024.gif) icon).
+5. In the Azure portal, select the API Application (noted with the ![image](./media/image-024.gif) icon).
 
     ![image](./media/image-019.gif)
 
-1. On the details blade select `Deployment options`.
+6. On the details blade select `Deployment options`.
 
     ![image](./media/image-020.gif)
 
-1. If the app deployment is connected, click `Disconnect` on the menu bar.
+7. If the app deployment is connected, click `Disconnect` on the menu bar.
 
     ![image](./media/2017-06-15_15_47_00.png)
 
-1. Then select `Choose source` in the blade and select `External Repository`.
+8. Then select `Choose source` in the blade and select `External Repository`.
 
     ![image](./media/image-022.gif)
 
-1. Paste the following in the Repository URL field `https://github.com/AzureCAT-GSI/DevCamp.git`.
+9. Paste the following in the Repository URL field `https://github.com/AzureCAT-GSI/DevCamp.git`.
 
     ![image](./media/image-023.gif)
 
-1. Select `OK`.
+10. Select `OK`.
 
 ---
 

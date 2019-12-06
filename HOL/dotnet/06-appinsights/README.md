@@ -49,25 +49,28 @@ An instance of Application Insights can be created in a variety of ways, includi
 
 1. Open the Resource Group `Corso-MS-Cloud` that was originally deployed. Click `Add` on the top toolbar to add a new Azure resource to this group.
 
-    ![image](./media/2017-06-23_11_52_00.png)
+    ![image](./media/2019-10_01_01_DevCamp_create_insights.png)
 
 1. Search for `Application Insights` and select the entry from the results list:
 
-    ![image](./media/2017-06-23_11_54_00.png)
+    ![image](./media/2019-10_01_02_DevCamp_create_insights_2.png)
 
-1. In the overview blade that opens, click `Create` to open the creation settings blade. Enter your account name and `CityPower` as name, configure `Application Type` to `ASP.NET Web Application`, set to use the existing `Corso-MS-Cloud` as resource group and then click the `Create` button.
+1. In the overview blade that opens, click `Create` to open the creation settings blade. Enter your account name and `CityPower` as name, configure `Application Type` to `ASP.NET Web Application`, set to use the existing `Corso-MS-Cloud` as resource group and then click the `Review + Create` button and then the `Create` one.
+
+
+    ![image](./media/2019-10_01_03_DevCamp_create_insights_3.png)
 
     Creation typically takes less than a minute.
 
-    ![image](./media/2018-07-22_12_06_17.png)
+    ![image](./media/2019-10_01_04_DevCamp_create_insights_4.png)
+    
+2. Once provisioning completes, click on `Go to resource`.
 
-1. Once provisioning completes, return to your Resource Group and open the resource. You may need to hit the refresh button within the resource group blade.
+    ![image](./media/2019-10_01_05_DevCamp_insights_created.png)
 
-    ![image](./media/2017-06-23_12_07_00.png)
+3. In the `Essentials` section, take note of the `Instrumentation Key`. We will need that in future exercises.
 
-1. In the `Essentials` section, take note of the `Instrumentation Key`. We will need that in future exercises.
-
-    ![image](./media/2017-06-23_12_12_00.png)
+    ![image](./media/2019-10_01_06_DevCamp_insights_overview.png)
 
 We now have an instance of Application Insights created and ready for data. The Instrumentation Key is important, as it is the link that ties an application to the AI service.
 
@@ -152,27 +155,14 @@ We will add both components to our application and enable the sending of telemet
 
 1. Back in the Azure Portal, refresh the browser tab (or click `Refresh` from the top toolbar) until you see data appear.
 
-    ![image](./media/2017-06-23_14_06_00.png)
+    ![image](./media/2019-10_02_01_DevCamp_insights_overview_wstats.png)
 
     > It may take 3-5 minutes for data to appear even when manually refreshing.
 
-1. Our server is now sending data, but what about the client side? Let's add the JavaScript library.
-
-    In the portal, click the tile that says `Learn how to collect browser page load data`:
-
-    ![image](./media/2017-06-23_15_28_00.png)
-
-1. The next blade will give you a JavaScript snippet pre-loaded with the Instrumentation Key. This snippet, when placed on an HTML page, will download the full Application Insights JavaScript library and configure itself. The HTML snippet in the portal integrates the App Insights key into the markup. We will replace the key with a value from our settings class to allow for dynamic configuration of the App Insights resource. By doing this, we can configure the specific setting using a configuration value.
-
-    ![image](./media/2017-06-23_15_29_00.png)
-
-1. Let's integrate the snippet into our views. In Visual Studio open the `Views` -> `Shared` -> `Layout.cshtml` file. This file controls the outer layout for all of the pages.
-
-1. Paste the following snippet below the existing script tags.
-
-    >**Notice that we replaced the static instrumentation key with the constant from our settings.cs class**:
-    >instrumentationKey: "@DevCamp.WebApp.Utils.Settings.APPINSIGHTS_KEY"
-    >
+1. Our server is now sending data, but what about the client side? Let's add the JavaScript library into our views. 
+   In Visual Studio open the `Views` -> `Shared` -> `Layout.cshtml` file.
+   This file controls the outer layout for all of the pages.
+   Paste the following snippet .
 
     ```html
     <!-- 
@@ -193,9 +183,12 @@ We will add both components to our application and enable the sending of telemet
         appInsights.trackPageView();
     </script>
     ```
-1. Redeploy the application and load several pages to generate more sample telemetry. The Azure Portal should now light up data for **Page View Load Time**:
+2. Redeploy the application and load several pages to generate more sample telemetry.
+   Opening the `Performance` tab in the left bar we will see now metrics for the `Server` and for the `Browser`:
 
-    ![image](./media/2017-06-23_15_35_00.png)
+    ![image](./media/2019-10_02_02_DevCamp_insights_performances_server.png)
+
+    ![image](./media/2019-10_02_03_DevCamp_insights_performances_browser.png)
 
 Our application is now providing the Application Insights service telemetry data from both the server and client.
 
@@ -203,7 +196,9 @@ Our application is now providing the Application Insights service telemetry data
 
 ## Exercise 3: Monitor custom events<a name="ex3"></a>
 
-Up until this point the telemetry provided has been an automatic, out-of-the-box experience. For custom events we need to use the SDK. Let's create an event where any time a user views their Profile page, we record their name and AzureAD tenant ID.
+Up until this point the telemetry provided has been an automatic, out-of-the-box experience. 
+For custom events we need to use the SDK. 
+Let's create an event where any time a user views their Profile page, we record their name and AzureAD tenant ID.
 
 1. Open the `Controllers` -> `Profilecontroller.cs` file.
 
@@ -241,7 +236,9 @@ Up until this point the telemetry provided has been an automatic, out-of-the-box
 
 1. Hit F5 to begin debugging. Sign in, view your profile and Sign out a few times. Then view the custom events in the portal by opening the `Application Insights` blade and pressing the `Search` button. Clicking on one of the custom events gives us more details including the custom data we defined. For exceptions, we get the call stack and more information associated with the event.
 
-    ![image](./media/2017-06-29_13_01_00.png)
+    ![image](./media/2019-10_03_01_DevCamp_insights_custom_events.png)
+
+    ![image](./media/2019-10_03_02_DevCamp_insights_custom_events_details.png)
 
     > ***Note:*** If you do not see your custom events, look at the URL you are redirected to after your sign in. If you are redirected to the Azure hosted instance of your app, update your settings on [https://apps.dev.microsoft.com](https://apps.dev.microsoft.com) to reflect your current debugging environment. Remove the Azure addresses and enter the current port number that Visual Studio uses for debugging.
 
@@ -253,32 +250,38 @@ These custom events (and the related concept of custom metrics) are a powerful w
 
 Application Insights has the ability to do performance and availability testing of your application from multiple locations around the world, all configured from the Azure portal.  
 
-1. To show the Application Insights availability monitoring capability, we first need to make sure the application is deployed to the Azure App service. This is done in the [DevOps with Visual Studio Team Services](../04-devops-ci) hands-on-lab. To verify the application is running in the cloud, first go to the Azure portal, open your resource group, and click on the dotnet app service:
+1. To show the Application Insights availability monitoring capability, we first need to make sure the application is deployed to the Azure App service.
+   This is done in the [Azure DevOps](../04-devops-ci) hands-on-lab.
+   To verify the application is running in the cloud, first go to the Azure portal, open your resource group, and click on the dotnet app service:
 
-    ![image](./media/2017-06-29_11_54_00.png)
+    ![image](./media/2019-10_04_01_DevCamp_dotnetapp.png)
 
     Then, click the `Browse` link in the App service blade:
 
-    ![image](./media/2017-06-29_11_53_00.png)
+    ![image](./media/2019-10_04_02_DevCamp_dotnetapp_details.png)
 
     This should open another window with the City Power and Light application in it. Make note of the URL at the top of the browser.
 
 2. In the Azure portal, click on the City Power Application Insights deployment in your resource group to open its blade. Availability is under `INVESTIGATE` in the scrolling pane - click on it to open the `Availability` tab:
 
-    ![image](./media/2017-06-29_11_10_00.png)
+    ![image](./media/2019-10_04_03_DevCamp_dotnetapp_insights_availability.png)
 
     Click on `Add test`. In the `Create test` blade, give the test a name, put the URL for your application in the URL box, and choose several
     locations to test your application from. You can choose to receive an alert email when the availability test fails by clicking on the `Alerts` box and entering the alert configuration. Click `OK` and `Create`.  
 
-    ![image](./media/2017-06-29_11_15_00.png)
+    ![image](./media/2019-10_04_04_DevCamp_dotnetapp_insights_availability_test_basic.png)
+
+    ![image](./media/2019-10_04_05_DevCamp_dotnetapp_insights_availability_test_locations.png)
+
+    ![image](./media/2019-10_04_06_DevCamp_dotnetapp_insights_availability_test_create.png)
 
     It may take 5-10 minutes for your web test to start running. When it is executing and collecting data, you should see availability information on the `Availability` tab of the Application Insights blade. You can click on the web test to get more information:
 
-    ![image](./media/2017-06-29_11_28_00.png)
+    ![image](./media/2019-10_04_07_DevCamp_dotnetapp_insights_availability_test_results.png)
 
     And clicking on one of the dots on the graph will give you information about that specific test. Clicking on the request will show you the response that was received from your application:
 
-    ![image](./media/2017-06-29_11_32_00.png)
+    ![image](./media/2019-10_04_08_DevCamp_dotnetapp_insights_availability_test_results_details.png)
 
     > With all of this testing, you may exceed the limits of the free service tier for Azure app services. If that occurs, you can click on the App Service, and you'll see a notification that your App Service has been stopped due to it's consumption. All you need to do is change the App service plan to basic, which will start the application again.
 
@@ -286,25 +289,26 @@ Application Insights has the ability to do performance and availability testing 
 
 ## Exercise 5: Interact with your telemetry data<a name="ex5"></a>
 
-In the `Metrics Explorer`, you can create charts and grids based on the telemetry data received, and you can relate data points over time. These charts and graphs are very configurable, so you can see the metrics that matter to you.
+In the `Live Metrics Stream`, you can create charts and grids based on the telemetry data received, and you can relate data points over time. 
+These charts and graphs are very configurable, so you can see the metrics that matter to you.
 
 1. Here is an example of page views vs process CPU and processor time:
 
-    ![image](./media/2016-10-25_22-10-19.gif)
+    ![image](./media/2019-10_05_01_DevCamp_dotnetapp_insights_live_metrics_stream.png)
 
     In `Search` you can see the raw telemetry events, you can filter on the specific events you want to see, and you can drill into more detail on those events. You can also search for properties on the telemetry event. Here is the basic view:
 
-    ![image](./media/2016-10-25_22-13-47.gif)
+    ![image](./media/2019-10_05_02_DevCamp_dotnetapp_insights_search.png)
 
     Clicking on one of the events gives you a detail blade for that event:
 
-    ![image](./media/2016-10-25_22-15-49.gif)
+    ![image](./media/2019-10_05_03_DevCamp_dotnetapp_insights_search_details.png)
 
     If there are remote dependencies, such as calls to a database or other resources, those will appear under `Calls to Remote Dependencies`. If there were exceptions, traces or failed calls to dependencies, you could get detail on that under `Related Items`.
 
 1. When we go to `Application map`, we can see a diagram of the monitored items that make up the application:
 
-   ![image](./media/2016-10-25_22-29-02.gif)
+   ![image](./media/2019-10_05_04_DevCamp_dotnetapp_insights_app_map.png)
 
 ---
 

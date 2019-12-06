@@ -10,8 +10,7 @@ iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 Write-Host "Installing package: Microsoft Azure Storage Explorer..."
 
 choco install microsoftazurestorageexplorer --x86 --force --yes --acceptlicense --verbose --allow-empty-checksums --ignore-checksums | Out-Null  
-if (-not $?)
-{
+if (-not $?) {
     Write-Host "Installation of Microsoft Azure Storage Explorer failed via Chocolatey."
 }
 else {
@@ -22,8 +21,7 @@ else {
 Write-Host "Installing package: Github..."
 
 choco install github --x86 --force --yes --acceptlicense --verbose --allow-empty-checksums --ignore-checksums | Out-Null  
-if (-not $?)
-{
+if (-not $?) {
     Write-Host "Installation of Github failed via Chocolatey."
 }
 else {

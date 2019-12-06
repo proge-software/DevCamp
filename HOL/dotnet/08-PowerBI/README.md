@@ -26,45 +26,14 @@ This hands-on-lab has the following exercises:
 ---
 ## Exercise 1: Set up your environment <a name="ex1"></a>
 
-### To download via direct link
+## Install Power BI
 
-1. In a browser, navigate to the [Power BI service portal](https://powerbi.microsoft.com).
+- Using Microsoft Store: Use this [link](https://www.microsoft.com/store/productId/9NTXR16HNW1T) to install the latest version of Power BI from the Microsoft Store.
+- Downloading from PowerBI Web Site: go to [https://powerbi.microsoft.com/](https://powerbi.microsoft.com/) download and install Power BI
 
-1. Scroll to the bottom of the page to the Downloads section and select `Power BI Desktop`.
+## Sign In into Power BI
 
-    ![image](./media/pbi-downloadlink.png)
-
-1. Click the `Download Free` button
-
-    ![image](./media/pbi-downloadfree.png)
-
-1. Your download will start. Save the `.MSI` to a local folder.
-
-    ![image](./media/pbi-downloadfromportal.png)
-
-
-### To download via the Power BI portal
-
-1. In a browser, navigate to the *Power BI service portal* https://powerbi.microsoft.com.
-
-1. Click `sign in` and login with your organizational account
-
-    ![image](./media/pbi-signin.png)
-
-1. If this is your first time signing in, you may see a Quick tour link. View the tour or click `No thanks`
-
-    ![image](./media/pbi-quicktour.png)
-
-1. From the menu, click the download icon then click  `Power BI Desktop`
-
-    ![image](./media/pbi-downloadfromportal.png)
-
-1. Your download will start. Save the `.MSI` to a local folder.
-
-    ![image](./media/pbi-localsave.png)
-
-
-You are now ready to create Power BI reports and dashboards.
+....
 
 ---
 ## Exercise 2: Connect and prepare the data <a name="ex2"></a>
@@ -135,21 +104,21 @@ You are now ready to create Power BI reports and dashboards.
 
     ![image](./media/pbi-dashboard-07.png)
 
-1. Power BI will connect to your data and discover the data. Select the `Incidents` collection and then click `Load`
+1. Power BI will connect to your data and discover the data. Select the `Incidents` collection and then click `Transform Data`
 
-    ![image](./media/pbi-dashboard-08.png)
+    ![image](./media/08-01-03_PowerBI_AddData.png)
 
-1. You may recieve a prompt that notifies you of pending changes. Click `Apply Changes` to accept the updates
+1. Right click on the entry in the left panel named `incident[YOUR_NAME]` and click on rename
 
-    ![image](./media/pbi-dashboard-09.png)
+    ![image](./media/08-01-04_PowerBI_TransformData_Rename.png)
 
-1. From the side navigation menu, click the `Table` icon
+1. Rename as `incidents`
 
-    ![image](./media/pbi-dashboard-10.png)
+    ![image](./media/08-01-05_PowerBI_TransformData_Renamed.png)
 
-1. Now that we have our data, we neeed to configure the data source to transform the fields for display on the report. On the right side of the screen, in the Incidents table definition, click the `...` and choose `Edit Query`
+1. From the navigation menu, click the `Edit Queries` icon
 
-    ![image](./media/pbi-dashboard-11.png)
+    ![image](./media/08-01-03_PowerBI_EditQueries.png)
 
 1. Find the `Document` table header and click on the `Expand` icon. This will display the following screen. Uncheck the `Use original column as prefix` option and click `Ok`
 
@@ -195,7 +164,7 @@ You are now ready to create Power BI reports and dashboards.
 
 1. On the formatting options, find the `Title Text` field. Change the name to `Top 10 Zip Codes`
 
-    ![image](./media/pbi-dashboard-24.png)
+    ![image](./media/08-01-06_PowerBI_Visualization_Map_ChangeTitle.png)
 
 1. Chose the `Average Of Days Open` visualization card.
 
