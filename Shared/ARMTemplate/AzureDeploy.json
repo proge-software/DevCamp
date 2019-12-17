@@ -35,7 +35,7 @@
         "chocoPackages": "Git-Credential-Manager-for-Windows,azure-cli,webpicmd",
         "containerAppName": "[concat('containerapp', toLower(parameters('userName')), uniqueString(resourceGroup().id))]",
         "dockerRegistryUsername": "progedevcamp",
-        "dockerRegistryPassword": null,
+        "dockerRegistryPassword": "",
         "dockerRegistryStartupCommand": "",
         "alwaysOn": "false",
         "subscriptionId": "5d71b05c-3bd6-4055-836d-99b7558bd920",
