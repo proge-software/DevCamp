@@ -321,7 +321,7 @@ With Compose, you use a YAML file to configure your application’s services. Th
 1. Run a container built upon the downloaded image
 
     ```bash
-        docker run -it --rm -p 9000:80 progedevcamp.azurecr.io/{YOUR_USERNAME}-mfca:{buildID}
+        docker run -it --rm -p 9000:80 progedevcamp.azurecr.io/{YOUR_USERNAME}/mfca:{buildID}
     ```
 
     Then open a browser and go to [http://localhost:9000](http://localhost:9000)
