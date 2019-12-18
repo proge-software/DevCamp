@@ -174,12 +174,12 @@ In a future lab we will use [Azure DevOps](https://dev.azure.com/), or "ADO" for
 
 1. Connect to ADO:
 
-    ![image](./media/201910-04_Setup_ADO.png)
-    ![image](./media/201910-05_Setup_ADO.png)
+    ![image](./media/201910-04_Setup_ADO.PNG)
+    ![image](./media/201910-05_Setup_ADO.PNG)
 
 2. Open the ADO web portal to create a new project:
 
-    ![image](./media/201910-06_WebPortal_new_project.png)
+    ![image](./media/201910-06_WebPortal_new_project.PNG)
 
 3. Complete the form inserting a `Project name` and selecting `Git` as `Version control` system and `Agile` as Work item process
 
