@@ -38,7 +38,7 @@ This hands-on-lab has the following exercises:
 ---
 ## Exercise 2: Connect and prepare the data <a name="ex2"></a>
 
-1. We will need to load some incidents so our report can have some data. In a browser, navigate to `http://incidentapi[YOUR API ID]].azurewebsites.net/incidents/fakedata`. You will see a message similar to the following that indicates success:
+1. We will need to load some incidents so our report can have some data. In a browser, navigate to `http://incidentapi[YOUR API ID].azurewebsites.net/incidents/fakedata`. You will see a message similar to the following that indicates success:
 
 ```JSON
     {
