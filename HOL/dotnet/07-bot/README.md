@@ -254,10 +254,10 @@ This hands-on-lab has the following exercises:
     public string Traveler { get; set; }
     ```
 
-1. Open in the folder `Dialogs` the file `BookingDialog.cs` and add the following code to the class.
+1. In the folder `Dialogs` open the file `BookingDialog.cs` and add the following code to the class.
 
     ```c#
-    private const string OriginStepMsgText = "Where are you traveling from?";
+    private const string TravelerStepMsgText = "What is the name of the traveler?";
 
     private async Task<DialogTurnResult> TravelerStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
     {
@@ -275,7 +275,7 @@ This hands-on-lab has the following exercises:
     }
     ```
 
-1. Change the `BookingDialog.cs` constructor to look like the following snippet:
+1. Change the `BookingDialog` constructor to look like the following snippet:
 
     ```c#
     public BookingDialog()
@@ -298,6 +298,24 @@ This hands-on-lab has the following exercises:
         InitialDialogId = nameof(WaterfallDialog);
     }
     ```
+
+1. Update the `TravelDateStepAsync` method as follows:
+
+```
+        private async Task<DialogTurnResult> TravelDateStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
+        {
+            var bookingDetails = (BookingDetails)stepContext.Options;
+
+            bookingDetails.Traveler = (string)stepContext.Result;
+
+            if (bookingDetails.TravelDate == null || IsAmbiguous(bookingDetails.TravelDate))
+            {
+                return await stepContext.BeginDialogAsync(nameof(DateResolverDialog), bookingDetails.TravelDate, cancellationToken);
+            }
+
+            return await stepContext.NextAsync(bookingDetails.TravelDate, cancellationToken);
+        }
+```
 
 1. Open the class `Dialog\MainDialog.cs` and modify the `FinalStepAsync` method changing the `messageText` variable like follows:
 
