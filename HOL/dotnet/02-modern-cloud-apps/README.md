@@ -72,7 +72,7 @@ This hands-on-lab has the following exercises:
 
     Select the API app that begins with the name `incidentapi` followed by a random string of characters.
 
-    ![image](./media/2019-10_01_IncidentAPI_AppService.png)
+    ![image](./media/2019-10_01_IncidentAPI.png)
 
 1. The window that slides out is called a **blade** and contains information and configuration options for the resource.  
 
