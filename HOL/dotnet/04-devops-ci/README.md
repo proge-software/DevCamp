@@ -312,7 +312,7 @@ In the ARM Template that was originally deployed, a web app was created as a dev
 
         ![image](./media/2019-10_04_08_ADO_Pipelines_Stage1.png)
 
-    4. Move to step 11.
+    4. Move to step 12.
 
 3. If the drop-down next to `Azure subscription` does not offer you your subscription or the drop-down next to `App Service name` does not offer you your Azure Web app resource (give it a moment after selecting the subscription:
 
